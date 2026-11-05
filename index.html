@@ -1,0 +1,875 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IA sem hype</title>
+<meta name="description" content="O que é IA de verdade: LLM, token, contexto, inferência, harness, agentes e Codex — para arquitetas.">
+<style>
+:root{
+  --bg:#0d0e10; --bg2:#16181b; --line:#2a2d32; --fg:#f2f1ee; --dim:#9a9ca2;
+  --accent:#ffb020; --accent-ink:#1a1200; --ok:#5fd38d; --bad:#ff6b5e; --blue:#6aa9ff;
+  --ease:cubic-bezier(.23,1,.32,1);
+  --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+:root[data-theme="light"]{--bg:#fbfaf7;--bg2:#efede7;--line:#d5d2c8;--fg:#17181a;--dim:#5d6066;--accent:#b36b00;--accent-ink:#fff;--ok:#1b7f45;--bad:#b3261e;--blue:#1f5fbf}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%;background:var(--bg);color:var(--fg);font-family:var(--sans);overflow:hidden}
+body{-webkit-font-smoothing:antialiased}
+::selection{background:var(--accent);color:var(--accent-ink)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.deck{position:fixed;inset:0}
+.slide{position:absolute;inset:0;display:none;padding:clamp(24px,5vw,72px) clamp(20px,7vw,110px) clamp(48px,7vh,80px);overflow:auto;flex-direction:column;justify-content:center;gap:clamp(14px,2.4vh,26px)}
+.slide.on{display:flex;animation:in .26s var(--ease)}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+h1{font-size:clamp(30px,5.6vw,84px);line-height:1.04;letter-spacing:-.03em;font-weight:800;text-wrap:balance}
+h2{font-size:clamp(26px,4vw,58px);line-height:1.08;letter-spacing:-.025em;font-weight:800;text-wrap:balance}
+h3{font-size:clamp(16px,1.7vw,24px);font-weight:700;letter-spacing:-.01em}
+p,li{font-size:clamp(15px,1.9vw,27px);line-height:1.4;color:var(--fg);text-wrap:pretty;max-width:68ch}
+.dim{color:var(--dim)} .acc{color:var(--accent)} .ok{color:var(--ok)} .bad{color:var(--bad)}
+.big{font-size:clamp(32px,6.4vw,100px);font-weight:800;line-height:1.02;letter-spacing:-.035em;text-wrap:balance}
+.small{font-size:clamp(12px,1.25vw,17px);color:var(--dim)}
+ul{padding-left:1.1em;display:grid;gap:.5em} li::marker{color:var(--accent)}
+code,.mono{font-family:var(--mono);font-size:.92em}
+.statement{justify-content:center}
+.statement .big{max-width:20ch}
+.quote{font-size:clamp(28px,5.2vw,78px);font-weight:800;line-height:1.08;letter-spacing:-.03em;max-width:22ch;text-wrap:balance}
+.by{font-size:clamp(14px,1.6vw,22px);color:var(--dim)}
+mark{background:var(--accent);color:var(--accent-ink);padding:0 .15em;border-radius:3px}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:clamp(12px,2vw,28px);align-items:start}
+.panel{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:clamp(14px,1.8vw,26px);display:grid;gap:.6em;align-content:start}
+.panel p,.panel li{font-size:clamp(13px,1.45vw,20px)}
+.panel h3{color:var(--accent)}
+.panel.good h3{color:var(--ok)} .panel.badp h3{color:var(--bad)}
+table{border-collapse:collapse;width:100%;font-size:clamp(12px,1.45vw,20px)}
+th,td{padding:.55em .8em;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--accent);font-weight:700}
+.terminal{background:#07080a;color:#d8f5df;border:1px solid var(--line);border-radius:10px;font-family:var(--mono);font-size:clamp(11px,1.35vw,19px);line-height:1.55;padding:0;overflow:hidden;max-width:min(100%,980px)}
+.terminal .bar{background:#1b1d21;padding:.45em .9em;color:#8a8d94;font-size:.8em;display:flex;gap:.5em;align-items:center}
+.terminal .bar i{width:.7em;height:.7em;border-radius:50%;background:#444;display:inline-block}
+.terminal pre{margin:0;padding:1em 1.2em;white-space:pre-wrap;word-break:break-word;font:inherit}
+.terminal .p{color:var(--accent)} .terminal .c{color:#7d828b} .terminal .g{color:#5fd38d} .terminal .r{color:#ff8b80}
+:root[data-theme="light"] .terminal{background:#15171a}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:.6em}
+.chip{background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:.35em .9em;font-size:clamp(12px,1.4vw,19px)}
+.chip.a{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:700}
+.arrow{color:var(--dim);font-size:1.2em}
+.case{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:clamp(8px,1.2vw,16px)}
+.case>div{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:clamp(10px,1.2vw,18px)}
+.case b{display:block;color:var(--accent);font-size:clamp(11px,1.1vw,15px);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.35em}
+.case p{font-size:clamp(12px,1.3vw,18px);line-height:1.38}
+.case .next{background:var(--accent);border-color:var(--accent)} .case .next b,.case .next p{color:var(--accent-ink)}
+.warn{color:var(--bad)}
+button,.btn{font:inherit;color:inherit;cursor:pointer;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:.5em 1em;transition:transform .16s var(--ease),background .16s var(--ease)}
+button:hover{background:var(--line)} button:active{transform:scale(.97)}
+input[type=text],textarea{font:inherit;color:inherit;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:.6em .9em;width:100%}
+/* WhatsApp-like keyboard */
+.phone{width:min(100%,420px);background:#e9e4dc;color:#111;border-radius:18px;overflow:hidden;border:1px solid var(--line)}
+.phone .msg{background:#dcf8c6;margin:14px;padding:.7em .9em;border-radius:10px;font-size:clamp(15px,1.7vw,22px);min-height:2.6em;word-break:break-word;color:#111}
+.phone .sug{display:grid;grid-template-columns:1fr 1fr 1fr;background:#f4f2ee;border-top:1px solid #cfcac0}
+.phone .sug button{background:transparent;border:0;border-right:1px solid #cfcac0;border-radius:0;color:#111;padding:.8em .3em;font-size:clamp(14px,1.6vw,20px)}
+.phone .sug button:last-child{border-right:0} .phone .sug button:hover{background:#e6e2d9}
+/* tokenizer */
+.tok{display:flex;flex-wrap:wrap;gap:4px;margin-top:.4em}
+.tok span{padding:.15em .4em;border-radius:5px;font-family:var(--mono);font-size:clamp(13px,1.6vw,22px);color:#101010}
+/* next token bars */
+.bars{display:grid;gap:.45em;max-width:560px}
+.bar{display:grid;grid-template-columns:7em 1fr 3em;gap:.7em;align-items:center;font-size:clamp(12px,1.4vw,19px)}
+.bar i{display:block;height:1.1em;background:var(--accent);border-radius:4px;width:0;transition:width .5s var(--ease)}
+/* context desk */
+.desk{border:2px solid var(--line);border-radius:12px;height:clamp(60px,12vh,110px);display:flex;overflow:hidden;background:var(--bg2);max-width:760px}
+.desk div{height:100%;display:grid;place-items:center;font-size:clamp(10px,1.1vw,15px);color:#101010;transition:flex .5s var(--ease),opacity .4s;white-space:nowrap;overflow:hidden}
+/* timelines */
+.tl{display:grid;gap:.5em;max-width:820px}
+.tl .row{display:grid;grid-template-columns:7.5em 1fr;gap:.7em;align-items:center;font-size:clamp(11px,1.25vw,17px)}
+.tl .track{position:relative;height:1.9em;background:var(--bg2);border-radius:6px}
+.tl .blk{position:absolute;top:0;height:100%;border-radius:6px;display:grid;place-items:center;color:#101010;font-size:.85em;font-weight:700;transform-origin:left;animation:grow .6s var(--ease) both}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.hud{position:fixed;left:0;right:0;bottom:0;height:34px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;font-size:12px;color:var(--dim);pointer-events:none;z-index:5}
+.hud b{color:var(--fg)}
+.prog{position:fixed;left:0;top:0;height:3px;background:var(--accent);width:0;transition:width .3s var(--ease);z-index:6}
+.notesbox{position:fixed;left:0;right:0;bottom:34px;max-height:38vh;overflow:auto;background:rgba(0,0,0,.92);color:#eee;padding:14px 22px;font-size:15px;line-height:1.5;display:none;z-index:7;border-top:2px solid var(--accent)}
+.notesbox.on{display:block}
+aside.notes{display:none}
+.overview{position:fixed;inset:0;background:var(--bg);z-index:8;display:none;overflow:auto;padding:24px}
+.overview.on{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;align-content:start}
+.overview button{text-align:left;padding:.7em .8em;font-size:13px;line-height:1.3;min-height:70px}
+.overview button small{display:block;color:var(--dim);margin-bottom:.3em}
+.overview button.cur{border-color:var(--accent)}
+@media (max-width:640px){svg{min-width:520px}.slide{justify-content:flex-start;padding-top:32px}.bar{grid-template-columns:5em 1fr 2.6em}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{
+  :root{--bg:#fff;--bg2:#f3f1ec;--line:#d5d2c8;--fg:#111;--dim:#555;--accent:#b36b00;--accent-ink:#fff}
+  html,body{overflow:visible;height:auto}
+  .deck{position:static}
+  .slide{display:flex!important;position:relative;inset:auto;height:100vh;page-break-after:always;break-after:page;overflow:hidden;animation:none}
+  .hud,.prog,.notesbox,.overview{display:none!important}
+  .terminal{background:#15171a}
+}
+</style>
+</head>
+<body>
+<div class="prog" id="prog"></div>
+<main class="deck" id="deck">
+
+<!-- ============ 1. ABERTURA ============ -->
+<section class="slide statement" data-t="Citação">
+  <p class="quote">“IA nada mais é do que um gerador de texto glorificado.”</p>
+  <p class="by">Fabio Akita (Akita on Rails)</p>
+  <aside class="notes">Deixe a frase respirar. Pergunte: concordam? Discordam? Vamos descobrir se ele está certo — e por que isso é uma notícia boa, não ruim. (2 min)</aside>
+</section>
+
+<section class="slide" data-t="Você já usa IA">
+  <h2>Você usa isso há 10 anos.</h2>
+  <p class="dim">Toque na sugestão do meio e veja o que acontece.</p>
+  <div class="phone" id="wa">
+    <div class="msg" id="wa-msg">Bom dia, tudo</div>
+    <div class="sug"><button></button><button></button><button></button></div>
+  </div>
+  <aside class="notes">Deixe uma delas tocar no celular fictício. O corretor do WhatsApp sugere a próxima palavra com base no que você já escreveu. Isso é um gerador de texto.</aside>
+</section>
+
+<section class="slide" data-t="Sugestão do meio ×10">
+  <h2>Toque só na do meio, dez vezes.</h2>
+  <p class="big acc" style="font-size:clamp(24px,4.4vw,64px)" id="wa-demo">…</p>
+  <p class="dim">Sai uma frase que parece português e não quer dizer nada. Esse modelo olha só para as últimas 1–2 palavras.</p>
+  <button id="wa-run" style="width:max-content">Gerar de novo</button>
+  <aside class="notes">Mostra que “plausível” não é “verdadeiro”. O corretor tem memória curtíssima; um LLM tem memória de milhares de páginas.</aside>
+</section>
+
+<section class="slide" data-t="Mesmo truque, escala absurda">
+  <h2>Agora o mesmo truque,<br>com <span class="acc">escala absurda</span>.</h2>
+  <div class="cols">
+    <div class="panel"><h3>Corretor do celular</h3><p>Olha 1–2 palavras para trás. Aprendeu com o que <i>você</i> escreve. Cabe no celular.</p></div>
+    <div class="panel"><h3>LLM (modelo de linguagem grande)</h3><p>Olha milhares de páginas para trás. Aprendeu com uma parte enorme de tudo que a humanidade publicou. Roda em datacenters.</p></div>
+  </div>
+  <p><mark>Mesma ideia: prever o que vem a seguir.</mark></p>
+  <aside class="notes">Ele tem razão no mecanismo. A parte “glorificada” é onde mora o poder: em escala, prever a próxima palavra obriga o modelo a capturar gramática, fatos, estilo e até raciocínio.</aside>
+</section>
+
+<section class="slide" data-t="Promessa do dia">
+  <h1>De <span class="dim">vibe coder</span><br>a quem <span class="acc">dirige a obra</span>.</h1>
+  <p>Hoje: entender como funciona, onde usar no escritório, e montar um jeito de trabalhar que dá para confiar.</p>
+  <div class="flow"><span class="chip">1 Como funciona</span><span class="chip">2 Vocabulário</span><span class="chip">3 Agentes e harness</span><span class="chip">4 No escritório</span><span class="chip">5 Open source</span><span class="chip">6 Codex na prática</span></div>
+  <aside class="notes">Vibe coding = pedir e torcer. Engenharia com IA = especificar, delegar, verificar. É a diferença entre pedir ao pedreiro “faz uma parede” e entregar projeto, especificação e vistoria.</aside>
+</section>
+
+<!-- ============ 2. DESMISTIFICANDO ============ -->
+<section class="slide" data-t="Mapa da IA">
+  <h2>Onde cada coisa se encaixa</h2>
+  <svg viewBox="0 0 700 320" style="width:min(100%,760px)" role="img" aria-label="Círculos concêntricos: IA, aprendizado de máquina, aprendizado profundo, IA generativa, LLM">
+    <g fill="none" stroke-width="2">
+      <rect x="4" y="4" width="692" height="312" rx="22" stroke="var(--line)"/>
+      <rect x="60" y="44" width="580" height="256" rx="20" stroke="var(--dim)"/>
+      <rect x="116" y="84" width="468" height="200" rx="18" stroke="var(--blue)"/>
+      <rect x="172" y="124" width="356" height="148" rx="16" stroke="var(--ok)"/>
+      <rect x="228" y="168" width="244" height="92" rx="14" stroke="var(--accent)" fill="rgba(255,176,32,.12)"/>
+    </g>
+    <g fill="var(--fg)" font-family="ui-sans-serif,system-ui" font-size="17" font-weight="700">
+      <text x="24" y="32">Inteligência Artificial (qualquer sistema “esperto”)</text>
+      <text x="80" y="72" fill="var(--dim)">Aprendizado de máquina (aprende com exemplos)</text>
+      <text x="134" y="112" fill="var(--blue)">Aprendizado profundo (redes neurais)</text>
+      <text x="190" y="152" fill="var(--ok)">IA generativa (cria texto, imagem, áudio)</text>
+      <text x="250" y="220" fill="var(--accent)" font-size="22">LLM: gera texto</text>
+    </g>
+  </svg>
+  <aside class="notes">Quando alguém diz “IA” hoje, quase sempre fala do círculo de dentro. O corretor do celular também está aqui, só que bem pequeno.</aside>
+</section>
+
+<section class="slide" data-t="Como aprende">
+  <h2>Como ela “aprende”</h2>
+  <div class="flow"><span class="chip">Lê trilhões de frases</span><span class="arrow">→</span><span class="chip">Tenta adivinhar a próxima palavra</span><span class="arrow">→</span><span class="chip">Errou? Ajusta bilhões de “botões”</span><span class="arrow">→</span><span class="chip a">Repete até acertar bem</span></div>
+  <p>Os “botões” são os <b>parâmetros</b>. O resultado final é um arquivo gigante de números: o modelo.</p>
+  <div class="panel"><h3>Analogia de obra</h3><p>Uma estagiária que leu todas as bibliotecas do mundo… e nunca pisou em um canteiro. Sabe falar de tudo, não viu nada acontecer.</p></div>
+  <aside class="notes">Ninguém programou regras de arquitetura nela. Ela viu tanto texto que absorveu padrões.</aside>
+</section>
+
+<section class="slide" data-t="Plausível ≠ verdadeiro">
+  <h2>Ela não pesquisa. Não “sabe”.<br>Ela prevê o que soa certo.</h2>
+  <p class="big acc" style="font-size:clamp(28px,5vw,72px)">Plausível ≠ verdadeiro.</p>
+  <p>Quando o assunto é comum, o plausível costuma ser verdadeiro. Quando é raro, específico ou recente, ela completa o buraco com algo que <i>parece</i> certo.</p>
+  <aside class="notes">Isso explica tudo o que vem depois: por que precisa de contexto, de ferramentas, de conferência.</aside>
+</section>
+
+<section class="slide" data-t="Alucinação">
+  <h2>Alucinação, na prática</h2>
+  <div class="terminal"><div class="bar"><i></i><i></i><i></i>&nbsp;chat</div><pre><span class="p">você&gt;</span> Qual o artigo da NBR 9050 que fixa a largura de rampa em obras residenciais unifamiliares?
+<span class="r">IA&gt;</span>  O artigo 7.3.2 da NBR 9050:2015 estabelece largura mínima de 1,20 m para rampas em residências unifamiliares.
+<span class="c">// Tom seguro. Número de artigo bonito. Pode estar inventado.</span></pre></div>
+  <p><mark>Regra:</mark> norma, medida, preço e prazo — <b>sempre confira na fonte</b>.</p>
+  <aside class="notes">Não afirmamos que esse artigo existe; o ponto é o tom. Sempre peça a fonte e abra a norma.</aside>
+</section>
+
+<section class="slide" data-t="Forte e fraca">
+  <h2>Onde ela é forte, onde é fraca</h2>
+  <div class="cols">
+    <div class="panel good"><h3>Muito boa em</h3><ul><li>Redigir e reescrever</li><li>Resumir e comparar</li><li>Classificar e extrair dados</li><li>Traduzir, padronizar</li><li>Escrever scripts e fórmulas</li></ul></div>
+    <div class="panel badp"><h3>Perigosa em</h3><ul><li>Contas “de cabeça”</li><li>Fatos recentes ou raros</li><li>Normas e leis sem fonte</li><li>Responsabilidade técnica</li><li>Saber o que você não contou</li></ul></div>
+  </div>
+  <aside class="notes">Fecha a seção 2. Daqui em diante vamos aprender o vocabulário para saber por quê.</aside>
+</section>
+
+<!-- ============ 3. VOCABULÁRIO ============ -->
+<section class="slide" data-t="LLM">
+  <h2>LLM = o arquivo + o programa que o roda</h2>
+  <div class="cols">
+    <div class="panel"><h3>Modelo</h3><p>Arquivo de números (pesos) resultante do treino. Gigante. Congelado: não aprende com a sua conversa.</p></div>
+    <div class="panel"><h3>Programa que roda</h3><p>Pega seu texto, passa pelo modelo, devolve a continuação.</p></div>
+  </div>
+  <p class="dim">Exemplos: GPT (OpenAI), Claude (Anthropic), Gemini (Google), Grok (xAI), Llama (Meta), Qwen, Mistral.</p>
+  <aside class="notes">“Congelado” é importante: o modelo não está aprendendo com você agora. Só o contexto muda.</aside>
+</section>
+
+<section class="slide" data-t="Token">
+  <h2>Token: ela não lê letras nem palavras.<br>Lê <span class="acc">pedaços</span>.</h2>
+  <input type="text" id="tk-in" value="O levantamento de materiais do porcelanato retificado" aria-label="Frase para tokenizar">
+  <div class="tok" id="tk-out"></div>
+  <p class="small" id="tk-n"></p>
+  <p class="small">Aproximação didática. Cada modelo usa seu próprio “dicionário” de pedaços; a contagem real varia.</p>
+  <aside class="notes">Palavras longas e raras (porcelanato, retificado) viram vários pedaços; palavras comuns costumam ser 1. Em português, geralmente gasta-se mais tokens que em inglês.</aside>
+</section>
+
+<section class="slide" data-t="Por que tokens importam">
+  <h2>Tudo é medido em tokens</h2>
+  <div class="cols">
+    <div class="panel"><h3>Preço</h3><p>Você paga (ou gasta sua cota) por token que entra e sai.</p></div>
+    <div class="panel"><h3>Limite</h3><p>Cada modelo só “vê” um número máximo de tokens por vez.</p></div>
+    <div class="panel"><h3>Velocidade</h3><p>Resposta longa = mais tokens = mais espera.</p></div>
+  </div>
+  <p>Ordem de grandeza: <b>1 página de texto ≈ 500–700 tokens</b>. Imagens e PDFs também viram tokens.</p>
+  <aside class="notes">Um PDF de projeto executivo escaneado pode custar dezenas de milhares de tokens. Já já falamos de economizar.</aside>
+</section>
+
+<section class="slide" data-t="Janela de contexto">
+  <h2>Janela de contexto = a mesa de trabalho</h2>
+  <p>Tudo que a IA “vê” agora: suas instruções, a conversa e os arquivos. <b>O que não está na mesa, não existe.</b></p>
+  <div class="desk" id="desk"></div>
+  <div class="flow"><button id="desk-add">Adicionar à mesa</button><button id="desk-reset">Esvaziar</button><span class="small" id="desk-info"></span></div>
+  <aside class="notes">Clique em “Adicionar” várias vezes: quando a mesa enche, o que é mais antigo cai da borda.</aside>
+</section>
+
+<section class="slide" data-t="Mesa cheia">
+  <h2>Mesa cheia = trabalho pior</h2>
+  <div class="cols">
+    <div class="panel"><h3>O que acontece</h3><ul><li>O começo da conversa “cai da borda”</li><li>O meio fica embaçado</li><li>Ela se contradiz e esquece decisões</li></ul></div>
+    <div class="panel good"><h3>O que fazer</h3><ul><li>Uma conversa por assunto</li><li>Dar só o necessário</li><li>Instruções importantes no começo</li><li>Pedir resumo antes de trocar de conversa</li></ul></div>
+  </div>
+  <p class="dim">Como uma prancheta lotada de rolos: você acha o que está por cima, não o que está lá embaixo.</p>
+  <aside class="notes">Muitos modelos hoje têm janelas enormes, mas mais contexto não é qualidade automática.</aside>
+</section>
+
+<section class="slide" data-t="Inferência">
+  <h2>Inferência: quando você usa.<br>Uma palavra por vez.</h2>
+  <p class="mono" style="font-size:clamp(16px,2.2vw,32px)" id="inf-text">A reforma da cozinha vai exigir</p>
+  <div class="bars" id="inf-bars"></div>
+  <div class="flow"><button id="inf-step">Sortear próxima palavra</button><button id="inf-reset">Reiniciar</button></div>
+  <aside class="notes">Treino = ler tudo e ajustar o modelo (feito uma vez, caríssimo). Inferência = usar o modelo pronto. Cada palavra é sorteada entre as prováveis — por isso respostas variam.</aside>
+</section>
+
+<section class="slide" data-t="Por que varia e é caro">
+  <h2>Por que a resposta muda?<br>E por que isso custa?</h2>
+  <div class="cols">
+    <div class="panel"><h3>Sorteio</h3><p>A cada palavra, o modelo sorteia entre candidatas. “Temperatura” alta = mais ousado; baixa = mais previsível.</p></div>
+    <div class="panel"><h3>Conta pesada</h3><p>Cada token passa por bilhões de multiplicações em chips caros (GPUs). Por isso há cota, plano e preço por token.</p></div>
+  </div>
+  <aside class="notes">Mesma pergunta duas vezes pode dar respostas diferentes. Isso não é defeito, é o mecanismo.</aside>
+</section>
+
+<section class="slide" data-t="Token minimizing">
+  <h2>Economizar a mesa (token minimizing)</h2>
+  <div class="cols">
+    <div class="panel badp"><h3>Jeito caro</h3><p>Mandar o projeto executivo de 200 páginas para perguntar “quanto de piso na sala?”.</p><p class="small">~100 mil tokens</p></div>
+    <div class="panel good"><h3>Jeito barato</h3><p>Mandar só a lista de ambientes com áreas e acabamentos (CSV de 1 página).</p><p class="small">~700 tokens</p></div>
+  </div>
+  <ul><li>Peça respostas curtas, em tabela.</li><li>Resuma conversas antigas e recomece.</li><li>Rotina que se repete vira <b>skill</b> (carrega só quando usa).</li><li>Regras fixas ficam no <b>AGENTS.md</b>, não coladas toda vez.</li></ul>
+  <aside class="notes">Os números são ordens de grandeza para ilustrar. Economizar tokens também melhora a qualidade, porque a mesa fica limpa.</aside>
+</section>
+
+<section class="slide" data-t="Determinístico × probabilístico">
+  <h2>IA sorteia. Planilha não.</h2>
+  <div class="cols">
+    <div class="panel"><h3>Probabilístico</h3><p>IA: mesma pergunta, respostas parecidas mas não idênticas. Boa para escrever, classificar, decidir o que fazer.</p></div>
+    <div class="panel"><h3>Determinístico</h3><p>Planilha, script, calculadora: mesma entrada, <b>sempre</b> a mesma saída. Boa para calcular e conferir.</p></div>
+  </div>
+  <p><mark>Regra de ouro:</mark> a IA decide e escreve; a ferramenta determinística calcula e confere.</p>
+  <ul><li>IA monta a planilha com fórmulas; <b>a planilha</b> faz m² × perda.</li><li>IA escreve o script que renomeia layers; ele roda igual toda vez.</li></ul>
+  <aside class="notes">Para aumentar previsibilidade: instruções fixas (AGENTS.md), formato de saída rígido, exemplos, checklist e hooks.</aside>
+</section>
+
+<section class="slide" data-t="Prompt bom × ruim">
+  <h2>Prompt: peça como quem contrata</h2>
+  <div class="cols">
+    <div class="panel badp"><h3>Vibe coder</h3><div class="terminal"><pre>faz um memorial da casa</pre></div></div>
+    <div class="panel good"><h3>Quem dirige a obra</h3><div class="terminal"><pre>Papel: arquiteta sênior.
+Contexto: casa 180 m², entrada/ambientes.csv.
+Modelo: entrada/modelo-memorial.md.
+Formato: um .md por ambiente.
+Não invente: use [PREENCHER].
+Pronto = arquivo em saida/ + lista de pendências.</pre></div></div>
+  </div>
+  <aside class="notes">Papel, contexto, exemplo/modelo, formato, limites e critério de pronto.</aside>
+</section>
+
+<section class="slide" data-t="Resumo do bloco">
+  <div class="flow" style="font-size:clamp(14px,2.4vw,34px)"><span class="chip">seu texto</span><span class="arrow">→</span><span class="chip">tokens</span><span class="arrow">→</span><span class="chip a">modelo prevê o próximo</span><span class="arrow">→</span><span class="chip">texto sai</span></div>
+  <h2>Só isso.<br>Todo o resto é <span class="acc">o que colocamos em volta</span>.</h2>
+  <aside class="notes">Ponte para o harness.</aside>
+</section>
+
+<!-- ============ 4. HARNESS ============ -->
+<section class="slide" data-t="Chat × agente">
+  <h2>Chat responde.<br>Agente <span class="acc">age</span>.</h2>
+  <div class="flow" style="font-size:clamp(14px,2.2vw,30px)"><span class="chip">pensa</span><span class="arrow">→</span><span class="chip a">age (lê arquivo, roda comando)</span><span class="arrow">→</span><span class="chip">observa o resultado</span><span class="arrow">↺</span></div>
+  <p>Chat = consultor ao telefone. Agente = estagiária com acesso à pasta do projeto.</p>
+  <aside class="notes">Agente = modelo + ferramentas + objetivo + autonomia para dar vários passos em ciclo.</aside>
+</section>
+
+<section class="slide" data-t="Harness">
+  <h2>Harness: modelo é o motor,<br>harness é o carro.</h2>
+  <div class="cols">
+    <div class="panel"><h3>Modelo (motor)</h3><p>Gera texto. Sozinho não abre arquivo, não lembra de ontem, não sabe suas regras.</p></div>
+    <div class="panel"><h3>Harness (carro)</h3><p>Volante, freio, painel e cinto: dá ferramentas, regras, memória e limites ao modelo.</p></div>
+  </div>
+  <p class="dim">Exemplos de harness: Codex (OpenAI), Claude Code (Anthropic), Gemini CLI (Google), Cursor.</p>
+  <aside class="notes">A maior parte da diferença prática entre “usar IA” e “usar bem” está no harness.</aside>
+</section>
+
+<section class="slide" data-t="Rules">
+  <h2>Rules: o memorial do escritório</h2>
+  <p>Um arquivo (<code>AGENTS.md</code>) que a IA lê <b>toda vez</b> antes de trabalhar.</p>
+  <div class="terminal"><div class="bar"><i></i><i></i><i></i>&nbsp;AGENTS.md</div><pre>## Nunca faça
+- Enviar e-mail. <span class="g">Só rascunho.</span>
+- Apagar ou sobrescrever em projetos/.
+- Inventar medida, norma ou preço.
+
+## Pronto significa
+Arquivo em saida/ + resumo de 3 linhas + pendências.</pre></div>
+  <aside class="notes">Quanto mais específico e curto, melhor. É o primeiro arquivo que vocês vão criar.</aside>
+</section>
+
+<section class="slide" data-t="Skills">
+  <h2>Skills: cadernos de procedimento</h2>
+  <p>“Como a gente faz levantamento de materiais aqui.” A IA só abre o caderno <b>quando a tarefa pede</b> — economiza a mesa.</p>
+  <div class="terminal"><div class="bar"><i></i><i></i><i></i>&nbsp;skills/levantamento-materiais/SKILL.md</div><pre>---
+name: levantamento-materiais
+description: Gera quantitativos de materiais a partir
+  da lista de ambientes, em planilha com fórmulas...
+---
+1. Valide o CSV.  2. Crie a planilha com fórmulas.
+3. Aba "Premissas".  4. Não invente preços.</pre></div>
+  <aside class="notes">O cabeçalho (nome + descrição) fica sempre visível; o resto só carrega quando usado.</aside>
+</section>
+
+<section class="slide" data-t="Hooks">
+  <h2>Hooks: a vistoria automática</h2>
+  <p>Um script que roda sozinho em momentos fixos e pode <b>barrar</b> a ação.</p>
+  <div class="flow"><span class="chip">IA vai apagar algo em projetos/</span><span class="arrow">→</span><span class="chip a">hook confere</span><span class="arrow">→</span><span class="chip">BLOQUEADO + motivo</span></div>
+  <p class="dim">Regra no AGENTS.md é um pedido. Hook é uma trava.</p>
+  <aside class="notes">Pedido pode ser ignorado pelo modelo; trava não. Para o que nunca pode acontecer, use hook ou sandbox.</aside>
+</section>
+
+<section class="slide" data-t="MCP">
+  <h2>MCP: a tomada universal</h2>
+  <svg viewBox="0 0 700 260" style="width:min(100%,780px)" role="img" aria-label="IA no centro conectada a e-mail, arquivos, planilhas, notas e agenda por um padrão único">
+    <g stroke="var(--dim)" stroke-width="2"><line x1="350" y1="130" x2="110" y2="50"/><line x1="350" y1="130" x2="110" y2="210"/><line x1="350" y1="130" x2="590" y2="50"/><line x1="350" y1="130" x2="590" y2="210"/><line x1="350" y1="130" x2="350" y2="30"/></g>
+    <g font-family="ui-sans-serif,system-ui" font-size="16" font-weight="700" text-anchor="middle">
+      <rect x="270" y="98" width="160" height="64" rx="14" fill="var(--accent)"/><text x="350" y="136" fill="#1a1200">Agente (IA)</text>
+      <rect x="40" y="28" width="140" height="44" rx="10" fill="var(--bg2)" stroke="var(--line)"/><text x="110" y="56" fill="var(--fg)">E-mail</text>
+      <rect x="40" y="188" width="140" height="44" rx="10" fill="var(--bg2)" stroke="var(--line)"/><text x="110" y="216" fill="var(--fg)">Planilhas</text>
+      <rect x="520" y="28" width="140" height="44" rx="10" fill="var(--bg2)" stroke="var(--line)"/><text x="590" y="56" fill="var(--fg)">Pastas</text>
+      <rect x="520" y="188" width="140" height="44" rx="10" fill="var(--bg2)" stroke="var(--line)"/><text x="590" y="216" fill="var(--fg)">Agenda / Notion</text>
+      <rect x="290" y="6" width="120" height="34" rx="10" fill="var(--bg2)" stroke="var(--line)"/><text x="350" y="29" fill="var(--fg)">Redes</text>
+    </g>
+  </svg>
+  <p>Um padrão aberto para ligar a IA a sistemas, sem cada um inventar seu plugue. Comece com acesso <b>somente leitura</b>.</p>
+  <aside class="notes">Tomada: o que importa é o padrão. Cada conector tem permissões; trate como dar chave da obra a alguém.</aside>
+</section>
+
+<section class="slide" data-t="Tudo junto">
+  <h2>Juntando tudo</h2>
+  <svg viewBox="0 0 700 300" style="width:min(100%,800px)" role="img" aria-label="Modelo no centro rodeado por rules, skills, hooks e MCP, e a arquiteta como responsável técnica">
+    <g font-family="ui-sans-serif,system-ui" font-size="15" font-weight="700" text-anchor="middle">
+      <rect x="20" y="20" width="660" height="260" rx="20" fill="none" stroke="var(--line)" stroke-width="2" stroke-dasharray="6 6"/>
+      <text x="110" y="46" fill="var(--dim)">HARNESS</text>
+      <rect x="260" y="110" width="180" height="80" rx="14" fill="var(--accent)"/><text x="350" y="157" fill="#1a1200" font-size="18">Modelo (LLM)</text>
+      <rect x="40" y="70" width="150" height="50" rx="10" fill="var(--bg2)" stroke="var(--line)"/><text x="115" y="101" fill="var(--fg)">Rules (AGENTS.md)</text>
+      <rect x="40" y="180" width="150" height="50" rx="10" fill="var(--bg2)" stroke="var(--line)"/><text x="115" y="211" fill="var(--fg)">Skills</text>
+      <rect x="510" y="70" width="150" height="50" rx="10" fill="var(--bg2)" stroke="var(--line)"/><text x="585" y="101" fill="var(--fg)">Hooks (travas)</text>
+      <rect x="510" y="180" width="150" height="50" rx="10" fill="var(--bg2)" stroke="var(--line)"/><text x="585" y="211" fill="var(--fg)">MCP (conexões)</text>
+      <rect x="250" y="224" width="200" height="40" rx="10" fill="var(--ok)"/><text x="350" y="250" fill="#06210f">Você: responsável técnica</text>
+    </g>
+  </svg>
+  <aside class="notes">O modelo está no meio; todo o resto são camadas que vocês configuram. Vocês assinam o resultado.</aside>
+</section>
+
+<section class="slide" data-t="Vibe × engenharia">
+  <h2>Vibe coding × engenharia com IA</h2>
+  <div class="cols">
+    <div class="panel badp"><h3>Pedir e torcer</h3><ul><li>Prompt solto</li><li>Aceita o que vier</li><li>Conversa infinita</li><li>“Funcionou?” — não sei</li></ul></div>
+    <div class="panel good"><h3>Especificar, delegar, verificar</h3><ul><li>Regras e skills escritas</li><li>Plano antes de executar</li><li>Tarefas pequenas, com “pronto”</li><li>Revisão e vistoria</li></ul></div>
+  </div>
+  <aside class="notes">Vibe coding funciona para protótipo. Para entregar a cliente, precisa de processo.</aside>
+</section>
+
+<!-- ============ 4b. AGENTES E ORQUESTRAÇÃO ============ -->
+<section class="slide" data-t="Escritório = equipe de agentes">
+  <h2>Projeto é o escritório.<br>Agentes são a equipe.<br>Obra é a execução.</h2>
+  <p>Você coordena. Cada agente tem uma função, ferramentas e limites.</p>
+  <aside class="notes">Analogia central desta seção.</aside>
+</section>
+
+<section class="slide" data-t="Orquestração">
+  <h2>Orquestração: a coordenadora distribui</h2>
+  <svg viewBox="0 0 700 250" style="width:min(100%,780px)" role="img" aria-label="Um coordenador distribui tarefas a três agentes especialistas e junta os resultados">
+    <g font-family="ui-sans-serif,system-ui" font-size="15" font-weight="700" text-anchor="middle">
+      <g stroke="var(--dim)" stroke-width="2" fill="none"><path d="M350 70 L110 150"/><path d="M350 70 L350 150"/><path d="M350 70 L590 150"/></g>
+      <rect x="190" y="20" width="320" height="50" rx="12" fill="var(--accent)"/><text x="350" y="51" fill="#1a1200">Coordenadora (você + agente)</text>
+      <rect x="20" y="150" width="180" height="56" rx="12" fill="var(--bg2)" stroke="var(--line)"/><text x="110" y="183" fill="var(--fg)">Agente: materiais</text>
+      <rect x="260" y="150" width="180" height="56" rx="12" fill="var(--bg2)" stroke="var(--line)"/><text x="350" y="183" fill="var(--fg)">Agente: documentos</text>
+      <rect x="500" y="150" width="180" height="56" rx="12" fill="var(--bg2)" stroke="var(--line)"/><text x="590" y="183" fill="var(--fg)">Agente: cliente</text>
+      <text x="350" y="236" fill="var(--dim)">resultados voltam para a coordenadora revisar</text>
+    </g>
+  </svg>
+  <aside class="notes">Subagentes têm mesa própria: não poluem o contexto da principal. Vantagem de organização, e de tokens.</aside>
+</section>
+
+<section class="slide" data-t="Sequencial">
+  <h2>Sequencial: uma etapa depende da outra</h2>
+  <div class="tl" id="tl-seq">
+    <div class="row"><span>Obra</span><div class="track"><div class="blk" style="left:0;width:20%;background:#ffb020">Fundação</div><div class="blk" style="left:20%;width:20%;background:#6aa9ff;animation-delay:.2s">Estrutura</div><div class="blk" style="left:40%;width:20%;background:#5fd38d;animation-delay:.4s">Alvenaria</div><div class="blk" style="left:60%;width:20%;background:#ff8b80;animation-delay:.6s">Instal.</div><div class="blk" style="left:80%;width:20%;background:#d9b3ff;animation-delay:.8s">Acabam.</div></div></div>
+    <div class="row"><span>IA</span><div class="track"><div class="blk" style="left:0;width:20%;background:#ffb020">Briefing</div><div class="blk" style="left:20%;width:20%;background:#6aa9ff;animation-delay:.2s">Programa</div><div class="blk" style="left:40%;width:20%;background:#5fd38d;animation-delay:.4s">Memorial</div><div class="blk" style="left:60%;width:20%;background:#ff8b80;animation-delay:.6s">Materiais</div><div class="blk" style="left:80%;width:20%;background:#d9b3ff;animation-delay:.8s">Cotação</div></div></div>
+  </div>
+  <p>Cada saída é entrada da próxima. Pare e aprove entre as etapas.</p>
+  <aside class="notes">Não adianta orçar material antes de ter o memorial.</aside>
+</section>
+
+<section class="slide" data-t="Paralelo">
+  <h2>Paralelo: tarefas independentes ao mesmo tempo</h2>
+  <div class="tl">
+    <div class="row"><span>Alvenaria</span><div class="track"><div class="blk" style="left:0;width:70%;background:#5fd38d">sobe a parede</div></div></div>
+    <div class="row"><span>Marcenaria</span><div class="track"><div class="blk" style="left:0;width:60%;background:#6aa9ff;animation-delay:.1s">fabrica os móveis</div></div></div>
+    <div class="row"><span>Elétrica</span><div class="track"><div class="blk" style="left:0;width:40%;background:#ffb020;animation-delay:.2s">compra material</div></div></div>
+    <div class="row"><span>IA: sessão A</span><div class="track"><div class="blk" style="left:0;width:45%;background:#ff8b80">triagem de e-mails</div></div></div>
+    <div class="row"><span>IA: sessão B</span><div class="track"><div class="blk" style="left:0;width:65%;background:#d9b3ff;animation-delay:.1s">benchmark de concorrentes</div></div></div>
+    <div class="row"><span>IA: sessão C</span><div class="track"><div class="blk" style="left:0;width:55%;background:#ffd36a;animation-delay:.2s">revisão do memorial</div></div></div>
+  </div>
+  <aside class="notes">Ganha tempo. Custa mais tokens ao mesmo tempo e exige que você revise tudo no fim.</aside>
+</section>
+
+<section class="slide" data-t="Sequencial ou paralelo?">
+  <h2>Como decidir</h2>
+  <div class="cols">
+    <div class="panel"><h3>Depende do resultado da outra?</h3><p><b>Sim</b> → sequencial.<br><b>Não</b> → paralelo.</p></div>
+    <div class="panel badp"><h3>Cuidado no paralelo</h3><p>Duas sessões mexendo no <b>mesmo arquivo</b> = dois pedreiros na mesma parede.</p></div>
+    <div class="panel good"><h3>Solução</h3><p>Cada sessão com sua pasta de saída e um ponto de junção: você revisa e consolida.</p></div>
+  </div>
+  <aside class="notes">Em código usa-se branches/cópias separadas pelo mesmo motivo.</aside>
+</section>
+
+<section class="slide" data-t="Human-in-the-loop">
+  <h2>Human-in-the-loop: as vistorias da obra</h2>
+  <p>A IA <b>propõe</b>. Você <b>aprova</b> — antes de:</p>
+  <div class="flow"><span class="chip">enviar e-mail</span><span class="chip">apagar/sobrescrever</span><span class="chip">mandar orçamento ao cliente</span><span class="chip">entregar prancha</span><span class="chip">gastar dinheiro</span></div>
+  <div class="flow" style="margin-top:.6em"><span class="chip">sugere</span><span class="arrow">→</span><span class="chip a">executa com aprovação</span><span class="arrow">→</span><span class="chip">executa e avisa (baixo risco, reversível)</span></div>
+  <p class="dim">No Codex: modo de aprovação + sandbox. Trava dura: hooks.</p>
+  <aside class="notes">Escada de autonomia: suba um degrau só depois de confiar naquela tarefa.</aside>
+</section>
+
+<section class="slide" data-t="Provedores">
+  <h2>Outros provedores, mesmos conceitos</h2>
+  <table>
+    <tr><th>Provedor</th><th>Modelos</th><th>Agente / harness</th></tr>
+    <tr><td>OpenAI</td><td>GPT</td><td>Codex, ChatGPT</td></tr>
+    <tr><td>Anthropic</td><td>Claude</td><td>Claude Code, Claude</td></tr>
+    <tr><td>xAI</td><td>Grok</td><td>Grok (app e API)</td></tr>
+    <tr><td>Google</td><td>Gemini</td><td>Gemini CLI</td></tr>
+    <tr><td>Aberto / local</td><td>Llama, Qwen, Mistral</td><td>Ollama, LM Studio + harness</td></tr>
+  </table>
+  <p><b>Contexto, tokens, rules, skills, MCP e aprovação existem em todos.</b> AGENTS.md e MCP são padrões abertos que vários harnesses entendem: aprendeu um, aprendeu todos.</p>
+  <aside class="notes">Opcional/pular se faltar tempo. Produtos mudam de nome rápido: confira o site do provedor antes de decidir. Sem guerra de marcas.</aside>
+</section>
+
+<section class="slide statement" data-t="Equipe e responsável">
+  <p class="big">Agentes são a equipe.<br><span class="acc">Você é a responsável técnica que assina.</span></p>
+  <aside class="notes">Fecha a seção. Próximo: o que fazer de verdade no escritório.</aside>
+</section>
+
+<!-- ============ 5. APLICAÇÕES ============ -->
+<section class="slide" data-t="Do papel pra fora">
+  <h2>Do papel pra fora:<br>sete ideias para o escritório</h2>
+  <div class="flow"><span class="chip">E-mails</span><span class="chip">Organização do projeto</span><span class="chip">Suas redes</span><span class="chip">Concorrentes</span><span class="chip">Documentação</span><span class="chip">Materiais de obra</span><span class="chip">CAD</span></div>
+  <p class="dim">Cada uma: dor → o que a IA faz → como montar → entrega → cuidado → primeiro passo.</p>
+  <aside class="notes">Peça para cada uma escolher qual dói mais hoje.</aside>
+</section>
+
+<section class="slide" data-t="Caso: e-mails">
+  <h2>Triagem de e-mails corporativos</h2>
+  <div class="case">
+    <div><b>Dor</b><p>Caixa cheia: cliente, obra, fornecedor, prefeitura, spam. O urgente se perde.</p></div>
+    <div><b>A IA faz</b><p>Classifica, dá urgência, extrai prazos, rascunha respostas, resume o dia.</p></div>
+    <div><b>Como montar</b><p>Skill <code>triagem-email</code> + conector de e-mail (leitura/rascunho).</p></div>
+    <div><b>Entrega</b><p>Tabela por urgência + “ações de hoje” + rascunhos.</p></div>
+    <div><b>Cuidado</b><p class="warn">Rascunho, nunca envio. Dados de clientes.</p></div>
+    <div class="next"><b>Primeiro passo</b><p>Rodar com <code>exemplos/emails.txt</code>.</p></div>
+  </div>
+  <aside class="notes">Demo ao vivo no bloco do Codex.</aside>
+</section>
+
+<section class="slide" data-t="Caso: organização do projeto">
+  <h2>Organização de projeto</h2>
+  <div class="case">
+    <div><b>Dor</b><p>A reunião acaba e ninguém sabe quem faz o quê até quando.</p></div>
+    <div><b>A IA faz</b><p>Ata → pendências com responsável e prazo; cronograma por etapa; status semanal.</p></div>
+    <div><b>Como montar</b><p>Skill <code>organizacao-projeto</code> + planilha/Notion.</p></div>
+    <div><b>Entrega</b><p><code>pendencias.csv</code>, cronograma, status de 12 linhas.</p></div>
+    <div><b>Cuidado</b><p class="warn">Sem responsável/prazo na ata? Ela deve perguntar, não inventar.</p></div>
+    <div class="next"><b>Primeiro passo</b><p>Rodar com <code>exemplos/reuniao-ata.txt</code>.</p></div>
+  </div>
+  <aside class="notes">Etapas: estudo → anteprojeto → executivo → obra.</aside>
+</section>
+
+<section class="slide" data-t="Caso: suas redes">
+  <h2>Análise das suas redes sociais</h2>
+  <div class="case">
+    <div><b>Dor</b><p>Posta sem saber o que funciona.</p></div>
+    <div><b>A IA faz</b><p>Lê o export de métricas, agrupa por tema/formato/dia, sugere calendário e legendas.</p></div>
+    <div><b>Como montar</b><p>Skill <code>analise-redes-sociais</code> + CSV exportado da plataforma.</p></div>
+    <div><b>Entrega</b><p>Relatório + calendário de 4 semanas.</p></div>
+    <div><b>Cuidado</b><p class="warn">Poucos posts = conclusão fraca. Não publicar sozinha.</p></div>
+    <div class="next"><b>Primeiro passo</b><p>Exportar os últimos 30 posts.</p></div>
+  </div>
+  <aside class="notes">Contas são feitas por script/planilha, não de cabeça (lembra do determinístico).</aside>
+</section>
+
+<section class="slide" data-t="Caso: concorrentes">
+  <h2>Análise de concorrentes</h2>
+  <div class="case">
+    <div><b>Dor</b><p>Não dá tempo de acompanhar os outros escritórios.</p></div>
+    <div><b>A IA faz</b><p>Um agente por concorrente, em paralelo: temas, estilo, frequência, chamadas.</p></div>
+    <div><b>Como montar</b><p>Skill <code>analise-concorrentes</code> + sessões paralelas.</p></div>
+    <div><b>Entrega</b><p>Tabela comparativa e “o que eles fazem que nós não”.</p></div>
+    <div><b>Cuidado</b><p class="warn">Só conteúdo público e termos de uso. Não copiar.</p></div>
+    <div class="next"><b>Primeiro passo</b><p>Escolher 3 concorrentes e salvar 20 posts de cada.</p></div>
+  </div>
+  <aside class="notes">Bom exemplo de paralelismo.</aside>
+</section>
+
+<section class="slide" data-t="Caso: documentação">
+  <h2>Documentação do projeto</h2>
+  <div class="case">
+    <div><b>Dor</b><p>Memorial, especificações e checklists tomam noites.</p></div>
+    <div><b>A IA faz</b><p>Rascunha por ambiente, compara memorial × lista de ambientes, aponta divergências.</p></div>
+    <div><b>Como montar</b><p>Skill <code>documentacao-projeto</code> + seu memorial anterior como modelo.</p></div>
+    <div><b>Entrega</b><p>Memorial com <code>[PREENCHER]</code> onde faltar dado + lista de pendências.</p></div>
+    <div><b>Cuidado</b><p class="warn">Norma só com número/ano certo. Revisão e assinatura são suas.</p></div>
+    <div class="next"><b>Primeiro passo</b><p>Pegar um memorial antigo como modelo.</p></div>
+  </div>
+  <aside class="notes">Vitória rápida: documentação e e-mail.</aside>
+</section>
+
+<section class="slide" data-t="Caso: materiais">
+  <h2>Levantamento de materiais de obra</h2>
+  <div class="case">
+    <div><b>Dor</b><p>Quantitativo manual, ambiente por ambiente.</p></div>
+    <div><b>A IA faz</b><p>Lê a lista de ambientes e monta planilha com fórmulas, perdas e colunas de cotação.</p></div>
+    <div><b>Como montar</b><p>Skill <code>levantamento-materiais</code> + <code>ambientes.csv</code>.</p></div>
+    <div><b>Entrega</b><p><code>levantamento.xlsx</code> com aba de premissas.</p></div>
+    <div><b>Cuidado</b><p class="warn">A <b>planilha</b> calcula, não a IA. Estimativa, não orçamento fechado.</p></div>
+    <div class="next"><b>Primeiro passo</b><p>Rodar com <code>exemplos/ambientes.csv</code>.</p></div>
+  </div>
+  <aside class="notes">Piso = área × (1 + perda). Perda é parâmetro editável.</aside>
+</section>
+
+<section class="slide" data-t="Caso: CAD">
+  <h2>Apoio ao AutoCAD / progeCAD</h2>
+  <p><b>A IA não desenha o projeto.</b> Ela automatiza o repetitivo.</p>
+  <div class="cols">
+    <div class="terminal"><div class="bar"><i></i><i></i><i></i>&nbsp;renomear-layer.lsp</div><pre><span class="c">; renomeia a layer "Layer1" para "A-TEXTO"</span>
+(defun c:AJUSTA ()
+  (command "-LAYER" "RENAME" "Layer1" "A-TEXTO" "")
+  (princ))</pre></div>
+    <div class="panel"><h3>Boas tarefas</h3><ul><li>Auditar e padronizar layers</li><li>Numerar pranchas, gerar carimbos</li><li>Extrair tabela de áreas</li><li>Ler/gerar DXF com Python</li></ul></div>
+  </div>
+  <p class="small">Sempre em cópia do arquivo, e revise o script antes de rodar. Demo: <code>exemplos/planta.dxf</code>.</p>
+  <aside class="notes">Script roda igual toda vez: determinístico. O trabalho de projeto continua humano.</aside>
+</section>
+
+<section class="slide" data-t="Por onde começar">
+  <h2>Por onde começar?</h2>
+  <table>
+    <tr><th>Ideia</th><th>Esforço</th><th>Impacto</th></tr>
+    <tr><td>Triagem de e-mails</td><td>baixo</td><td>alto</td></tr>
+    <tr><td>Documentação / memorial</td><td>baixo</td><td>alto</td></tr>
+    <tr><td>Organização de projeto</td><td>médio</td><td>alto</td></tr>
+    <tr><td>Levantamento de materiais</td><td>médio</td><td>alto</td></tr>
+    <tr><td>Análise das redes</td><td>médio</td><td>médio</td></tr>
+    <tr><td>Concorrentes</td><td>alto</td><td>médio</td></tr>
+    <tr><td>Scripts de CAD</td><td>alto</td><td>alto (com tempo)</td></tr>
+  </table>
+  <p>Comece por <b>e-mail e documentação</b>: vitória rápida, risco baixo.</p>
+  <aside class="notes">Esforço e impacto são estimativas gerais; elas ajustam ao escritório.</aside>
+</section>
+
+<section class="slide" data-t="O que NÃO delegar">
+  <h2>O que <span class="bad">não</span> delegar</h2>
+  <div class="cols">
+    <div class="panel badp"><h3>Responsabilidade técnica</h3><p>Assinatura, RRT, laudos, aprovações legais.</p></div>
+    <div class="panel badp"><h3>Cálculo estrutural e de instalações</h3><p>Com os profissionais habilitados.</p></div>
+    <div class="panel badp"><h3>Dados de clientes</h3><p>LGPD: não cole CPF, endereço, telefone sem necessidade.</p></div>
+    <div class="panel badp"><h3>Envio sem revisão</h3><p>Nada sai do escritório sem olho humano.</p></div>
+  </div>
+  <aside class="notes">A IA acelera; a responsabilidade continua sendo de vocês.</aside>
+</section>
+
+<!-- ============ 6. LICENCIADO x OPEN SOURCE ============ -->
+<section class="slide" data-t="Licenciado × open source">
+  <h2>Software licenciado × open source</h2>
+  <div class="cols">
+    <div class="panel"><h3>Licenciado / proprietário</h3><p>Você paga pelo <b>direito de usar</b>. O código é fechado: não vê, não altera. O fabricante decide preço, versão e fim do suporte.</p></div>
+    <div class="panel"><h3>Open source</h3><p>O código é <b>aberto</b>: qualquer pessoa pode ver, usar e modificar, dentro das regras da licença (algumas exigem compartilhar as melhorias).</p></div>
+  </div>
+  <p><mark>“Grátis” não é o mesmo que open source.</mark> E open source não é “sem regra”.</p>
+  <aside class="notes">Analogia: licenciado = projeto padrão alugado; open source = planta aberta que você pode reformar, respeitando a licença.</aside>
+</section>
+
+<section class="slide" data-t="Comparativo">
+  <h2>Comparando</h2>
+  <table>
+    <tr><th></th><th>Licenciado</th><th>Open source</th></tr>
+    <tr><td>Custo</td><td>Assinatura/licença</td><td>Geralmente sem licença; custo de tempo/suporte</td></tr>
+    <tr><td>Suporte</td><td>Do fabricante</td><td>Comunidade ou empresas contratadas</td></tr>
+    <tr><td>Controle</td><td>Limitado</td><td>Alto</td></tr>
+    <tr><td>Privacidade</td><td>Depende do contrato</td><td>Pode rodar no seu computador</td></tr>
+    <tr><td>Dependência</td><td>Do fabricante</td><td>Menor</td></tr>
+    <tr><td>Facilidade</td><td>Geralmente maior</td><td>Varia</td></tr>
+  </table>
+  <aside class="notes">Não é “um é melhor”: é adequação ao uso e risco.</aside>
+</section>
+
+<section class="slide" data-t="No mundo de vocês">
+  <h2>No seu mundo</h2>
+  <div class="cols">
+    <div class="panel"><h3>Projeto</h3><p><b>Licenciado:</b> AutoCAD, Revit, SketchUp.<br><b>Aberto:</b> FreeCAD, LibreCAD, Blender/Bonsai (BIM), QGIS.</p></div>
+    <div class="panel"><h3>IA</h3><p><b>Fechados, na nuvem:</b> GPT, Claude, Gemini, Grok.<br><b>Pesos abertos:</b> Llama, Qwen, Mistral, rodando no seu PC (Ollama, LM Studio).</p></div>
+  </div>
+  <p class="small">“Pesos abertos” = o modelo pode ser baixado e rodado por você; nem sempre significa open source completo. Leia a licença de cada um.</p>
+  <aside class="notes">Opcional se faltar tempo. Modelos locais são mais fracos que os de ponta, mas mantêm o dado dentro de casa.</aside>
+</section>
+
+<section class="slide" data-t="Como escolher">
+  <h2>Como escolher</h2>
+  <ul><li><b>Dado sensível?</b> Considere rodar local ou ler a política de privacidade do plano.</li><li><b>Qualidade necessária?</b> Tarefa difícil costuma pedir modelo de ponta (fechado).</li><li><b>Custo e volume?</b> Muito volume pode compensar modelo local.</li><li><b>Suporte e prazo?</b> Quem responde se quebrar?</li></ul>
+  <p>O próprio <b>Codex CLI é open source</b> e usa modelos da OpenAI: um híbrido comum.</p>
+  <aside class="notes">Exemplo de híbrido: harness aberto + modelo fechado. Verificar a licença atual do repositório se perguntarem.</aside>
+</section>
+
+<!-- ============ 7. CODEX ============ -->
+<section class="slide" data-t="Codex">
+  <h2>Codex: o harness que vamos configurar</h2>
+  <p>Agente de código e de arquivos da OpenAI. Roda no terminal (CLI), em app ou dentro do editor. Serve para <b>qualquer</b> tarefa com arquivos, não só código.</p>
+  <div class="terminal"><div class="bar"><i></i><i></i><i></i>&nbsp;terminal</div><pre><span class="p">$</span> cd C:\Projetos\casa-lago
+<span class="p">$</span> codex
+<span class="c">// instalação e login: ver codex-kit/README.md e
+// developers.openai.com/codex</span></pre></div>
+  <aside class="notes">Mostrar instalação ao vivo ou já instalado. Os passos mudam; a página oficial é a fonte.</aside>
+</section>
+
+<section class="slide" data-t="Anatomia do projeto">
+  <h2>Anatomia de uma pasta de trabalho</h2>
+  <div class="terminal"><div class="bar"><i></i><i></i><i></i>&nbsp;casa-lago/</div><pre>casa-lago/
+├── AGENTS.md            <span class="c">← rules do escritório</span>
+├── entrada/             <span class="c">← o que você fornece</span>
+├── saida/               <span class="c">← o que a IA gera</span>
+├── projetos/            <span class="c">← intocável</span>
+└── (skills no projeto ou em ~/.codex/skills/)
+
+~/.codex/
+├── config.toml          <span class="c">← modelo, aprovação, sandbox, MCP</span>
+└── skills/              <span class="c">← suas skills</span></pre></div>
+  <aside class="notes">Tudo pronto em codex-kit/. É copiar e editar.</aside>
+</section>
+
+<section class="slide" data-t="Configurando">
+  <h2>Configurando em 5 passos</h2>
+  <ol style="display:grid;gap:.5em;padding-left:1.2em">
+    <li>Instalar o Codex e fazer login.</li>
+    <li>Copiar <code>AGENTS.md</code> para a pasta do projeto e editar.</li>
+    <li>Copiar <code>config.toml</code> para <code>~/.codex/</code> — comece em <code>on-request</code> + <code>workspace-write</code>.</li>
+    <li>Copiar as skills para <code>~/.codex/skills/</code>.</li>
+    <li>Só depois: ligar um MCP (somente leitura) e um hook.</li>
+  </ol>
+  <div class="terminal"><pre><span class="c"># ~/.codex/config.toml</span>
+approval_policy = <span class="g">"on-request"</span>
+sandbox_mode    = <span class="g">"workspace-write"</span></pre></div>
+  <aside class="notes">Cinto de segurança primeiro, autonomia depois.</aside>
+</section>
+
+<section class="slide" data-t="Demo">
+  <h2>Demo ao vivo</h2>
+  <div class="terminal"><div class="bar"><i></i><i></i><i></i>&nbsp;codex</div><pre><span class="p">você&gt;</span> Use a skill triagem-email em entrada/emails.txt.
+       Mostre o plano antes. Só rascunhos.
+<span class="g">codex&gt;</span> Plano: 1) ler 5 e-mails 2) classificar 3) rascunhar...
+<span class="p">você&gt;</span> pode ir
+<span class="g">codex&gt;</span> Criado: saida/triagem-2026-11-05.md  saida/rascunhos/</pre></div>
+  <p>Depois: <code>levantamento-materiais</code> com <code>ambientes.csv</code>, e <code>apoio-cad</code> com <code>planta.dxf</code>.</p>
+  <aside class="notes">Mostre o plano, o pedido de aprovação, o arquivo gerado, e confira 2 números à mão. Se a demo falhar, é aula: mostre como corrigir.</aside>
+</section>
+
+<section class="slide" data-t="Boas práticas">
+  <h2>Boas práticas de orquestração</h2>
+  <div class="cols">
+    <ul><li>Uma tarefa clara por conversa.</li><li>Peça o <b>plano</b> antes de executar.</li><li>Etapas com critério de “pronto”.</li><li>Git (ou cópias) como “Ctrl+Z” de tudo.</li></ul>
+    <ul><li><b>Revise</b> o arquivo/diff, sempre.</li><li>Paralelize só o independente.</li><li>Contexto enxuto: skills, não colar tudo.</li><li>O que repete vira skill; o que aprendeu vai pro AGENTS.md.</li></ul>
+  </div>
+  <p class="dim">Receitas em <code>codex-kit/orquestracao.md</code>.</p>
+  <aside class="notes">Prática: 2 sessões em paralelo (concorrentes + e-mails) e 1 cadeia sequencial (briefing → memorial → materiais), com vocês aprovando entre as etapas.</aside>
+</section>
+
+<section class="slide" data-t="Antipadrões">
+  <h2>Antipadrões do vibe coder</h2>
+  <table>
+    <tr><th>Não faça</th><th>Faça</th></tr>
+    <tr><td>Prompt gigante e vago</td><td>Papel, contexto, formato, “pronto”</td></tr>
+    <tr><td>Aceitar sem ler</td><td>Revisar arquivo e conferir contas</td></tr>
+    <tr><td>Conversa infinita</td><td>Nova conversa por assunto + resumo</td></tr>
+    <tr><td>Acesso total no dia 1</td><td>Somente leitura, aprovação, sandbox</td></tr>
+    <tr><td>Repetir o prompt toda vez</td><td>Virar skill</td></tr>
+  </table>
+  <aside class="notes">Fecha o bloco prático.</aside>
+</section>
+
+<!-- ============ 8. FECHAMENTO ============ -->
+<section class="slide" data-t="Semana 1">
+  <h2>Sua semana 1</h2>
+  <ul><li>Instalar o Codex e logar.</li><li>Copiar o kit e editar o <code>AGENTS.md</code>.</li><li>Rodar a triagem com <code>exemplos/emails.txt</code>.</li><li>Rodar o levantamento com <code>ambientes.csv</code>.</li><li>Criar <b>uma</b> skill própria para algo que você repete.</li></ul>
+  <aside class="notes">Pequeno e concreto. Combinar uma data para trocar experiências.</aside>
+</section>
+
+<section class="slide statement" data-t="Fim">
+  <p class="quote">Gerador de texto glorificado?<br><span class="acc">Sim. E quem dirige a obra é você.</span></p>
+  <p class="by">Perguntas?</p>
+  <aside class="notes">Volta à frase de abertura: ele tem razão no mecanismo; a diferença está em como você o usa.</aside>
+</section>
+</main>
+<div class="hud"><span>IA sem hype</span><span><b id="cur">1</b> / <span id="tot">1</span></span></div>
+<div class="notesbox" id="notes" aria-live="polite"></div>
+<nav class="overview" id="ov" aria-label="Visão geral"></nav>
+<script>
+(function(){
+"use strict";
+var slides=[].slice.call(document.querySelectorAll(".slide")), i=0;
+var $=function(id){return document.getElementById(id)};
+function show(n,fromHash){
+  n=Math.max(0,Math.min(slides.length-1,n));
+  slides.forEach(function(s,k){s.classList.toggle("on",k===n)});
+  i=n; slides[n].scrollTop=0;
+  $("cur").textContent=n+1; $("tot").textContent=slides.length;
+  $("prog").style.width=((n+1)/slides.length*100)+"%";
+  if(!fromHash){try{history.replaceState(null,"","#"+(n+1))}catch(e){}}
+  var a=slides[n].querySelector("aside.notes"); $("notes").textContent=a?a.textContent.trim():"(sem notas)";
+  var ov=$("ov"); [].forEach.call(ov.children,function(b,k){b.classList.toggle("cur",k===n)});
+}
+function fromHash(){var h=parseInt(location.hash.slice(1),10); show(isNaN(h)?0:h-1,true)}
+var ov=$("ov");
+slides.forEach(function(s,k){
+  var b=document.createElement("button"); b.innerHTML="<small>"+(k+1)+"</small>"; b.appendChild(document.createTextNode(s.getAttribute("data-t")||"Slide "+(k+1)));
+  b.onclick=function(){ov.classList.remove("on");show(k)}; ov.appendChild(b);
+});
+function toggle(el){el.classList.toggle("on")}
+document.addEventListener("keydown",function(e){
+  if(e.target.tagName==="INPUT"||e.target.tagName==="TEXTAREA"||e.ctrlKey||e.metaKey||e.altKey)return;
+  var k=e.key;
+  if(k==="ArrowRight"||k==="PageDown"||k===" "||k==="Enter"&&e.target===document.body){e.preventDefault();show(i+1)}
+  else if(k==="ArrowLeft"||k==="PageUp"){e.preventDefault();show(i-1)}
+  else if(k==="Home")show(0); else if(k==="End")show(slides.length-1);
+  else if(k==="n"||k==="N")toggle($("notes"));
+  else if(k==="o"||k==="O")toggle(ov);
+  else if(k==="f"||k==="F"){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen()}
+  else if(k==="p"||k==="P")window.print();
+  else if(k==="Escape"){ov.classList.remove("on");$("notes").classList.remove("on")}
+});
+var tx=null;
+document.addEventListener("touchstart",function(e){tx=e.touches[0].clientX},{passive:true});
+document.addEventListener("touchend",function(e){
+  if(tx===null)return; var dx=e.changedTouches[0].clientX-tx; tx=null;
+  if(Math.abs(dx)>60)show(i+(dx<0?1:-1));
+},{passive:true});
+$("deck").addEventListener("click",function(e){
+  if(e.target.closest("button,input,a,textarea,.terminal,table"))return;
+  var x=e.clientX/window.innerWidth; if(x>.7)show(i+1); else if(x<.15)show(i-1);
+});
+window.addEventListener("hashchange",fromHash);
+
+/* ---------- WhatsApp / corretor ---------- */
+var NEXT={tudo:["bem","certo","joia"],bem:["e","com","também"],certo:["então","por","e"],joia:["!","e","vamos"],
+"então":["vamos","eu","tudo"],por:["favor","isso","aqui"],isso:["é","aí","mesmo"],"é":["que","o","muito"],que:["você","eu","a"],
+"você":["pode","quer","vai"],quer:["ir","que","um"],ir:["lá","para","embora"],"lá":["em","na","às"],em:["casa","breve","cima"],
+casa:["de","e","com"],de:["novo","manhã","repente"],novo:["bom","dia","amigo"],dia:["tudo","de","a"],bom:["dia","dia","trabalho"],
+e:["aí","eu","a"],"aí":["tudo","eu","é"],eu:["vou","acho","tô"],vou:["lá","ver","te"],ver:["isso","depois","se"],
+vamos:["marcar","ver","lá"],marcar:["para","um","com"],para:["você","amanhã","mim"],amanhã:["cedo","de","às"],"!":["bom","bom","tudo"],
+com:["você","a","o"],"também":["tô","é","vou"],"tô":["indo","aqui","bem"],indo:["lá","para","embora"],a:["gente","casa","sua"],
+gente:["se","vai","fala"],se:["fala","a","você"],fala:["comigo","tudo","aí"]};
+var DEF=["e","que","o"];
+function sugs(text){var w=text.trim().split(/\s+/).pop().toLowerCase().replace(/[,.]$/,"");return NEXT[w]||DEF}
+var msg=$("wa-msg"), sb=document.querySelectorAll("#wa .sug button");
+function waRender(){var s=sugs(msg.textContent);sb.forEach(function(b,k){b.textContent=s[k];b.dataset.w=s[k]})}
+sb.forEach(function(b){b.onclick=function(){msg.textContent+=" "+b.dataset.w;waRender()}});
+waRender();
+function waDemo(){var t="Bom dia, tudo";for(var k=0;k<10;k++)t+=" "+sugs(t)[1];$("wa-demo").textContent=t+"…"}
+$("wa-run").onclick=function(){var t=msg.textContent||"Bom dia, tudo";for(var k=0;k<10;k++)t+=" "+sugs(t)[Math.floor(Math.random()*3)];$("wa-demo").textContent=t+"…"};
+waDemo();
+
+/* ---------- tokenizer (aproximação) ---------- */
+var COLORS=["#ffd36a","#8fd3ff","#a6f0b5","#ffb3a8","#d9b3ff","#fff0a6"];
+function tokenize(t){
+  var out=[],m=t.match(/\s?[\p{L}\p{N}]+|\s?[^\s\p{L}\p{N}]/gu)||[];
+  m.forEach(function(w){
+    var lead=/^\s/.test(w)?" ":"",core=w.replace(/^\s/,"");
+    if(!/[\p{L}\p{N}]/u.test(core)||core.length<=5){out.push(lead+core);return}
+    var parts=Math.ceil(core.length/4),size=Math.ceil(core.length/parts);
+    for(var p=0;p<core.length;p+=size)out.push((p===0?lead:"")+core.slice(p,p+size));
+  });
+  return out;
+}
+function tkRender(){
+  var t=$("tk-in").value,toks=tokenize(t),box=$("tk-out");box.innerHTML="";
+  toks.forEach(function(s,k){var sp=document.createElement("span");sp.textContent=s.replace(/ /g,"·")||" ";sp.style.background=COLORS[k%COLORS.length];box.appendChild(sp)});
+  $("tk-n").textContent=t.length+" caracteres → ~"+toks.length+" tokens";
+}
+$("tk-in").addEventListener("input",tkRender);tkRender();
+
+/* ---------- mesa de contexto ---------- */
+var ITEMS=[["instruções","#ffd36a",1],["conversa","#8fd3ff",2],["planta.pdf","#ffb3a8",3],["memorial","#a6f0b5",2],["e-mails","#d9b3ff",2],["pergunta","#fff0a6",1]];
+var CAP=10,desk=[],n=0;
+function deskRender(){
+  var d=$("desk");d.innerHTML="";
+  desk.forEach(function(x,k){var e=document.createElement("div");e.textContent=x[0];e.style.background=x[1];e.style.flex=x[2];e.style.opacity=.55+.45*(k/Math.max(1,desk.length-1));d.appendChild(e)});
+  var used=desk.reduce(function(a,x){return a+x[2]},0);
+  $("desk-info").textContent="Ocupação: "+used+"/"+CAP+(n>desk.length?" · "+(n-desk.length)+" item(ns) caíram da mesa":"");
+}
+$("desk-add").onclick=function(){desk.push(ITEMS[n%ITEMS.length]);n++;var u=function(){return desk.reduce(function(a,x){return a+x[2]},0)};while(u()>CAP)desk.shift();deskRender()};
+$("desk-reset").onclick=function(){desk=[];n=0;deskRender()};deskRender();
+
+/* ---------- inferência ---------- */
+var DIST={exigir:[["nova",.35],["um",.25],["licença",.2],["reforço",.12],["paciência",.08]],
+nova:[["laje",.3],["instalação",.3],["tubulação",.25],["licença",.15]],um:[["projeto",.4],["laudo",.3],["orçamento",.2],["prazo",.1]],
+licença:[["da",.5],["na",.3],["do",.2]],reforço:[["estrutural",.6],["de",.25],["na",.15]],paciência:[[".",.5],["e",.3],["com",.2]],
+laje:[["estrutural",.5],["nova",.3],["de",.2]],instalação:[["elétrica",.5],["hidráulica",.4],["de",.1]],tubulação:[["nova",.4],["de",.35],["hidráulica",.25]]};
+var BASE="A reforma da cozinha vai exigir",txt=BASE,DEFD=[[".",.4],["e",.3],["de",.2],["com",.1]];
+function infRender(){
+  $("inf-text").textContent=txt;var last=txt.split(" ").pop(),d=DIST[last]||DEFD,b=$("inf-bars");b.innerHTML="";
+  d.forEach(function(x){var r=document.createElement("div");r.className="bar";r.innerHTML="<span></span><i></i><span></span>";
+    r.children[0].textContent=x[0];r.children[2].textContent=Math.round(x[1]*100)+"%";b.appendChild(r);
+    requestAnimationFrame(function(){requestAnimationFrame(function(){r.children[1].style.width=(x[1]*100)+"%"})})});
+}
+$("inf-step").onclick=function(){var last=txt.split(" ").pop(),d=DIST[last]||DEFD,r=Math.random(),c=0,pick=d[d.length-1][0];
+  for(var k=0;k<d.length;k++){c+=d[k][1];if(r<c){pick=d[k][0];break}}
+  txt+=(pick==="."?"":" ")+pick;infRender()};
+$("inf-reset").onclick=function(){txt=BASE;infRender()};infRender();
+
+fromHash();
+})();
+</script>
+</body>
+</html>
