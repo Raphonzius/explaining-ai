@@ -1,0 +1,7 @@
+ambiente,area_m2,perimetro_m,pe_direito_m,piso,parede,rodape,observacoes
+Sala,28.5,22.0,2.7,porcelanato 90x90,pintura acrilica,MDF branco 10cm,porta 0.9 + janela 2.0
+Cozinha,12.0,14.0,2.7,porcelanato 60x60,azulejo ate 1.6m,nenhum,porta 0.8
+Suite,16.0,16.0,2.7,laminado,pintura acrilica,MDF branco 10cm,porta 0.8 + janela 1.5
+Banheiro suite,5.5,9.5,2.7,porcelanato 60x60,porcelanato ate 2.4m,nenhum,porta 0.7
+Quarto 2,11.0,13.0,2.7,laminado,pintura acrilica,MDF branco 10cm,porta 0.8 + janela 1.5
+Varanda,8.0,11.0,2.7,porcelanato antiderrapante,textura,cimenticio,

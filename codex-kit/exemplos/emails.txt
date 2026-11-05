@@ -1,0 +1,24 @@
+### 1
+De: marina.souza@clientefake.example
+Assunto: Cor da fachada - preciso decidir até sexta
+Oi! Meu marido gostou do tom cinza, mas eu prefiro o terracota. Podemos conversar? O pedreiro começa a pintura na segunda.
+
+### 2
+De: vendas@pisosbrasil.example
+Assunto: Promoção porcelanato 90x90 - últimos dias
+Aproveite 30% off! Clique aqui.
+
+### 3
+De: obras@prefeitura-exemplo.example
+Assunto: Pendência no alvará 2026/0457
+Informamos que falta a ART/RRT atualizada e a planta de situação. Prazo: 10 dias úteis.
+
+### 4
+De: joao.eletricista@fornecedorfake.example
+Assunto: Orçamento revisado - Casa Lago
+Segue orçamento atualizado. Valor total R$ 18.400. Validade 7 dias. Preciso do ok para comprar o material.
+
+### 5
+De: financeiro@escritorio.example
+Assunto: NF de maio em aberto
+Lembrete: a nota fiscal do cliente Torres ainda não foi emitida.

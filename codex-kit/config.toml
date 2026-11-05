@@ -1,0 +1,41 @@
+# Exemplo de ~/.codex/config.toml  (no Windows: C:\Users\<voce>\.codex\config.toml)
+# Chaves conferidas com a documentação oficial do Codex em 2026-11:
+#   https://developers.openai.com/codex/config-basic
+#   https://developers.openai.com/codex/config-reference
+# Nomes de modelos e opções mudam: na dúvida, confira a referência acima.
+
+# --- Modelo -----------------------------------------------------------------
+# model = "..."   # deixe comentado para usar o padrão atual do Codex
+
+# --- Segurança: o "cinto de segurança" ---------------------------------------
+# Quando o Codex precisa pedir sua permissão:
+#   "untrusted"  = pede antes de rodar quase qualquer comando (mais seguro, ótimo p/ começar)
+#   "on-request" = roda o que é seguro dentro da pasta e pede quando precisa sair dela
+#   "never"      = nunca pede (NÃO use no começo)
+approval_policy = "on-request"
+
+# Onde ele pode escrever:
+#   "read-only"          = só lê
+#   "workspace-write"    = lê e escreve só na pasta do projeto  (recomendado)
+#   "danger-full-access" = mexe em qualquer lugar do computador (evite)
+sandbox_mode = "workspace-write"
+
+# --- MCP: conectores com o mundo ---------------------------------------------
+# Cada conector é uma tabela [mcp_servers.<nome>]. Descomente só o que for usar,
+# e use SEMPRE contas de teste / somente leitura primeiro.
+
+# Exemplo 1: pasta de arquivos (servidor MCP local, via npx; precisa de Node.js)
+# [mcp_servers.arquivos]
+# command = "npx"
+# args = ["-y", "@modelcontextprotocol/server-filesystem", "C:/Projetos/entrada"]
+
+# Exemplo 2: serviço remoto por URL (Gmail/Notion/etc. variam por provedor;
+# veja o endereço oficial do conector que você quer usar)
+# [mcp_servers.exemplo_remoto]
+# url = "https://exemplo.invalid/mcp"
+
+# --- Hooks (vistorias automáticas) -------------------------------------------
+# Hooks ficam em ~/.codex/hooks.json (ou em [hooks] aqui). Veja ../codex-kit/hooks/.
+# Podem exigir ativação da feature "hooks" na sua versão — confira a doc oficial.
+# [features]
+# hooks = true

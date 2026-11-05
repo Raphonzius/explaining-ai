@@ -1,0 +1,18 @@
+{
+  "description": "Vistoria automática: bloqueia comandos de apagar dentro de projetos/ (exemplo didático).",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "^Bash$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ~/.codex/hooks/bloquear_apagar.py",
+            "timeout": 10,
+            "statusMessage": "Vistoria: checando se o comando é seguro"
+          }
+        ]
+      }
+    ]
+  }
+}
