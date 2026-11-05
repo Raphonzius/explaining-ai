@@ -1,8 +1,6 @@
 # Exemplo de ~/.codex/config.toml  (no Windows: C:\Users\<voce>\.codex\config.toml)
-# Chaves conferidas com a documentação oficial do Codex em 2026-11:
-#   https://developers.openai.com/codex/config-basic
-#   https://developers.openai.com/codex/config-reference
-# Nomes de modelos e opções mudam: na dúvida, confira a referência acima.
+# Chaves conferidas no código-fonte do Codex (github.com/openai/codex) em 2026-11.
+# Na dúvida, procure "Codex config reference" na documentação oficial da OpenAI.
 
 # --- Modelo -----------------------------------------------------------------
 # model = "..."   # deixe comentado para usar o padrão atual do Codex
@@ -17,6 +15,7 @@ approval_policy = "on-request"
 # Onde ele pode escrever:
 #   "read-only"          = só lê
 #   "workspace-write"    = lê e escreve só na pasta do projeto  (recomendado)
+#                          (por padrão também bloqueia internet dentro dos comandos)
 #   "danger-full-access" = mexe em qualquer lugar do computador (evite)
 sandbox_mode = "workspace-write"
 
@@ -35,7 +34,5 @@ sandbox_mode = "workspace-write"
 # url = "https://exemplo.invalid/mcp"
 
 # --- Hooks (vistorias automáticas) -------------------------------------------
-# Hooks ficam em ~/.codex/hooks.json (ou em [hooks] aqui). Veja ../codex-kit/hooks/.
-# Podem exigir ativação da feature "hooks" na sua versão — confira a doc oficial.
-# [features]
-# hooks = true
+# Hooks já vêm ligados. Ficam em ~/.codex/hooks.json (veja codex-kit/hooks/).
+# Depois de copiar, abra o Codex e aprove com /hooks — sem aprovação não rodam.

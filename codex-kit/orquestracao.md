@@ -17,6 +17,7 @@ Vamos fazer em 4 etapas. Termine cada uma, salve em saida/ e PARE para eu aprova
 
 ## 2. Paralelo — quando as tarefas não dependem uma da outra
 Obra: enquanto a alvenaria sobe, o marceneiro fabrica os móveis.
+Obra: os complementares (estrutural, elétrico, hidráulico) andam em paralelo e depois vem a **compatibilização**.
 IA: abra **uma sessão por tarefa** (terminais/abas separados):
 - Sessão A: triagem de e-mails
 - Sessão B: benchmark do concorrente 1 · Sessão C: concorrente 2
@@ -30,6 +31,7 @@ Regras do paralelo:
 ## 3. Human-in-the-loop — vistorias obrigatórias
 Peça aprovação **antes** de: enviar algo para fora, apagar/sobrescrever, entregar ao cliente, gastar dinheiro.
 - Modo de aprovação: `approval_policy = "on-request"` (ou `"untrusted"` no começo).
+- O nome técnico disso é "human-in-the-loop": o visto da arquiteta.
 - Hooks barram o que nunca pode acontecer (ver `hooks/`).
 - Escala de autonomia: **sugere** → **executa com aprovação** → **executa e avisa** (só baixo risco e reversível).
 
