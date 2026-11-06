@@ -274,6 +274,11 @@ body.reflow .mega{font-size:72px} body.reflow .mega.sm{font-size:60px}
 body.reflow .trio{grid-template-columns:1fr;gap:12px} body.reflow .trio>div{padding:16px 18px;gap:8px} body.reflow .trio .k{font-size:24px} body.reflow .trio p{font-size:22px}
 .card .mega{color:var(--teal)} .card.fill .mega{color:#fff}
 .notesbox{white-space:pre-line}
+/* centralização do palco: independente do tamanho da tela */
+.viewport{display:block}
+.stage{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(var(--s,1))}
+body.reflow .stage{position:relative;left:auto;top:auto;transform:none}
+@media print{.stage{position:static;transform:none!important}}
 </style>
 </head>
 <body>
