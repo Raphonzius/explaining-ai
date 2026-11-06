@@ -259,6 +259,21 @@ body.reflow .split,body.reflow .body,body.reflow .fig,body.reflow .mock{flex:non
 body.reflow .lbl{font-size:11px;padding:2px 6px}
 body.reflow .foot{background:var(--bg);left:0;right:0;padding:8px 18px;bottom:0}
 body.reflow .slide.dark .foot{background:var(--dark)}
+/* v3: estilo keynote */
+.mega{font:600 200px/1 var(--font-sans);letter-spacing:-.045em;color:var(--teal);margin:0}
+.mega.sm{font-size:150px}
+.card .mega{margin:8px 0}
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;align-items:stretch}
+.trio>div{background:var(--paper);border:1px solid var(--rule);border-top:4px solid var(--teal);border-radius:12px;padding:40px 36px;display:grid;gap:18px;align-content:start}
+.trio>div.warn{border-top-color:var(--clay)} .trio>div.warn .k{color:var(--clay-ink)}
+.trio .k{font:500 56px/1 var(--font-mono);color:var(--teal)}
+.trio p{font:600 44px/1.18 var(--font-sans);letter-spacing:-.015em;color:var(--ink)}
+.dark-trio>div{background:#1d2228;border-color:#2b323a;border-top-color:var(--teal-light)} .dark-trio .k{color:var(--teal-light)} .dark-trio p{color:#fff}
+.card h3+h3{margin-top:4px}
+body.reflow .mega{font-size:72px} body.reflow .mega.sm{font-size:60px}
+body.reflow .trio{grid-template-columns:1fr;gap:12px} body.reflow .trio>div{padding:16px 18px;gap:8px} body.reflow .trio .k{font-size:24px} body.reflow .trio p{font-size:22px}
+.card .mega{color:var(--teal)} .card.fill .mega{color:#fff}
+.notesbox{white-space:pre-line}
 </style>
 </head>
 <body>
@@ -269,80 +284,72 @@ body.reflow .slide.dark .foot{background:var(--dark)}
     <p class="quote">“IA nada mais é do que um gerador de texto glorificado.”</p>
     <p class="by">Fabio Akita (paráfrase) · “RANT: o Akita abriu as pernas pra IA??” · akitaonrails.com · fev/2026</p>
   </div>
-  <aside class="notes">Paráfrase. A frase literal do post (24/02/2026) é: os modelos “continuam sendo ‘papagaios estocásticos’ ou ‘geradores de texto glorificados’”. No mesmo post ele diz que, mesmo assim, são a forma mais eficiente de produzir boa parte do trabalho. Pergunte: concordam? Vamos ver por que ele tem razão no mecanismo — e por que isso é notícia boa. (2 min)</aside>
+  <aside class="notes">Falar: deixe a frase respirar 3 segundos. Pergunte: “concordam?”. Ele tem razão no mecanismo — e hoje vamos ver por que isso é notícia boa. || Se perguntarem a fonte: a frase literal do post (24/02/2026) é “continuam sendo ‘papagaios estocásticos’ ou ‘geradores de texto glorificados’”.</aside>
 </section>
 
 <section class="slide" data-t="Você já usa isso">
-  <header class="head"><div class="eyebrow">Abertura · o corretor do celular</div><h2 class="title">Você usa isso há dez anos.</h2></header>
+  <header class="head"><div class="eyebrow">Abertura</div><h2 class="title">Você usa isso há dez anos.</h2></header>
   <div class="split r">
-    <div class="stack">
-      <p class="lead">O teclado do celular sugere a próxima palavra olhando o que você acabou de escrever.</p>
-      <p class="lead"><b>Toque na sugestão do meio.</b> De novo. E de novo.</p>
-      <p class="note">Simulação simplificada de um corretor genérico.</p>
-    </div>
+    <div class="stack"><p class="lead">Toque na sugestão do meio.<br>De novo. E de novo.</p></div>
     <div class="phone" id="wa" role="group" aria-label="Simulação do teclado do celular com três sugestões de palavra">
       <div class="msgs"><div class="bubble" id="wa-msg">Bom dia, tudo</div></div>
       <div class="sug"><button></button><button></button><button></button></div>
       <div class="kb" aria-hidden="true"><div><span>q</span><span>w</span><span>e</span><span>r</span><span>t</span><span>y</span><span>u</span><span>i</span><span>o</span><span>p</span></div><div><span>a</span><span>s</span><span>d</span><span>f</span><span>g</span><span>h</span><span>j</span><span>k</span><span>l</span></div><div><span>z</span><span>x</span><span>c</span><span>v</span><span>b</span><span>n</span><span>m</span></div></div>
     </div>
   </div>
-  <aside class="notes">Deixe uma delas tocar. O corretor sugere a próxima palavra com base nas últimas palavras. Isso já é um gerador de texto.</aside>
+  <aside class="notes">Falar: passe o controle para uma delas tocar. O teclado do celular olha as últimas palavras e sugere a próxima. Isso já é um gerador de texto. || Se perguntarem: é uma simulação simples, não o teclado de verdade.</aside>
 </section>
 
 <section class="slide" data-t="Sugestão do meio ×10">
-  <header class="head"><div class="eyebrow">Abertura · o experimento</div><h2 class="title">Dez vezes a sugestão do meio:</h2></header>
+  <header class="head"><div class="eyebrow">Abertura</div><h2 class="title">Dez vezes a do meio:</h2></header>
   <div class="body center">
     <p class="prompt" id="wa-demo">…</p>
-    <p class="lead">Parece português. Não quer dizer nada. Esse modelo olha só uma ou duas palavras para trás.</p>
-    <div class="flow"><button class="btn" id="wa-run">Gerar outra (sorteando)</button></div>
+    <p class="lead">Parece português. Não diz nada.</p>
+    <div class="flow"><button class="btn" id="wa-run">Sortear outra</button></div>
   </div>
-  <aside class="notes">“Parece certo” não é “está certo”. Guarde isso: vai voltar o tempo todo.</aside>
+  <aside class="notes">Falar: “parece certo” não é “está certo”. Guardem isso, vai voltar o tempo todo. O teclado só olha uma ou duas palavras para trás.</aside>
 </section>
 
 <section class="slide" data-t="Mesmo truque, escala absurda">
-  <header class="head"><div class="eyebrow">Abertura · LLM</div><h2 class="title">Agora o mesmo truque, em escala absurda.</h2></header>
-  <div class="body">
-    <table class="tbl">
-      <tr><th>Critério</th><th>Corretor do celular</th><th class="h">LLM (modelo de linguagem grande)</th></tr>
-      <tr><td>Olha para trás</td><td>1–2 palavras</td><td class="h">centenas de páginas</td></tr>
-      <tr><td>Aprendeu com</td><td>o que você digita</td><td class="h">uma parte enorme do que a humanidade publicou</td></tr>
-      <tr><td>Roda em</td><td>seu celular</td><td class="h">datacenters (ou num PC parrudo)</td></tr>
-      <tr><td>Faz o quê</td><td>prevê a próxima palavra</td><td class="h">prevê a próxima palavra</td></tr>
-    </table>
-    <p class="lead"><mark>A última linha é igual.</mark> O resto é tamanho.</p>
+  <header class="head"><div class="eyebrow">Abertura</div><h2 class="title">O mesmo truque. Em escala absurda.</h2></header>
+  <div class="cols2">
+    <div class="card"><span class="tag">Teclado do celular</span><p class="mega sm">2</p><p>palavras para trás</p></div>
+    <div class="card fill"><span class="tag">LLM</span><p class="mega sm">500</p><p>páginas para trás</p></div>
   </div>
-  <aside class="notes">Ele tem razão no mecanismo. Em escala, prever a próxima palavra obriga o modelo a capturar gramática, fatos e estilo. O resultado parece raciocínio. Não é alguém pensando.</aside>
+  <p class="lead">Os dois fazem a mesma coisa: <mark>adivinham a próxima palavra.</mark></p>
+  <aside class="notes">Falar: LLM = “modelo de linguagem grande”. Aprendeu com uma parte enorme do que a humanidade publicou e roda em datacenters. O resultado parece raciocínio; não é alguém pensando. || Os números são ordem de grandeza, para dar a escala.</aside>
+</section>
+
+<section class="slide statement" data-t="Três ideias">
+  <header class="head"><div class="eyebrow">Para levar para casa</div></header>
+  <div class="body">
+    <div class="trio">
+      <div><span class="k">①</span><p>É um gerador de texto.</p></div>
+      <div><span class="k">②</span><p>O poder está no que vai em volta.</p></div>
+      <div><span class="k">③</span><p>Quem assina é você.</p></div>
+    </div>
+  </div>
+  <aside class="notes">Falar: se esquecerem tudo, lembrem destas três frases. Elas vão voltar no fim de cada parte.</aside>
 </section>
 
 <section class="slide" data-t="Agenda">
   <header class="head"><div class="eyebrow">Roteiro</div><h2 class="title">Do “pede e torce” ao “pede com método”.</h2></header>
-  <div class="split">
-    <div class="stack">
-      <div class="ncard"><span class="n">01</span><h3>Desmistificando</h3><p>O que é, como aprende, por que inventa.</p></div>
-      <div class="ncard"><span class="n">02</span><h3>Vocabulário</h3><p>Token, contexto, inferência, economia.</p></div>
-      <div class="ncard"><span class="n">03</span><h3>Harness</h3><p>Regras, skills, travas e tomadas.</p></div>
-      <div class="ncard"><span class="n">04</span><h3>Agentes e orquestração</h3><p>Sequencial, paralelo, o visto da arquiteta.</p></div>
-    </div>
-    <div class="stack">
-      <div class="ncard"><span class="n">05</span><h3>No escritório</h3><p>Sete tarefas chatas e mais ideias.</p></div>
-      <div class="ncard"><span class="n">06</span><h3>Licenciado × open source</h3><p>O que é seu, o que é alugado.</p></div>
-      <div class="ncard"><span class="n">07</span><h3>Codex na prática</h3><p>Configurar, demonstrar, regras da casa.</p></div>
-      <div class="card fill"><p>Hoje a gente abre o capô, mostra que não tem mágica e monta um processo onde a IA trabalha e vocês conferem.</p></div>
-    </div>
+  <div class="body center">
+    <div class="flow"><span class="chip">01 Desmistificando</span><span class="chip">02 Vocabulário</span><span class="chip">03 Harness</span><span class="chip">04 Agentes</span><span class="chip">05 No escritório</span><span class="chip">06 Licenças</span><span class="chip a">07 Codex</span></div>
   </div>
-  <aside class="notes">“Pede e torce” = jogar um pedido solto e aceitar o que vier. “Pede com método” = especificar, delegar e conferir, como se faz com qualquer prestador de serviço.</aside>
+  <aside class="notes">Falar: “pede e torce” é jogar um pedido solto e aceitar o que vier. “Pede com método” é como contratar qualquer serviço: explicar, delegar, conferir. Esse é o vilão e o herói da apresentação.</aside>
 </section>
 
 <!-- ================= PARTE 01 ================= -->
 <section class="slide divider" data-t="Parte 01 · Desmistificando">
   <div class="sd-top">PARTE 01 <i></i><span class="of">DE 07</span></div>
-  <div class="sd-grid"><div class="sd-num">01</div><div><div class="sd-kick">Próxima seção</div><h2 class="sd-title">Desmistificando</h2><div class="sd-rule"></div>
-    <ul class="sd-next"><li class="k">A SEGUIR</li><li><span>→</span>Onde a IA se encaixa</li><li><span>→</span>Treino × uso</li><li><span>→</span>Plausível ≠ verdadeiro</li></ul></div></div>
+  <div class="sd-grid"><div class="sd-num">01</div><div><div class="sd-kick">① É um gerador de texto</div><h2 class="sd-title">Desmistificando</h2><div class="sd-rule"></div>
+    <ul class="sd-next"><li class="k">A SEGUIR</li><li><span>→</span>Como aprende</li><li><span>→</span>Por que inventa</li><li><span>→</span>Onde serve</li></ul></div></div>
   <div class="sd-foot"><span>IA sem hype</span><span>para arquitetas · 2026</span></div>
 </section>
 
 <section class="slide" data-t="Mapa da IA">
-  <header class="head"><div class="eyebrow">Desmistificando · o mapa</div><h2 class="title">Quando alguém diz “IA”, quase sempre é o miolo.</h2></header>
+  <header class="head"><div class="eyebrow">Desmistificando</div><h2 class="title">Quando dizem “IA”, quase sempre é o miolo.</h2></header>
   <div class="fig" style="flex:1">
     <svg viewBox="0 0 1600 640" role="img" aria-labelledby="map-t map-d"><title id="map-t">Diagrama: camadas da inteligência artificial</title><desc id="map-d">Retângulos aninhados: IA contém aprendizado de máquina, que contém aprendizado profundo, que contém IA generativa, que contém os LLMs.</desc>
       <g fill="none" stroke-width="2">
@@ -352,264 +359,219 @@ body.reflow .slide.dark .foot{background:var(--dark)}
         <rect x="310" y="268" width="980" height="332" rx="20" stroke="var(--teal)"/>
         <rect x="430" y="370" width="740" height="210" rx="18" fill="var(--teal-soft)" stroke="var(--teal)" stroke-width="3"/>
       </g>
-      <text class="s m" x="44" y="62">Inteligência Artificial — qualquer sistema “esperto”</text>
-      <text class="s m" x="144" y="148">Aprendizado de máquina — aprende com exemplos</text>
-      <text class="s" x="244" y="234">Aprendizado profundo — redes neurais</text>
-      <text class="s t" x="344" y="320">IA generativa — cria texto, imagem, áudio</text>
+      <text class="s m" x="44" y="62">Inteligência Artificial</text>
+      <text class="s m" x="144" y="148">Aprendizado de máquina</text>
+      <text class="s" x="244" y="234">Aprendizado profundo</text>
+      <text class="s t" x="344" y="320">IA generativa</text>
       <text class="s t2 mid" x="800" y="468" style="font-size:52px">LLM: gera texto</text>
-      <text class="s m mid" x="800" y="530" style="font-size:24px">o corretor do celular é um primo bem pequeno</text>
+      <text class="s m mid" x="800" y="530" style="font-size:24px">o teclado do celular é um primo bem pequeno</text>
     </svg>
   </div>
-  <aside class="notes">Opcional se faltar tempo. Hoje, “IA” no dia a dia quase sempre é o retângulo de dentro.</aside>
+  <aside class="notes">Opcional. Falar: “IA” é um guarda-chuva enorme; o que vocês usam no dia a dia é o retângulo de dentro. || Se perguntarem “e o filtro de spam?”: também é IA, do círculo de fora, aprendizado de máquina.</aside>
 </section>
 
 <section class="slide" data-t="Treino × uso">
   <header class="head"><div class="eyebrow">Desmistificando · como aprende</div><h2 class="title">Aprende uma vez. Depois só é usado.</h2></header>
   <div class="split r">
     <div class="fig">
-      <svg viewBox="0 0 1000 600" role="img" aria-labelledby="tr-t tr-d"><title id="tr-t">Diagrama: treino e uso</title><desc id="tr-d">Treino acontece uma vez e ajusta o modelo. No uso, o modelo está congelado: recebe a pergunta e devolve a resposta, sem aprender.</desc>
+      <svg viewBox="0 0 1000 560" role="img" aria-labelledby="tr-t tr-d"><title id="tr-t">Diagrama: treino e uso</title><desc id="tr-d">Treino acontece uma vez e ajusta o modelo. No uso, o modelo está congelado: recebe a pergunta e devolve a resposta, sem aprender.</desc>
         <defs><marker id="ah-tr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--muted)"/></marker></defs>
-        <text class="s t mono" x="0" y="34" style="font-size:22px">TREINO · UMA VEZ · MESES · CARÍSSIMO</text>
-        <rect x="0" y="60" width="260" height="110" rx="14" fill="var(--paper)" stroke="var(--rule-strong)" stroke-width="2"/><text class="s mid" x="130" y="108">Trilhões</text><text class="s m mid" x="130" y="142" style="font-size:22px">de textos</text>
-        <rect x="340" y="60" width="320" height="110" rx="14" fill="var(--teal-soft)" stroke="var(--teal)" stroke-width="2"/><text class="s mid" x="500" y="108">Ajusta bilhões</text><text class="s m mid" x="500" y="142" style="font-size:22px">de “botões”</text>
-        <rect x="740" y="60" width="260" height="110" rx="14" fill="var(--teal)"/><text class="s w mid" x="870" y="108">Modelo</text><text class="s w mid" x="870" y="142" style="font-size:22px">(um arquivo)</text>
+        <text class="s t mono" x="0" y="34" style="font-size:24px">TREINO · UMA VEZ</text>
+        <rect x="0" y="60" width="260" height="110" rx="14" fill="var(--paper)" stroke="var(--rule-strong)" stroke-width="2"/><text class="s mid" x="130" y="124">Textos</text>
+        <rect x="340" y="60" width="320" height="110" rx="14" fill="var(--teal-soft)" stroke="var(--teal)" stroke-width="2"/><text class="s mid" x="500" y="124">Ajusta “botões”</text>
+        <rect x="740" y="60" width="260" height="110" rx="14" fill="var(--teal)"/><text class="s w mid" x="870" y="124">Modelo</text>
         <path d="M262 115H332" stroke="var(--muted)" stroke-width="3" marker-end="url(#ah-tr)"/><path d="M662 115H732" stroke="var(--muted)" stroke-width="3" marker-end="url(#ah-tr)"/>
-        <text class="s m mid" x="500" y="208" style="font-size:20px">erra → ajusta → repete</text>
-        <line x1="0" y1="262" x2="1000" y2="262" stroke="var(--rule)" stroke-width="2" stroke-dasharray="8 8"/>
-        <text class="s t mono" x="0" y="320" style="font-size:22px">USO (INFERÊNCIA) · TODO DIA · SEGUNDOS</text>
-        <rect x="0" y="350" width="260" height="110" rx="14" fill="var(--paper)" stroke="var(--rule-strong)" stroke-width="2"/><text class="s mid" x="130" y="414">Sua pergunta</text>
-        <rect x="340" y="350" width="320" height="110" rx="14" fill="var(--paper)" stroke="var(--ink)" stroke-width="3"/><text class="s mid" x="520" y="398">Modelo</text><text class="s m mid" x="520" y="432" style="font-size:22px">congelado</text>
+        <line x1="0" y1="250" x2="1000" y2="250" stroke="var(--rule)" stroke-width="2" stroke-dasharray="8 8"/>
+        <text class="s t mono" x="0" y="320" style="font-size:24px">USO · TODO DIA</text>
+        <rect x="0" y="350" width="260" height="110" rx="14" fill="var(--paper)" stroke="var(--rule-strong)" stroke-width="2"/><text class="s mid" x="130" y="414">Pergunta</text>
+        <rect x="340" y="350" width="320" height="110" rx="14" fill="var(--paper)" stroke="var(--ink)" stroke-width="3"/><text class="s mid" x="525" y="414">Congelado</text>
         <g transform="translate(372 380)" fill="none" stroke="var(--ink)" stroke-width="3"><rect x="0" y="22" width="40" height="32" rx="5" fill="var(--ink)"/><path d="M8 22V12a12 12 0 0 1 24 0v10"/></g>
         <rect x="740" y="350" width="260" height="110" rx="14" fill="var(--paper)" stroke="var(--rule-strong)" stroke-width="2"/><text class="s mid" x="870" y="414">Resposta</text>
         <path d="M262 405H332" stroke="var(--muted)" stroke-width="3" marker-end="url(#ah-tr)"/><path d="M662 405H732" stroke="var(--muted)" stroke-width="3" marker-end="url(#ah-tr)"/>
-        <text class="s ci mid" x="500" y="520" style="font-size:24px">✕ não aprende com a sua conversa</text>
       </svg>
     </div>
-    <div class="stack">
-      <div class="ncard"><span class="n">01</span><h3>Treino</h3><p>Lê trilhões de frases tentando adivinhar a próxima palavra. Errou, ajusta os “botões” (parâmetros). Repete até acertar bem.</p></div>
-      <div class="ncard"><span class="n">02</span><h3>Uso</h3><p>O arquivo pronto responde. Não aprende com você: só enxerga o que está na conversa.</p></div>
-      <div class="card num"><p><b>Leu tudo. Não viu nada. Não assina nada.</b></p></div>
-    </div>
+    <div class="body center"><p class="big md">Leu tudo.<br>Não viu nada.<br><span class="acc">Não assina nada.</span></p></div>
   </div>
-  <aside class="notes">Ninguém programou regras de arquitetura nele. Ele viu texto suficiente para imitar os padrões. A “memória” de alguns apps é só texto que o app coloca de volta na conversa; e conversas podem ser usadas em treinos futuros, dependendo do plano.</aside>
+  <aside class="notes">Falar: no treino ele lê trilhões de frases tentando adivinhar a próxima palavra; quando erra, ajusta bilhões de “botões” (parâmetros). Depois disso, vira um arquivo congelado: não aprende com a conversa de vocês. || Se perguntarem “mas o ChatGPT lembra de mim”: a “memória” é só texto que o app cola de volta na conversa. E conversas podem ser usadas em treinos futuros, conforme o plano.</aside>
 </section>
 
 <section class="slide" data-t="Plausível ≠ verdadeiro">
-  <header class="head"><div class="eyebrow">Desmistificando · o que ela faz</div><h2 class="title">Ela não pesquisa. Ela prevê o que soa certo.</h2></header>
+  <header class="head"><div class="eyebrow">Desmistificando</div><h2 class="title">Não pesquisa. Prevê o que soa certo.</h2></header>
   <div class="split r">
     <div class="stack">
-      <p class="prompt">A laje será de concreto <em>___</em></p>
+      <p class="prompt">Pão com <em>___</em></p>
       <div class="bars" aria-label="Probabilidades ilustrativas da próxima palavra">
-        <div class="row"><span class="w">armado</span><div class="track"><div class="fill" style="width:62%"></div><span class="pct">62%</span></div></div>
-        <div class="row"><span class="w">protendido</span><div class="track"><div class="fill" style="width:18%"></div><span class="pct">18%</span></div></div>
-        <div class="row"><span class="w">aparente</span><div class="track"><div class="fill" style="width:9%"></div><span class="pct">9%</span></div></div>
-        <div class="row"><span class="w">usinado</span><div class="track"><div class="fill" style="width:6%"></div><span class="pct">6%</span></div></div>
-        <div class="row"><span class="w">outros</span><div class="track"><div class="fill" style="width:5%"></div><span class="pct">5%</span></div></div>
+        <div class="row"><span class="w">manteiga</span><div class="track"><div class="fill" style="width:61%"></div><span class="pct">61%</span></div></div>
+        <div class="row"><span class="w">queijo</span><div class="track"><div class="fill" style="width:22%"></div><span class="pct">22%</span></div></div>
+        <div class="row"><span class="w">ovo</span><div class="track"><div class="fill" style="width:9%"></div><span class="pct">9%</span></div></div>
+        <div class="row"><span class="w">geleia</span><div class="track"><div class="fill" style="width:5%"></div><span class="pct">5%</span></div></div>
       </div>
-      <p class="note">Valores ilustrativos.</p>
     </div>
-    <div class="stack">
-      <p class="big md">Plausível ≠ verdadeiro.</p>
-      <p class="lead">Assunto comum: o plausível costuma acertar. Assunto raro, específico ou recente: ela tapa o buraco com algo que <i>parece</i> certo.</p>
-    </div>
+    <div class="body center"><p class="big md">Plausível<br><span class="acc">≠ verdadeiro.</span></p></div>
   </div>
-  <aside class="notes">Isso explica tudo o que vem depois: por que precisa de contexto, de ferramentas e de conferência.</aside>
+  <aside class="notes">Falar: ela escolhe o que é mais provável, não o que é verdade. Em assunto comum, o provável costuma acertar. Em assunto raro, específico ou recente, ela tapa o buraco com algo que soa certo. Valores ilustrativos.</aside>
 </section>
 
-<section class="slide" data-t="Não está pensando">
-  <header class="head"><div class="eyebrow">Desmistificando · o mito</div><h2 class="title">“Pensando…” é a interface. Não é alguém pensando.</h2></header>
-  <div class="cols2">
-    <div class="card"><span class="tag">O que você vê</span><h3>Uma bolinha girando e “Pensando…”</h3><p>Parece uma pessoa refletindo do outro lado.</p></div>
-    <div class="card num"><span class="tag">O que acontece</span><h3>Mais texto sendo gerado</h3><p>Modelos “de raciocínio” escrevem um rascunho antes da resposta. Ajuda muito em problemas difíceis. Continua sendo previsão de texto.</p></div>
+<section class="slide statement" data-t="Não está pensando">
+  <header class="head"><div class="eyebrow">Desmistificando · o mito</div></header>
+  <div class="body">
+    <p class="big">“Pensando…” é a interface.<br><span class="acc">Não é alguém pensando.</span></p>
   </div>
-  <p class="lead">Não tem consciência, intenção nem responsabilidade. <b>Tem estatística muito bem treinada.</b></p>
-  <aside class="notes">Momento “abrir o capô”: desmontar a ilusão sem diminuir a ferramenta. O rascunho melhora muito a resposta — mas é texto gerado, não alguém pensando.</aside>
+  <aside class="notes">Falar: modelos “de raciocínio” escrevem um rascunho antes de responder. Isso ajuda muito, mas continua sendo texto gerado. Não tem consciência, intenção nem responsabilidade. Tem estatística muito bem treinada.</aside>
 </section>
 
 <section class="slide" data-t="Alucinação">
   <header class="head"><div class="eyebrow">Desmistificando · alucinação</div><h2 class="title">Tom de certeza não é fonte.</h2></header>
   <div class="split r">
-    <div class="term"><div class="bar"><i></i><i></i><i></i>&nbsp;chat · exemplo ilustrativo</div><pre><span class="p">você&gt;</span> Qual item da NBR 9050:2015 fixa a largura de
-       rampa em residências unifamiliares?
-<span class="r">IA&gt;</span>   O item 6.6.2.3 da NBR 9050:2015 estabelece
-       largura mínima de 1,20 m para rampas em
-       residências unifamiliares.</pre></div>
-    <div class="stack">
-      <div class="ncard warn"><span class="n">✕</span><h3>A pergunta já tem premissa a conferir</h3><p>Qual a edição vigente? A norma trata de residência unifamiliar? A IA não questiona: completa.</p></div>
-      <div class="ncard"><span class="n">→</span><h3>Regra da casa</h3><p>Norma, medida, preço e prazo: <b>sempre na fonte</b>. Peça o número do item e abra a norma.</p></div>
-    </div>
+    <div class="term"><div class="bar"><i></i><i></i><i></i>&nbsp;chat · exemplo ilustrativo</div><pre><span class="p">você&gt;</span> Qual livro o Machado de Assis
+       publicou em 1920?
+<span class="r">IA&gt;</span>   Em 1920, Machado publicou
+       “Memórias de um Velho Cais”,
+       um romance sobre o Rio antigo…</pre></div>
+    <div class="body center"><p class="big md">Machado morreu<br><span class="acc">em 1908.</span></p></div>
   </div>
-  <aside class="notes">Antes da aula, abra a NBR 9050 vigente (pelo que levantamos, a edição atual é de 2020 e o foco é acessibilidade em edificações de uso público/coletivo — confirme) e mostre a diferença ao vivo. Dica: pergunte duas vezes; se vierem dois números diferentes, está provado.</aside>
+  <aside class="notes">Falar: a pergunta tinha uma premissa errada e a IA não questionou: completou com algo plausível. Façam o teste ao vivo; perguntem duas vezes — se vierem dois livros diferentes, está provado. || Regra da casa: número, data, preço, prazo e norma, sempre na fonte. (Modelos atuais às vezes percebem a pegadinha; se acontecer, ótimo: pergunte algo mais obscuro.)</aside>
 </section>
 
 <section class="slide" data-t="Forte e fraca">
-  <header class="head"><div class="eyebrow">Desmistificando · onde serve</div><h2 class="title">Muito boa em texto. Perigosa em fato.</h2></header>
+  <header class="head"><div class="eyebrow">Desmistificando · onde serve</div><h2 class="title">Ótima com texto. Perigosa com fato.</h2></header>
   <div class="cols2">
-    <div class="card num"><span class="tag">Serve muito bem</span><ul class="list"><li>Redigir e reescrever</li><li>Resumir e comparar</li><li>Classificar e extrair dados</li><li>Padronizar e traduzir</li><li>Escrever fórmulas e scripts</li></ul></div>
-    <div class="card warn"><span class="tag">Perigosa</span><ul class="list"><li>Conta “de cabeça”</li><li>Fato recente ou raro</li><li>Norma e lei sem fonte</li><li>Responsabilidade técnica</li><li>Adivinhar o que você não contou</li></ul></div>
+    <div class="card num"><span class="tag">Serve</span><h3>Escrever</h3><h3>Resumir</h3><h3>Organizar</h3></div>
+    <div class="card warn"><span class="tag">Cuidado</span><h3>Fazer conta</h3><h3>Fato recente</h3><h3>Assinar embaixo</h3></div>
   </div>
-  <aside class="notes">Fecha a parte 1. Agora o vocabulário, para entender o porquê.</aside>
+  <aside class="notes">Falar: serve muito bem para redigir, resumir, comparar, classificar, padronizar, escrever fórmulas. É perigosa com conta “de cabeça”, fato raro ou recente, lei e norma sem fonte, e adivinhar o que você não contou. || Fecha a parte 1 com a mensagem ①: é um gerador de texto.</aside>
 </section>
 
 <!-- ================= PARTE 02 ================= -->
 <section class="slide divider" data-t="Parte 02 · Vocabulário">
   <div class="sd-top">PARTE 02 <i></i><span class="of">DE 07</span></div>
-  <div class="sd-grid"><div class="sd-num">02</div><div><div class="sd-kick">Próxima seção</div><h2 class="sd-title">Vocabulário</h2><div class="sd-rule"></div>
-    <ul class="sd-next"><li class="k">A SEGUIR</li><li><span>→</span>Token</li><li><span>→</span>Janela de contexto</li><li><span>→</span>Inferência e economia</li></ul></div></div>
+  <div class="sd-grid"><div class="sd-num">02</div><div><div class="sd-kick">① É um gerador de texto</div><h2 class="sd-title">Vocabulário</h2><div class="sd-rule"></div>
+    <ul class="sd-next"><li class="k">A SEGUIR</li><li><span>→</span>Token</li><li><span>→</span>A prancheta</li><li><span>→</span>Inferência</li></ul></div></div>
   <div class="sd-foot"><span>IA sem hype</span><span>para arquitetas · 2026</span></div>
 </section>
 
-<section class="slide" data-t="LLM">
-  <header class="head"><div class="eyebrow">Vocabulário · LLM</div><h2 class="title">O modelo é um arquivo gigante que já vem pronto.</h2></header>
-  <div class="cols3">
-    <div class="ncard"><span class="n">01</span><h3>Pronto</h3><p>Treinado antes. Não aprende com a sua conversa.</p></div>
-    <div class="ncard"><span class="n">02</span><h3>Sem memória</h3><p>A “memória” do app é texto que ele cola de volta na conversa.</p></div>
-    <div class="ncard"><span class="n">03</span><h3>Vários fabricantes</h3><p>GPT (OpenAI), Claude (Anthropic), Gemini (Google), Grok (xAI), Llama (Meta), Qwen, Mistral.</p></div>
+<section class="slide statement" data-t="LLM">
+  <header class="head"><div class="eyebrow">Vocabulário · LLM</div></header>
+  <div class="body">
+    <p class="big">O modelo é um arquivo pronto.<br><span class="acc">Não aprende com você.</span></p>
   </div>
-  <aside class="notes">Pesos = os números do arquivo. Não precisa decorar: o importante é “pronto e congelado”.</aside>
+  <aside class="notes">Falar: GPT (OpenAI), Claude (Anthropic), Gemini (Google), Grok (xAI), Llama (Meta) — todos são esse arquivo gigante de números, já treinado. O “pesos” que vocês vão ouvir é isso: os números do arquivo.</aside>
 </section>
 
 <section class="slide" data-t="Token">
-  <header class="head"><div class="eyebrow">Vocabulário · token</div><h2 class="title">Ela não lê letras nem palavras. Lê pedaços.</h2></header>
+  <header class="head"><div class="eyebrow">Vocabulário · token</div><h2 class="title">Não lê palavras. Lê pedaços.</h2></header>
   <div class="body">
-    <input type="text" class="txt" id="tk-in" value="Memorial descritivo do porcelanato retificado da residência" aria-label="Frase para quebrar em tokens">
+    <input type="text" class="txt" id="tk-in" value="Reunião com o cliente na quinta-feira às 15h" aria-label="Frase para quebrar em tokens">
     <div class="tok" id="tk-out" aria-live="polite"></div>
     <p class="lead" id="tk-n"></p>
-    <p class="note">Aproximação didática. Cada modelo tem seu próprio “dicionário de pedaços”; a contagem real varia. Português costuma gastar mais tokens que inglês.</p>
   </div>
-  <aside class="notes">Digite uma frase delas. Palavras longas e raras viram vários pedaços; palavras comuns, um só.</aside>
+  <aside class="notes">Falar: digitem uma frase de vocês. Palavras comuns viram um pedaço; palavras longas ou raras viram vários. Esses pedaços se chamam tokens. || Se perguntarem: é uma aproximação didática; cada modelo tem seu próprio “dicionário de pedaços”, e português gasta mais que inglês.</aside>
 </section>
 
-<section class="slide" data-t="Tudo é medido em tokens">
-  <header class="head"><div class="eyebrow">Vocabulário · por que importa</div><h2 class="title">Preço, limite e velocidade: tudo em tokens.</h2></header>
-  <div class="cols3">
-    <div class="ncard"><span class="n">01</span><h3>Preço</h3><p>Você paga (ou gasta a cota do plano) por token que entra e que sai.</p></div>
-    <div class="ncard"><span class="n">02</span><h3>Limite</h3><p>Cada modelo só enxerga um tanto de tokens por vez.</p></div>
-    <div class="ncard"><span class="n">03</span><h3>Velocidade</h3><p>Resposta longa = mais tokens = mais espera.</p></div>
+<section class="slide statement" data-t="Tudo é medido em tokens">
+  <header class="head"><div class="eyebrow">Vocabulário · por que importa</div></header>
+  <div class="body">
+    <p class="mega">1 página ≈ 700</p>
+    <p class="lead xl">pedaços. Preço, limite e velocidade: <b>tudo é contado assim.</b></p>
   </div>
-  <table class="tbl" style="margin-top:8px">
-    <tr><th>Material</th><th class="h">Ordem de grandeza</th></tr>
-    <tr><td>1 página de texto em português</td><td class="h">≈ 600–900 tokens</td></tr>
-    <tr><td>Lista de ambientes (planilha .csv)</td><td class="h">algumas centenas</td></tr>
-    <tr><td>PDF escaneado (lido como imagem)</td><td class="h">milhares por página</td></tr>
-  </table>
-  <aside class="notes">Um executivo escaneado de 200 páginas pode passar de centenas de milhares de tokens. Ordem de grandeza, não conta exata.</aside>
+  <aside class="notes">Falar: vocês pagam (ou gastam a cota do plano) por pedaço que entra e que sai; cada modelo só enxerga um tanto de pedaços por vez; resposta longa demora mais. || Se perguntarem de PDF: PDF escaneado é lido como imagem e custa milhares de pedaços por página.</aside>
 </section>
 
 <section class="slide" data-t="Janela de contexto">
   <header class="head"><div class="eyebrow">Vocabulário · janela de contexto</div><h2 class="title">A janela de contexto é a prancheta.</h2></header>
   <div class="body">
-    <p class="lead">Tudo o que ela enxerga agora: regras, conversa, arquivos, sua pergunta. <b>O que não está na prancheta não existe.</b></p>
+    <p class="lead">O que não está na prancheta não existe.</p>
     <div class="desk" id="desk" role="img" aria-label="Prancheta de contexto com itens ocupando espaço"></div>
     <div class="fallen" id="fallen" aria-live="polite"></div>
-    <div class="flow"><button class="btn pri" id="desk-add">Colocar mais na prancheta</button><button class="btn" id="desk-reset">Recomeçar</button><span class="note" id="desk-info"></span></div>
+    <div class="flow"><button class="btn pri" id="desk-add">Colocar mais</button><button class="btn" id="desk-reset">Recomeçar</button><span class="note" id="desk-info"></span></div>
   </div>
-  <aside class="notes">Clique várias vezes. Quando enche, o que é mais antigo sai da prancheta.</aside>
+  <aside class="notes">Falar: “janela de contexto” é tudo que a IA enxerga agora: regras, conversa, arquivos e a pergunta. Cliquem em “colocar mais” até encher: o mais antigo sai da prancheta.</aside>
 </section>
 
 <section class="slide" data-t="Prancheta cheia">
   <header class="head"><div class="eyebrow">Vocabulário · contexto cheio</div><h2 class="title">Prancheta lotada, trabalho pior.</h2></header>
-  <div class="cols2">
-    <div class="card warn"><span class="tag">O que acontece</span><ul class="list"><li>O app resume ou descarta partes antigas (depende do app)</li><li>Detalhes do começo se perdem</li><li>O meio fica “embaçado”</li><li>Ela se contradiz e esquece decisões</li></ul></div>
-    <div class="card num"><span class="tag">O que fazer</span><ul class="list"><li>Uma conversa por assunto</li><li>Dar só o necessário</li><li>O importante no começo</li><li>Pedir um resumo e recomeçar</li></ul></div>
+  <div class="trio">
+    <div><span class="k">1</span><p>Uma conversa por assunto.</p></div>
+    <div><span class="k">2</span><p>Só o necessário.</p></div>
+    <div><span class="k">3</span><p>Resuma e recomece.</p></div>
   </div>
-  <p class="note">Como uma prancheta cheia de rolos: você acha o que está por cima, não o que está embaixo.</p>
-  <aside class="notes">Pelo programa (API), passar do limite dá erro. Janelas enormes existem, mas mais contexto não significa mais qualidade.</aside>
+  <aside class="notes">Falar: quando enche, o app resume ou descarta partes antigas (depende do app). Detalhes do começo se perdem, o meio fica “embaçado” e ela se contradiz. Como uma mesa cheia de papel: você acha o que está por cima. || Se perguntarem: pela API, passar do limite dá erro. Janela grande não significa resposta melhor.</aside>
 </section>
 
 <section class="slide" data-t="Inferência">
-  <header class="head"><div class="eyebrow">Vocabulário · inferência</div><h2 class="title">Cada vez que você pergunta, ela escreve de novo. Um pedaço por vez.</h2></header>
+  <header class="head"><div class="eyebrow">Vocabulário · inferência</div><h2 class="title">Escreve um pedaço por vez.</h2></header>
   <div class="body">
-    <p class="prompt" id="inf-text">A reforma da cozinha vai exigir</p>
+    <p class="prompt" id="inf-text">Hoje à noite eu vou</p>
     <div class="bars" id="inf-bars"></div>
-    <div class="flow"><button class="btn pri" id="inf-step">Sortear o próximo pedaço</button><button class="btn" id="inf-reset">Recomeçar</button></div>
+    <div class="flow"><button class="btn pri" id="inf-step">Sortear o próximo</button><button class="btn" id="inf-reset">Recomeçar</button></div>
   </div>
-  <aside class="notes">Inferência = usar o modelo pronto. A cada pedaço (token), ele calcula as candidatas e sorteia uma. Por isso respostas variam.</aside>
+  <aside class="notes">Falar: “inferência” é a palavra técnica para usar o modelo pronto. A cada pedaço, ele calcula as candidatas e sorteia uma. Cliquem algumas vezes: por isso a mesma pergunta dá respostas diferentes.</aside>
 </section>
 
 <section class="slide statement" data-t="Abrindo o capô">
   <header class="head"><div class="eyebrow">Vocabulário · abrindo o capô</div></header>
   <div class="body">
     <p class="big">Isso é tudo que acontece.<br><span class="acc">Bilhões de vezes.</span></p>
-    <p class="lead">Calcula as candidatas, sorteia uma, cola no texto, repete.</p>
   </div>
-  <aside class="notes">Deixe o silêncio. É o coração da apresentação: o resto é engenharia em volta disso.</aside>
+  <aside class="notes">Falar: deixe o silêncio. Calcula as candidatas, sorteia uma, cola no texto, repete. O resto da apresentação é sobre o que colocamos em volta disso.</aside>
 </section>
 
-<section class="slide" data-t="Temperatura e custo">
-  <header class="head"><div class="eyebrow">Vocabulário · por que varia</div><h2 class="title">Por que a resposta muda? E por que custa?</h2></header>
-  <div class="split">
-    <div class="cols2">
-      <div class="card"><span class="tag">Temperatura baixa</span>
-        <svg viewBox="0 0 300 180" role="img" aria-label="Gráfico: uma barra alta, sorteio previsível"><rect x="10" y="10" width="60" height="150" rx="6" fill="var(--teal)"/><rect x="85" y="130" width="60" height="30" rx="6" fill="var(--human)"/><rect x="160" y="145" width="60" height="15" rx="6" fill="var(--human)"/><rect x="235" y="152" width="60" height="8" rx="6" fill="var(--human)"/></svg>
-        <p>Quase sempre a mesma escolha. Previsível.</p></div>
-      <div class="card"><span class="tag">Temperatura alta</span>
-        <svg viewBox="0 0 300 180" role="img" aria-label="Gráfico: barras parecidas, sorteio ousado"><rect x="10" y="70" width="60" height="90" rx="6" fill="var(--teal)"/><rect x="85" y="80" width="60" height="80" rx="6" fill="var(--teal)"/><rect x="160" y="88" width="60" height="72" rx="6" fill="var(--teal)"/><rect x="235" y="96" width="60" height="64" rx="6" fill="var(--teal)"/></svg>
-        <p>Escolhas espalhadas. Mais criativo, mais erro.</p></div>
-    </div>
-    <div class="stack">
-      <div class="ncard"><span class="n">01</span><h3>Sorteio</h3><p>Mesma pergunta, respostas diferentes. Não é defeito: é o mecanismo.</p></div>
-      <div class="ncard"><span class="n">02</span><h3>Conta pesada</h3><p>Cada pedaço passa por bilhões de multiplicações em chips caros. Daí cota, plano e preço.</p></div>
-    </div>
+<section class="slide" data-t="Temperatura">
+  <header class="head"><div class="eyebrow">Vocabulário · temperatura</div><h2 class="title">Previsível ou criativa: você escolhe.</h2></header>
+  <div class="cols2">
+    <div class="card"><span class="tag">Temperatura baixa</span>
+      <svg viewBox="0 0 300 180" role="img" aria-label="Gráfico: uma barra alta, sorteio previsível"><rect x="10" y="10" width="60" height="150" rx="6" fill="var(--teal)"/><rect x="85" y="130" width="60" height="30" rx="6" fill="var(--human)"/><rect x="160" y="145" width="60" height="15" rx="6" fill="var(--human)"/><rect x="235" y="152" width="60" height="8" rx="6" fill="var(--human)"/></svg>
+      <h3>Sempre parecido</h3></div>
+    <div class="card"><span class="tag">Temperatura alta</span>
+      <svg viewBox="0 0 300 180" role="img" aria-label="Gráfico: barras parecidas, sorteio ousado"><rect x="10" y="70" width="60" height="90" rx="6" fill="var(--teal)"/><rect x="85" y="80" width="60" height="80" rx="6" fill="var(--teal)"/><rect x="160" y="88" width="60" height="72" rx="6" fill="var(--teal)"/><rect x="235" y="96" width="60" height="64" rx="6" fill="var(--teal)"/></svg>
+      <h3>Mais ousado, mais erro</h3></div>
   </div>
-  <aside class="notes">Modelos de raciocínio nem sempre deixam ajustar a temperatura; e mesmo no mínimo a resposta pode variar.</aside>
+  <aside class="notes">Falar: “temperatura” controla o quanto o sorteio arrisca. Mesma pergunta, respostas diferentes: não é defeito, é o mecanismo. E cada pedaço é uma conta enorme em chips caros — daí cota, plano e preço. || Se perguntarem: modelos de raciocínio nem sempre deixam ajustar isso.</aside>
 </section>
 
 <section class="slide" data-t="Economize a prancheta">
-  <header class="head"><div class="eyebrow">Vocabulário · economia de tokens</div><h2 class="title">Economize a prancheta.</h2></header>
-  <div class="split">
-    <div class="stack">
-      <div class="card warn"><span class="tag">Jeito caro</span><h3>Mandar o executivo inteiro em PDF para perguntar quanto piso vai na sala.</h3></div>
-      <div class="card num"><span class="tag">Jeito barato</span><h3>Mandar só a lista de ambientes com áreas.</h3></div>
-      <p class="lead"><mark>O PDF inteiro custa centenas de vezes mais — e responde pior.</mark></p>
-    </div>
-    <div class="card"><span class="tag">Hábitos</span><ul class="list">
-      <li>Peça respostas curtas, em tabela</li>
-      <li>Resuma a conversa e recomece</li>
-      <li>Rotina repetida vira <b>skill</b> (só entra quando precisa)</li>
-      <li>Regras fixas no <b>AGENTS.md</b>, não coladas toda vez</li>
-      <li>Começo repetido (regras fixas) pode ficar em cache e sair mais barato</li></ul></div>
+  <header class="head"><div class="eyebrow">Vocabulário · economia</div><h2 class="title">Mande o capítulo, não o livro.</h2></header>
+  <div class="cols2">
+    <div class="card warn"><span class="tag">Caro e pior</span><h3>O livro inteiro, para achar um nome.</h3></div>
+    <div class="card num"><span class="tag">Barato e melhor</span><h3>Só o capítulo certo.</h3></div>
   </div>
-  <aside class="notes">Economizar tokens também melhora a qualidade: prancheta limpa, menos confusão. Cache = o serviço reaproveita um começo de conversa idêntico.</aside>
+  <p class="lead"><mark>Prancheta limpa = resposta melhor.</mark></p>
+  <aside class="notes">Falar: o livro inteiro custa umas cem vezes mais e responde pior, porque a prancheta fica bagunçada. Hábitos: pedir respostas curtas, em tabela; resumir e recomeçar; o que se repete vira “skill”; regras fixas ficam num arquivo, não coladas toda vez. || Se perguntarem: começos repetidos podem ficar em cache e sair mais baratos.</aside>
 </section>
 
 <section class="slide" data-t="A IA chuta, a planilha conta">
   <header class="head"><div class="eyebrow">Vocabulário · previsibilidade</div><h2 class="title">A IA chuta com estilo. A planilha faz conta.</h2></header>
-  <div class="cols2">
-    <div class="card"><span class="tag">IA (probabilística)</span><p>Mesma pergunta, respostas parecidas, nunca idênticas. Boa para escrever, classificar e decidir o que fazer.</p></div>
-    <div class="card num"><span class="tag">Planilha, script (determinístico)</span><p>Mesma entrada, <b>sempre</b> a mesma saída. Boa para calcular e conferir.</p></div>
+  <div class="body center">
+    <div class="flow"><span class="chip">IA escreve <code>=SOMA(B2:B9)</code></span><span class="arrow">→</span><span class="chip a">o Excel soma</span><span class="arrow">→</span><span class="chip">sempre o mesmo resultado</span></div>
   </div>
-  <div class="card fill"><h3>Regra de ouro: a IA escreve a fórmula, a planilha faz a conta.</h3><p>A IA escreve o script que padroniza as layers; o script roda igual toda vez.</p></div>
-  <aside class="notes">Para deixar a IA mais previsível: regras fixas (AGENTS.md), formato de saída rígido, exemplos, checklist e travas.</aside>
+  <aside class="notes">Falar: a IA é probabilística — respostas parecidas, nunca idênticas. Planilha e script são determinísticos — mesma entrada, sempre a mesma saída. Regra de ouro: a IA escreve a fórmula; a planilha faz a conta.</aside>
 </section>
 
 <section class="slide" data-t="Peça como quem contrata">
-  <header class="head"><div class="eyebrow">Vocabulário · o pedido</div><h2 class="title">Peça como quem contrata um serviço.</h2></header>
+  <header class="head"><div class="eyebrow">Vocabulário · o pedido</div><h2 class="title">Peça como quem contrata.</h2></header>
   <div class="cols2">
-    <div class="stack"><span class="small">PEDE E TORCE</span><div class="term"><pre>faz um memorial da casa</pre></div></div>
-    <div class="stack"><span class="small">PEDE COM MÉTODO</span><div class="term"><pre><span class="p">Papel:</span>    arquiteta sênior.
-<span class="p">Contexto:</span> casa 180 m², entrada/ambientes.csv
-<span class="p">Modelo:</span>   entrada/modelo-memorial.md
-<span class="p">Formato:</span>  uma seção por ambiente.
-<span class="p">Limite:</span>   não invente; use [PREENCHER].
-<span class="p">Pronto =</span> arquivo em saida/ + pendências.</pre></div></div>
+    <div class="stack"><span class="small">PEDE E TORCE</span><div class="term"><pre>resume a reunião</pre></div></div>
+    <div class="stack"><span class="small">PEDE COM MÉTODO</span><div class="term"><pre><span class="p">Contexto:</span> ata da reunião de ontem
+<span class="p">Formato:</span>  decisões + tarefas com dono
+<span class="p">Limite:</span>   não invente; marque [?]
+<span class="p">Pronto =</span> 1 página</pre></div></div>
   </div>
-  <aside class="notes">Papel, contexto, modelo, formato, limites e critério de pronto. É o que vocês já fazem ao contratar um projetista complementar.</aside>
+  <aside class="notes">Falar: é igual a contratar alguém — explicar o contexto, o formato, o limite e quando está pronto. Pergunte a elas: “como vocês pedem um serviço a um prestador?”. É a mesma coisa.</aside>
 </section>
 
 <section class="slide statement" data-t="Resumo">
   <header class="head"><div class="eyebrow">Vocabulário · resumo</div></header>
   <div class="body">
-    <div class="flow"><span class="chip">seu texto</span><span class="arrow">→</span><span class="chip">pedaços</span><span class="arrow">→</span><span class="chip a">o modelo prevê o próximo</span><span class="arrow">→</span><span class="chip">texto sai</span></div>
-    <p class="big">Só isso.<br>O resto é <span class="acc">o que colocamos em volta</span>.</p>
+    <div class="flow"><span class="chip">texto</span><span class="arrow">→</span><span class="chip">pedaços</span><span class="arrow">→</span><span class="chip a">prevê o próximo</span><span class="arrow">→</span><span class="chip">texto</span></div>
+    <p class="big"><span class="acc">①</span> É um gerador de texto.<br>Só isso.</p>
   </div>
-  <aside class="notes">Ponte para o harness: a engenharia em volta é o diferencial.</aside>
+  <aside class="notes">Falar: repita a mensagem ①. Ponte: o que faz a diferença é o que colocamos em volta — próxima parte.</aside>
 </section>
 <!-- ================= PARTE 03 ================= -->
 <section class="slide divider" data-t="Parte 03 · Harness">
   <div class="sd-top">PARTE 03 <i></i><span class="of">DE 07</span></div>
-  <div class="sd-grid"><div class="sd-num">03</div><div><div class="sd-kick">Próxima seção</div><h2 class="sd-title">Harness: o que vai em volta</h2><div class="sd-rule"></div>
-    <ul class="sd-next"><li class="k">A SEGUIR</li><li><span>→</span>Chat × agente</li><li><span>→</span>Regras, skills, travas, tomadas</li><li><span>→</span>O cercadinho</li></ul></div></div>
+  <div class="sd-grid"><div class="sd-num">03</div><div><div class="sd-kick">② O poder está no que vai em volta</div><h2 class="sd-title">Harness</h2><div class="sd-rule"></div>
+    <ul class="sd-next"><li class="k">A SEGUIR</li><li><span>→</span>Chat × agente</li><li><span>→</span>Regras, receitas, travas</li><li><span>→</span>Tomadas e cercadinho</li></ul></div></div>
   <div class="sd-foot"><span>IA sem hype</span><span>para arquitetas · 2026</span></div>
 </section>
 
@@ -617,7 +579,7 @@ body.reflow .slide.dark .foot{background:var(--dark)}
   <header class="head"><div class="eyebrow">Harness · chat × agente</div><h2 class="title">Chat responde. Agente age.</h2></header>
   <div class="split r">
     <div class="fig">
-      <svg viewBox="0 0 900 560" role="img" aria-labelledby="lp-t lp-d"><title id="lp-t">Diagrama: ciclo do agente</title><desc id="lp-d">Ciclo de três passos que se repete: pensa, age usando ferramentas, observa o resultado, até ficar pronto.</desc>
+      <svg viewBox="0 0 900 560" role="img" aria-labelledby="lp-t lp-d"><title id="lp-t">Diagrama: ciclo do agente</title><desc id="lp-d">Ciclo de três passos que se repete: pensa, age, observa o resultado, até ficar pronto.</desc>
         <defs><marker id="ah-lp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--teal)"/></marker></defs>
         <path d="M520 120 Q700 170 700 330" fill="none" stroke="var(--teal)" stroke-width="4" marker-end="url(#ah-lp)"/>
         <path d="M610 445 Q450 520 290 445" fill="none" stroke="var(--teal)" stroke-width="4" marker-end="url(#ah-lp)"/>
@@ -625,694 +587,542 @@ body.reflow .slide.dark .foot{background:var(--dark)}
         <circle cx="450" cy="100" r="86" fill="var(--paper)" stroke="var(--ink)" stroke-width="3"/><text class="s mid" x="450" y="110" style="font-size:32px">pensa</text>
         <circle cx="700" cy="410" r="86" fill="var(--teal)"/><text class="s w mid" x="700" y="420" style="font-size:32px">age</text>
         <circle cx="200" cy="410" r="86" fill="var(--paper)" stroke="var(--ink)" stroke-width="3"/><text class="s mid" x="200" y="420" style="font-size:32px">observa</text>
-        <text class="s m mid" x="450" y="300" style="font-size:24px">↺ repete até</text><text class="s m mid" x="450" y="334" style="font-size:24px">ficar pronto</text>
+        <text class="s m mid" x="450" y="318" style="font-size:24px">↺ até ficar pronto</text>
       </svg>
     </div>
-    <div class="stack">
-      <div class="ncard"><span class="n">01</span><h3>Chat</h3><p>Um consultor ao telefone: você conta, ele responde.</p></div>
-      <div class="ncard"><span class="n">02</span><h3>Agente</h3><p>Um estagiário com acesso à pasta do projeto: lê arquivos, roda comandos, cria planilhas.</p></div>
-      <p class="note">Agente = modelo + ferramentas + objetivo + autonomia para dar vários passos.</p>
-    </div>
+    <div class="body center"><p class="big md">Chat é um consultor ao telefone.<br><span class="acc">Agente é um estagiário com a chave da pasta.</span></p></div>
   </div>
-  <aside class="notes">O agente olha o resultado do que fez e decide o próximo passo. É aí que ele pode ir longe — para o bem e para o mal.</aside>
+  <aside class="notes">Falar: o agente lê arquivos, roda comandos, cria planilhas, olha o resultado e decide o próximo passo. Agente = modelo + ferramentas + objetivo + autonomia. É aí que ele vai longe — para o bem e para o mal.</aside>
 </section>
 
 <section class="slide" data-t="Harness">
-  <header class="head"><div class="eyebrow">Harness · visão geral</div><h2 class="title">O modelo é o motor. O harness é o carro.</h2></header>
+  <header class="head"><div class="eyebrow">Harness</div><h2 class="title">O modelo é o motor. O harness é o carro.</h2></header>
   <div class="split r">
     <div class="fig hx" data-on="none"></div>
-    <div class="stack">
-      <p class="lead">Sozinho, o modelo não abre arquivo, não lembra de ontem e não conhece suas regras.</p>
-      <p class="lead">O harness dá volante, freio, painel e cinto.</p>
-      <p class="note">Exemplos: Codex (OpenAI), Claude Code (Anthropic), Gemini CLI (Google), Grok Build (xAI), Cursor.</p>
-    </div>
+    <div class="body center"><p class="lead xl">Volante, freio, painel e cinto.</p><p class="note">Codex · Claude Code · Gemini CLI · Grok Build · Cursor</p></div>
   </div>
-  <aside class="notes">A diferença entre “usar IA” e “usar bem” está quase toda aqui. Nos próximos slides, o mesmo desenho com uma peça acesa por vez.</aside>
+  <aside class="notes">Falar: sozinho, o modelo não abre arquivo, não lembra de ontem e não conhece suas regras. “Harness” é tudo que vai em volta. Nos próximos slides, o mesmo desenho com uma peça acesa por vez.</aside>
 </section>
 
 <section class="slide" data-t="Rules">
-  <header class="head"><div class="eyebrow">Harness · rules</div><h2 class="title">Rules: o manual de padrões do escritório.</h2></header>
+  <header class="head"><div class="eyebrow">Harness · rules</div><h2 class="title">Rules: o manual do funcionário novo.</h2></header>
   <div class="split r">
     <div class="fig hx" data-on="rules"></div>
-    <div class="stack">
-      <p class="lead">Um arquivo de texto (<code>AGENTS.md</code>) que a IA lê <b>toda vez</b>, antes de começar. Como o manual que toda estagiária recebe no primeiro dia.</p>
-      <div class="term"><div class="bar"><i></i><i></i><i></i>&nbsp;AGENTS.md</div><pre>## Nunca faça
-- Enviar e-mail. <span class="g">Só rascunho.</span>
-- Apagar nada em projetos/.
-- Inventar medida, norma ou preço.</pre></div>
+    <div class="body center">
+      <div class="term"><div class="bar"><i></i><i></i><i></i>&nbsp;AGENTS.md</div><pre>Nunca envie e-mail sem eu ver.
+Nunca apague nada.
+Não sabe? Pergunte.</pre></div>
     </div>
   </div>
-  <aside class="notes">.md é texto puro: abre no Bloco de Notas. Curto e específico funciona melhor que longo e genérico.</aside>
+  <aside class="notes">Falar: um arquivo de texto que a IA lê toda vez, antes de começar — como o manual que todo funcionário novo recebe no primeiro dia. Curto e específico funciona melhor que longo e genérico. || .md é texto puro, abre no Bloco de Notas.</aside>
 </section>
 
 <section class="slide" data-t="Skills">
-  <header class="head"><div class="eyebrow">Harness · skills</div><h2 class="title">Skills: cadernos de procedimento.</h2></header>
+  <header class="head"><div class="eyebrow">Harness · skills</div><h2 class="title">Skills: receitas guardadas na gaveta.</h2></header>
   <div class="split r">
     <div class="fig hx" data-on="skills"></div>
-    <div class="stack">
-      <p class="lead">“Como a gente faz levantamento de materiais aqui.” A IA só abre o caderno <b>quando a tarefa pede</b> — economiza a prancheta.</p>
-      <div class="card"><span class="tag">Capa do caderno (sempre visível)</span><p><b>nome:</b> levantamento-materiais<br><b>quando usar:</b> quantitativos a partir da lista de ambientes, em planilha com fórmulas.</p></div>
-      <div class="card"><span class="tag">Miolo (só quando usa)</span><p>Valide a planilha → crie fórmulas → aba de premissas → não invente preços.</p></div>
-    </div>
+    <div class="body center"><p class="big md">Só abre a receita<br><span class="acc">quando vai cozinhar.</span></p></div>
   </div>
-  <aside class="notes">A capa (nome + descrição) fica sempre visível para a IA; o miolo só carrega quando ela decide usar. Formato SKILL.md, usado por vários harnesses.</aside>
+  <aside class="notes">Falar: uma skill é um passo a passo de uma tarefa (“como a gente faz a triagem de e-mails”). A IA vê só a capa (nome e quando usar) e abre o resto só quando precisa — economiza a prancheta.</aside>
 </section>
 
 <section class="slide" data-t="Hooks">
-  <header class="head"><div class="eyebrow">Harness · hooks</div><h2 class="title">Hooks: o DR do quadro. Desarma sozinho.</h2></header>
+  <header class="head"><div class="eyebrow">Harness · hooks</div><h2 class="title">Hooks: a trava do carro.</h2></header>
   <div class="split r">
     <div class="fig hx" data-on="hooks"></div>
-    <div class="stack">
-      <div class="flow"><span class="chip">IA vai apagar algo em projetos/</span><span class="arrow">→</span><span class="chip a">hook confere</span><span class="arrow">→</span><span class="chip w">✕ bloqueado + motivo</span></div>
-      <div class="ncard"><span class="n">01</span><h3>Regra é pedido. Hook é trava.</h3><p>Um script que roda sozinho em momentos fixos e pode barrar a ação.</p></div>
-      <div class="ncard warn"><span class="n">!</span><h3>Só barra o que reconhece</h3><p>Para o que é crítico: cercadinho + cópia de segurança + hook.</p></div>
-    </div>
+    <div class="body center"><p class="big md">Regra é um pedido.<br><span class="acc">Hook é uma trava.</span></p></div>
   </div>
-  <aside class="notes">Como o DR: não pede licença, desarma. Mas só pega o defeito para o qual foi feito.</aside>
+  <aside class="notes">Falar: como o carro que não deixa sair com a porta aberta. Um hook é um script que roda sozinho e pode barrar uma ação (ex.: apagar arquivo). || Se perguntarem: só barra o que foi programado para reconhecer. Para o que é crítico: cercadinho + cópia de segurança + hook.</aside>
 </section>
 
 <section class="slide" data-t="MCP">
-  <header class="head"><div class="eyebrow">Harness · MCP</div><h2 class="title">MCP: a tomada padrão.</h2></header>
+  <header class="head"><div class="eyebrow">Harness · MCP</div><h2 class="title">MCP: o carregador universal.</h2></header>
   <div class="split r">
     <div class="fig hx" data-on="mcp"></div>
-    <div class="stack">
-      <p class="lead">Como o padrão de tomada da NBR 14136: um plugue para tudo. Liga a IA ao e-mail, às pastas, às planilhas, à agenda.</p>
-      <div class="flow"><span class="chip">E-mail</span><span class="chip">Pastas</span><span class="chip">Planilhas</span><span class="chip">Agenda</span><span class="chip">Notion</span></div>
-      <div class="ncard warn"><span class="n">!</span><h3>É dar a chave da obra</h3><p>Comece sempre com acesso <b>somente leitura</b>.</p></div>
-    </div>
+    <div class="body center"><p class="big md">Um plugue.<br><span class="acc">E-mail, pastas, agenda.</span></p></div>
   </div>
-  <aside class="notes">MCP = Model Context Protocol, padrão aberto. Cada conector tem permissões: trate como cópia de chave.</aside>
+  <aside class="notes">Falar: como o USB-C — um padrão para ligar a IA a vários sistemas. Atenção: é dar a chave do sistema. Comece sempre com acesso somente leitura. || MCP = Model Context Protocol, padrão aberto.</aside>
 </section>
 
-<section class="slide" data-t="Cercadinho e aprovação">
-  <header class="head"><div class="eyebrow">Harness · sandbox</div><h2 class="title">Sandbox: o cercadinho. Aprovação: o “posso?”.</h2></header>
+<section class="slide" data-t="Cercadinho">
+  <header class="head"><div class="eyebrow">Harness · sandbox</div><h2 class="title">Sandbox: o cercadinho.</h2></header>
   <div class="split r">
     <div class="fig hx" data-on="sandbox"></div>
-    <div class="stack">
-      <div class="ncard"><span class="n">01</span><h3>Cercadinho</h3><p>A pasta onde a IA pode mexer. Fora dela, não escreve.</p></div>
-      <div class="ncard"><span class="n">02</span><h3>Aprovação</h3><p>Quando ela precisa pedir antes de agir. No começo, pede quase tudo.</p></div>
-      <p class="note">Cinto de segurança primeiro, autonomia depois.</p>
-    </div>
+    <div class="body center"><p class="big md">Cinto primeiro.<br><span class="acc">Autonomia depois.</span></p></div>
   </div>
-  <aside class="notes">No Codex: sandbox_mode e approval_policy. A gente configura na parte 7.</aside>
+  <aside class="notes">Falar: o cercadinho é a pasta onde a IA pode mexer. A aprovação é quando ela precisa pedir “posso?” antes de agir. No começo, ela pede quase tudo. No Codex: sandbox_mode e approval_policy (parte 7).</aside>
 </section>
 
 <section class="slide" data-t="Juntando tudo">
   <header class="head"><div class="eyebrow">Harness · juntando tudo</div><h2 class="title">Tudo aceso. Quem assina é você.</h2></header>
   <div class="split r">
     <div class="fig hx" data-on="all"></div>
-    <div class="stack">
-      <div class="ncard"><span class="n">01</span><h3>Rules</h3><p>o que vale sempre</p></div>
-      <div class="ncard"><span class="n">02</span><h3>Skills</h3><p>como fazer cada tarefa</p></div>
-      <div class="ncard"><span class="n">03</span><h3>Hooks</h3><p>o que nunca pode acontecer</p></div>
-      <div class="ncard"><span class="n">04</span><h3>MCP</h3><p>com o que ela se conecta</p></div>
-    </div>
+    <div class="body center"><p class="lead xl">Regras · receitas · travas · tomadas · cercadinho</p></div>
   </div>
-  <aside class="notes">O modelo está no meio; todo o resto é configurável por vocês. E a responsabilidade técnica continua sendo de vocês.</aside>
+  <aside class="notes">Falar: o modelo está no meio; todo o resto vocês configuram. Rules = o que vale sempre; skills = como fazer cada tarefa; hooks = o que nunca pode acontecer; MCP = com o que ela se conecta.</aside>
 </section>
 
-<section class="slide" data-t="Pede e torce × pede com método">
-  <header class="head"><div class="eyebrow">Harness · o jeito de trabalhar</div><h2 class="title">Pede e torce × pede com método.</h2></header>
+<section class="slide" data-t="O vilão">
+  <header class="head"><div class="eyebrow">Harness · o vilão</div><h2 class="title">Pede e torce × pede com método.</h2></header>
   <table class="tbl">
-    <tr><th>Situação</th><th>Pede e torce</th><th class="h">Pede com método</th></tr>
-    <tr><td>Pedido</td><td>Solto, de cabeça</td><td class="h">Regras e skills escritas</td></tr>
-    <tr><td>Execução</td><td>Aceita o que vier</td><td class="h">Plano antes de executar</td></tr>
-    <tr><td>Tamanho</td><td>Conversa infinita</td><td class="h">Tarefa pequena, com “pronto”</td></tr>
-    <tr><td>Resultado</td><td>“Funcionou?” Não sei.</td><td class="h">Conferido e assinado</td></tr>
+    <tr><th></th><th>Pede e torce</th><th class="h">Pede com método</th></tr>
+    <tr><td>Pedido</td><td>solto</td><td class="h">escrito</td></tr>
+    <tr><td>Execução</td><td>aceita tudo</td><td class="h">plano antes</td></tr>
+    <tr><td>Resultado</td><td>“acho que deu”</td><td class="h">conferido</td></tr>
   </table>
-  <aside class="notes">“Pede e torce” serve para rascunho e brincadeira. Para entregar ao cliente, precisa de método.</aside>
+  <aside class="notes">Falar: “pede e torce” serve para rascunho e brincadeira. Para entregar a um cliente, precisa de método.</aside>
+</section>
+
+<section class="slide statement" data-t="Mensagem 2">
+  <header class="head"><div class="eyebrow">Harness · resumo</div></header>
+  <div class="body"><p class="big"><span class="acc">②</span> O poder está<br>no que vai em volta.</p></div>
+  <aside class="notes">Falar: repita a mensagem ②. Ponte: agora, vários agentes trabalhando juntos.</aside>
 </section>
 
 <!-- ================= PARTE 04 ================= -->
 <section class="slide divider" data-t="Parte 04 · Agentes">
   <div class="sd-top">PARTE 04 <i></i><span class="of">DE 07</span></div>
-  <div class="sd-grid"><div class="sd-num">04</div><div><div class="sd-kick">Próxima seção</div><h2 class="sd-title">Agentes e orquestração</h2><div class="sd-rule"></div>
-    <ul class="sd-next"><li class="k">A SEGUIR</li><li><span>→</span>A coordenadora e os ajudantes</li><li><span>→</span>Sequencial × paralelo</li><li><span>→</span>O visto da arquiteta</li></ul></div></div>
+  <div class="sd-grid"><div class="sd-num">04</div><div><div class="sd-kick">② O poder está no que vai em volta</div><h2 class="sd-title">Agentes e orquestração</h2><div class="sd-rule"></div>
+    <ul class="sd-next"><li class="k">A SEGUIR</li><li><span>→</span>Coordenar ajudantes</li><li><span>→</span>Em sequência × ao mesmo tempo</li><li><span>→</span>O visto de quem assina</li></ul></div></div>
   <div class="sd-foot"><span>IA sem hype</span><span>para arquitetas · 2026</span></div>
 </section>
 
 <section class="slide statement" data-t="Você coordena">
-  <header class="head"><div class="eyebrow">Agentes · a ideia central</div></header>
-  <div class="body">
-    <p class="big">Você coordena.<br><span class="acc">A equipe executa.</span></p>
-    <p class="lead">Cada agente é um ajudante com função, ferramentas, limites — e mesa própria.</p>
-  </div>
-  <aside class="notes">Igual a coordenar os projetistas complementares: cada um no seu escopo, você integra.</aside>
+  <header class="head"><div class="eyebrow">Agentes</div></header>
+  <div class="body"><p class="big">Você coordena.<br><span class="acc">A equipe executa.</span></p></div>
+  <aside class="notes">Falar: cada agente é um ajudante com função, ferramentas, limites — e prancheta própria. Pergunte: “como vocês dividem trabalho hoje com a equipe ou com terceiros?”.</aside>
 </section>
 
 <section class="slide" data-t="Orquestração">
-  <header class="head"><div class="eyebrow">Agentes · orquestração</div><h2 class="title">Orquestrar: a coordenadora distribui e junta.</h2></header>
-  <div class="split r">
-    <div class="fig">
-      <svg viewBox="0 0 1200 520" role="img" aria-labelledby="or-t or-d"><title id="or-t">Diagrama: orquestração</title><desc id="or-d">Uma coordenadora distribui tarefas para três ajudantes, cada um com mesa própria, e recebe os resultados para revisar.</desc>
-        <g stroke="var(--teal)" stroke-width="3" fill="none"><path d="M600 130V200H200V290"/><path d="M600 130V290"/><path d="M600 200H1000V290"/></g>
-        <rect x="300" y="30" width="600" height="100" rx="16" fill="var(--teal)"/><text class="s w mid" x="600" y="92" style="font-size:30px">Coordenadora (você + agente principal)</text>
-        <g><rect x="20" y="290" width="360" height="120" rx="16" fill="var(--paper)" stroke="var(--rule-strong)" stroke-width="2"/><text class="s mid" x="200" y="342">Ajudante: materiais</text><text class="s m mid" x="200" y="380" style="font-size:22px">mesa própria</text></g>
-        <g><rect x="420" y="290" width="360" height="120" rx="16" fill="var(--paper)" stroke="var(--rule-strong)" stroke-width="2"/><text class="s mid" x="600" y="342">Ajudante: documentos</text><text class="s m mid" x="600" y="380" style="font-size:22px">mesa própria</text></g>
-        <g><rect x="820" y="290" width="360" height="120" rx="16" fill="var(--paper)" stroke="var(--rule-strong)" stroke-width="2"/><text class="s mid" x="1000" y="342">Ajudante: cliente</text><text class="s m mid" x="1000" y="380" style="font-size:22px">mesa própria</text></g>
-        <text class="s m mid" x="600" y="480" style="font-size:24px">resultados voltam para a coordenadora revisar</text>
-      </svg>
-    </div>
-    <div class="stack">
-      <div class="ncard"><span class="n">01</span><h3>Mesa própria</h3><p>Cada ajudante trabalha na sua prancheta e entrega só o resultado.</p></div>
-      <div class="ncard warn"><span class="n">!</span><h3>Não é de graça</h3><p>A prancheta da coordenadora fica limpa, mas o total de tokens sobe.</p></div>
-    </div>
-  </div>
-  <aside class="notes">Nome técnico: subagentes. Vantagem de organização; custo maior no total.</aside>
-</section>
-
-<section class="slide" data-t="Sequencial">
-  <header class="head"><div class="eyebrow">Agentes · sequencial</div><h2 class="title">Sequencial: uma etapa depende da outra.</h2></header>
+  <header class="head"><div class="eyebrow">Agentes · orquestração</div><h2 class="title">Orquestrar: distribuir e juntar.</h2></header>
   <div class="fig" style="flex:1">
-    <svg viewBox="0 0 1640 600" role="img" aria-labelledby="sq-t sq-d"><title id="sq-t">Cronograma em escada: obra e IA</title><desc id="sq-d">Na obra, fundação, estrutura, alvenaria, instalações e acabamento, uma após a outra, com vistoria entre etapas. Na IA, briefing, programa, memorial, materiais e cotação, com aprovação entre etapas.</desc>
-      <text class="s t mono" x="0" y="30" style="font-size:22px">OBRA</text>
-      <g class="s" style="font-size:22px">
-        <text x="0" y="82">Fundação</text><text x="0" y="132">Estrutura</text><text x="0" y="182">Alvenaria</text><text x="0" y="232">Instalações</text><text x="0" y="282">Acabamento</text>
-      </g>
-      <g fill="var(--human)"><rect x="240" y="56" width="260" height="36" rx="6"/><rect x="520" y="106" width="260" height="36" rx="6"/><rect x="800" y="156" width="260" height="36" rx="6"/><rect x="1080" y="206" width="260" height="36" rx="6"/><rect x="1360" y="256" width="260" height="36" rx="6"/></g>
-      <g fill="var(--paper)" stroke="var(--teal-2)" stroke-width="3"><path d="M510 62l12 12-12 12-12-12z"/><path d="M790 112l12 12-12 12-12-12z"/><path d="M1070 162l12 12-12 12-12-12z"/><path d="M1350 212l12 12-12 12-12-12z"/></g>
-      <line x1="0" y1="322" x2="1640" y2="322" stroke="var(--rule)" stroke-width="2" stroke-dasharray="8 8"/>
-      <text class="s t mono" x="0" y="370" style="font-size:22px">IA</text>
-      <g class="s" style="font-size:22px">
-        <text x="0" y="422">Briefing</text><text x="0" y="472">Programa</text><text x="0" y="522">Memorial</text><text x="0" y="572">Materiais</text>
-      </g>
-      <g><rect x="240" y="396" width="330" height="36" rx="6" fill="var(--teal)"/><rect x="590" y="446" width="330" height="36" rx="6" fill="var(--teal-2)"/><rect x="940" y="496" width="330" height="36" rx="6" fill="var(--teal)"/><rect x="1290" y="546" width="330" height="36" rx="6" fill="var(--teal-2)"/></g>
-      <g fill="var(--paper)" stroke="var(--clay)" stroke-width="3"><path d="M580 402l12 12-12 12-12-12z"/><path d="M930 452l12 12-12 12-12-12z"/><path d="M1280 502l12 12-12 12-12-12z"/></g>
-      <text class="s m end" x="1640" y="30" style="font-size:20px">◇ vistoria (obra) · ◇ aprovação (IA) · tempo →</text>
+    <svg viewBox="0 0 1200 460" role="img" aria-labelledby="or-t or-d"><title id="or-t">Diagrama: orquestração</title><desc id="or-d">Uma coordenadora distribui tarefas para três ajudantes, cada um com prancheta própria, e recebe os resultados.</desc>
+      <g stroke="var(--teal)" stroke-width="3" fill="none"><path d="M600 130V200H200V290"/><path d="M600 130V290"/><path d="M600 200H1000V290"/></g>
+      <rect x="350" y="30" width="500" height="100" rx="16" fill="var(--teal)"/><text class="s w mid" x="600" y="92" style="font-size:32px">Você + agente principal</text>
+      <rect x="20" y="290" width="360" height="110" rx="16" fill="var(--paper)" stroke="var(--rule-strong)" stroke-width="2"/><text class="s mid" x="200" y="356">Ajudante: e-mails</text>
+      <rect x="420" y="290" width="360" height="110" rx="16" fill="var(--paper)" stroke="var(--rule-strong)" stroke-width="2"/><text class="s mid" x="600" y="356">Ajudante: planilha</text>
+      <rect x="820" y="290" width="360" height="110" rx="16" fill="var(--paper)" stroke="var(--rule-strong)" stroke-width="2"/><text class="s mid" x="1000" y="356">Ajudante: relatório</text>
     </svg>
   </div>
-  <aside class="notes">Não adianta orçar material antes de ter memorial. Cada saída vira entrada da próxima; pare e aprove entre as etapas.</aside>
+  <aside class="notes">Falar: cada ajudante trabalha na própria prancheta e devolve só o resultado. A sua prancheta fica limpa. || Se perguntarem do custo: no total gasta mais tokens. Nome técnico: subagentes.</aside>
 </section>
 
-<section class="slide" data-t="Paralelo">
-  <header class="head"><div class="eyebrow">Agentes · paralelo</div><h2 class="title">Paralelo: complementares ao mesmo tempo. Depois, compatibilização.</h2></header>
+<section class="slide" data-t="Em sequência">
+  <header class="head"><div class="eyebrow">Agentes · sequencial</div><h2 class="title">Em sequência: um passo depende do outro.</h2></header>
   <div class="fig" style="flex:1">
-    <svg viewBox="0 0 1640 600" role="img" aria-labelledby="pa-t pa-d"><title id="pa-t">Cronograma paralelo: complementares e sessões de IA</title><desc id="pa-d">Projetos estrutural, elétrico e hidráulico correm em paralelo e terminam na compatibilização. Três sessões de IA correm em paralelo e terminam na revisão da arquiteta.</desc>
-      <text class="s t mono" x="0" y="30" style="font-size:22px">PROJETO</text>
-      <g class="s" style="font-size:22px"><text x="0" y="82">Estrutural</text><text x="0" y="132">Elétrico</text><text x="0" y="182">Hidráulico</text><text x="0" y="232">Junção</text></g>
-      <g fill="var(--human)"><rect x="240" y="56" width="760" height="36" rx="6"/><rect x="240" y="106" width="620" height="36" rx="6"/><rect x="240" y="156" width="840" height="36" rx="6"/></g>
-      <rect x="1120" y="206" width="500" height="36" rx="6" fill="var(--teal-soft)" stroke="var(--teal)" stroke-width="2"/><text class="s t2 mid" x="1370" y="231" style="font-size:22px">compatibilização</text>
-      <g stroke="var(--muted)" stroke-width="2" fill="none" stroke-dasharray="6 6"><path d="M1000 74H1100V222"/><path d="M860 124H1100"/><path d="M1080 174H1100"/></g>
-      <line x1="0" y1="282" x2="1640" y2="282" stroke="var(--rule)" stroke-width="2" stroke-dasharray="8 8"/>
-      <text class="s t mono" x="0" y="330" style="font-size:22px">IA</text>
-      <g class="s" style="font-size:22px"><text x="0" y="382">Sessão A</text><text x="0" y="432">Sessão B</text><text x="0" y="482">Sessão C</text><text x="0" y="532">Junção</text></g>
-      <rect x="240" y="356" width="480" height="36" rx="6" fill="var(--teal)"/><text class="s w" x="258" y="381" style="font-size:20px">triagem de e-mails</text>
-      <rect x="240" y="406" width="760" height="36" rx="6" fill="var(--teal-2)"/><text class="s w" x="258" y="431" style="font-size:20px">benchmark de concorrentes</text>
-      <rect x="240" y="456" width="620" height="36" rx="6" fill="var(--teal)"/><text class="s w" x="258" y="481" style="font-size:20px">revisão do memorial</text>
-      <rect x="1120" y="506" width="500" height="36" rx="6" fill="var(--clay-soft)" stroke="var(--clay)" stroke-width="2"/><text class="s ci mid" x="1370" y="531" style="font-size:22px">você revisa e junta</text>
-      <g stroke="var(--muted)" stroke-width="2" fill="none" stroke-dasharray="6 6"><path d="M720 374H1100V522"/><path d="M1000 424H1100"/><path d="M860 474H1100"/></g>
+    <svg viewBox="0 0 1640 520" role="img" aria-labelledby="sq-t sq-d"><title id="sq-t">Cronograma em escada: jantar e IA</title><desc id="sq-d">Para o jantar: comprar, cortar, cozinhar, servir, um depois do outro. Na IA: ler, resumir, rascunhar, você revisa, com aprovação entre os passos.</desc>
+      <text class="s t mono" x="0" y="30" style="font-size:24px">JANTAR</text>
+      <g class="s" style="font-size:26px"><text x="0" y="88">Comprar</text><text x="0" y="138">Cortar</text><text x="0" y="188">Cozinhar</text><text x="0" y="238">Servir</text></g>
+      <g fill="var(--human)"><rect x="240" y="60" width="330" height="40" rx="6"/><rect x="590" y="110" width="330" height="40" rx="6"/><rect x="940" y="160" width="330" height="40" rx="6"/><rect x="1290" y="210" width="330" height="40" rx="6"/></g>
+      <line x1="0" y1="290" x2="1640" y2="290" stroke="var(--rule)" stroke-width="2" stroke-dasharray="8 8"/>
+      <text class="s t mono" x="0" y="340" style="font-size:24px">IA</text>
+      <g class="s" style="font-size:26px"><text x="0" y="398">Ler</text><text x="0" y="448">Resumir</text><text x="0" y="498">Rascunhar</text></g>
+      <rect x="240" y="370" width="440" height="40" rx="6" fill="var(--teal)"/><rect x="700" y="420" width="440" height="40" rx="6" fill="var(--teal-2)"/><rect x="1160" y="470" width="460" height="40" rx="6" fill="var(--teal)"/>
+      <g fill="var(--paper)" stroke="var(--clay)" stroke-width="3"><path d="M690 378l12 12-12 12-12-12z"/><path d="M1150 428l12 12-12 12-12-12z"/></g>
+      <text class="s m end" x="1640" y="30" style="font-size:22px">◇ você aprova antes do próximo passo</text>
     </svg>
   </div>
-  <aside class="notes">Ganha tempo, gasta mais tokens ao mesmo tempo e exige revisão no fim. O ponto de junção é a compatibilização.</aside>
+  <aside class="notes">Falar: não dá para cozinhar antes de comprar. Na IA é igual: cada saída vira a entrada do próximo passo. Pare e aprove entre os passos.</aside>
+</section>
+
+<section class="slide" data-t="Ao mesmo tempo">
+  <header class="head"><div class="eyebrow">Agentes · paralelo</div><h2 class="title">Ao mesmo tempo: arroz, feijão e salada.</h2></header>
+  <div class="fig" style="flex:1">
+    <svg viewBox="0 0 1640 540" role="img" aria-labelledby="pa-t pa-d"><title id="pa-t">Cronograma paralelo: jantar e sessões de IA</title><desc id="pa-d">Arroz, feijão e salada são feitos ao mesmo tempo e juntados no prato. Três sessões de IA correm ao mesmo tempo e você junta os resultados no fim.</desc>
+      <text class="s t mono" x="0" y="30" style="font-size:24px">JANTAR</text>
+      <g class="s" style="font-size:26px"><text x="0" y="88">Arroz</text><text x="0" y="138">Feijão</text><text x="0" y="188">Salada</text></g>
+      <g fill="var(--human)"><rect x="240" y="60" width="620" height="40" rx="6"/><rect x="240" y="110" width="760" height="40" rx="6"/><rect x="240" y="160" width="360" height="40" rx="6"/></g>
+      <rect x="1120" y="110" width="500" height="40" rx="6" fill="var(--teal-soft)" stroke="var(--teal)" stroke-width="2"/><text class="s t2 mid" x="1370" y="138" style="font-size:24px">montar o prato</text>
+      <g stroke="var(--muted)" stroke-width="2" fill="none" stroke-dasharray="6 6"><path d="M860 80H1080V130H1110"/><path d="M1000 130H1110"/><path d="M600 180H1080V130"/></g>
+      <line x1="0" y1="250" x2="1640" y2="250" stroke="var(--rule)" stroke-width="2" stroke-dasharray="8 8"/>
+      <text class="s t mono" x="0" y="300" style="font-size:24px">IA</text>
+      <g class="s" style="font-size:26px"><text x="0" y="358">Sessão A</text><text x="0" y="408">Sessão B</text><text x="0" y="458">Sessão C</text></g>
+      <rect x="240" y="330" width="560" height="40" rx="6" fill="var(--teal)"/><text class="s w" x="258" y="358" style="font-size:22px">e-mails</text>
+      <rect x="240" y="380" width="760" height="40" rx="6" fill="var(--teal-2)"/><text class="s w" x="258" y="408" style="font-size:22px">concorrentes</text>
+      <rect x="240" y="430" width="660" height="40" rx="6" fill="var(--teal)"/><text class="s w" x="258" y="458" style="font-size:22px">relatório</text>
+      <rect x="1120" y="380" width="500" height="40" rx="6" fill="var(--clay-soft)" stroke="var(--clay)" stroke-width="2"/><text class="s ci mid" x="1370" y="408" style="font-size:24px">você revisa e junta</text>
+      <g stroke="var(--muted)" stroke-width="2" fill="none" stroke-dasharray="6 6"><path d="M800 350H1080V400H1110"/><path d="M1000 400H1110"/><path d="M900 450H1080V400"/></g>
+    </svg>
+  </div>
+  <aside class="notes">Falar: o que não depende um do outro pode ir ao mesmo tempo, em sessões separadas. Ganha tempo, gasta mais tokens de uma vez e exige que alguém junte no fim: vocês.</aside>
 </section>
 
 <section class="slide" data-t="Como decidir">
-  <header class="head"><div class="eyebrow">Agentes · como decidir</div><h2 class="title">Depende do resultado da outra? Então é em sequência.</h2></header>
-  <div class="cols3">
-    <div class="ncard"><span class="n">01</span><h3>Depende?</h3><p><b>Sim</b> → sequencial.<br><b>Não</b> → pode ser paralelo.</p></div>
-    <div class="ncard warn"><span class="n">!</span><h3>Dois pedreiros, uma parede</h3><p>Duas sessões mexendo no <b>mesmo arquivo</b> = retrabalho.</p></div>
-    <div class="ncard"><span class="n">02</span><h3>Cada um na sua pasta</h3><p>Uma pasta de saída por sessão e um ponto de junção: você.</p></div>
+  <header class="head"><div class="eyebrow">Agentes · como decidir</div><h2 class="title">Depende do outro? Então é em sequência.</h2></header>
+  <div class="cols2">
+    <div class="card warn"><span class="tag">Cuidado</span><h3>Duas pessoas editando a mesma planilha ao mesmo tempo.</h3></div>
+    <div class="card num"><span class="tag">Solução</span><h3>Cada sessão na sua pasta. Você junta.</h3></div>
   </div>
-  <aside class="notes">Em programação, usa-se cópias/branches separadas pelo mesmo motivo.</aside>
+  <aside class="notes">Falar: depende do resultado de outra tarefa? Sequência. Não depende? Pode ser ao mesmo tempo. Só não deixe duas sessões mexendo no mesmo arquivo.</aside>
 </section>
 
-<section class="slide" data-t="O visto da arquiteta">
-  <header class="head"><div class="eyebrow">Agentes · human-in-the-loop</div><h2 class="title">O visto da arquiteta.</h2></header>
-  <div class="body">
-    <div class="flow"><span class="small" style="margin-right:8px">PARE E APROVE ANTES DE:</span><span class="chip w">enviar e-mail</span><span class="chip w">apagar ou sobrescrever</span><span class="chip w">mandar orçamento</span><span class="chip w">entregar prancha</span><span class="chip w">gastar dinheiro</span></div>
-    <div class="steps">
-      <div class="card"><span class="tag">Degrau 1</span><h3>Sugere</h3><p>Você executa.</p></div>
-      <div class="card num"><span class="tag">Degrau 2</span><h3>Executa com aprovação</h3><p>Pede “posso?” antes de cada ação.</p></div>
-      <div class="card fill"><span class="tag">Degrau 3</span><h3>Executa e avisa</h3><p>Só tarefa de baixo risco e reversível.</p></div>
-    </div>
+<section class="slide" data-t="O visto de quem assina">
+  <header class="head"><div class="eyebrow">Agentes · human-in-the-loop</div><h2 class="title">O visto de quem assina.</h2></header>
+  <div class="steps">
+    <div class="card"><span class="tag">Degrau 1</span><h3>Sugere</h3></div>
+    <div class="card num"><span class="tag">Degrau 2</span><h3>Faz, pedindo “posso?”</h3></div>
+    <div class="card fill"><span class="tag">Degrau 3</span><h3>Faz e avisa</h3></div>
   </div>
-  <aside class="notes">Nome técnico: human-in-the-loop. Suba um degrau só depois de confiar naquela tarefa específica.</aside>
+  <aside class="notes">Falar: nome técnico, human-in-the-loop. Pare e aprove antes de: enviar e-mail, apagar ou sobrescrever, mandar orçamento, entregar algo ao cliente, gastar dinheiro. Suba um degrau só depois de confiar naquela tarefa específica; o degrau 3 só para o que é de baixo risco e dá para desfazer.</aside>
 </section>
 
-<section class="slide" data-t="Provedores">
+<section class="slide" data-t="Fabricantes">
   <header class="head"><div class="eyebrow">Agentes · outros fabricantes</div><h2 class="title">Muda a marca. Os conceitos ficam.</h2></header>
   <table class="tbl">
-    <tr><th>Fabricante</th><th>Modelos</th><th class="h">Agente / harness</th></tr>
-    <tr><td>OpenAI</td><td>GPT, gpt-oss (pesos abertos)</td><td class="h">Codex, ChatGPT</td></tr>
-    <tr><td>Anthropic</td><td>Claude</td><td class="h">Claude Code, Claude</td></tr>
-    <tr><td>xAI</td><td>Grok</td><td class="h">Grok Build (beta), app e API</td></tr>
-    <tr><td>Google</td><td>Gemini</td><td class="h">Gemini CLI, Antigravity</td></tr>
-    <tr><td>Aberto / local</td><td>Llama, Qwen, Mistral</td><td class="h">Ollama, LM Studio + um harness</td></tr>
+    <tr><th>Fabricante</th><th class="h">Agente</th></tr>
+    <tr><td>OpenAI</td><td class="h">Codex</td></tr>
+    <tr><td>Anthropic</td><td class="h">Claude Code</td></tr>
+    <tr><td>Google</td><td class="h">Gemini CLI</td></tr>
+    <tr><td>xAI</td><td class="h">Grok Build</td></tr>
   </table>
-  <p class="lead">MCP, AGENTS.md e o formato de skills são padrões abertos que vários harnesses usam. Nomes de arquivo e hooks ainda variam.</p>
-  <aside class="notes">Opcional. Produtos mudam de nome toda hora: confira o site antes de decidir. Sem guerra de marcas.</aside>
+  <aside class="notes">Opcional. Falar: contexto, tokens, regras, skills, MCP e aprovação existem em todos. MCP, AGENTS.md e o formato de skills são padrões abertos; nomes de arquivo e hooks ainda variam. Produtos mudam de nome toda hora: confiram o site antes de decidir. Também dá para rodar modelos abertos no próprio PC (Ollama, LM Studio).</aside>
 </section>
 
 <section class="slide dark statement" data-t="Equipe e responsável">
-  <div class="body">
-    <p class="big">Agentes são a equipe.<br><span class="acc">Quem coordena e assina é você.</span></p>
-  </div>
-  <aside class="notes">Fecha a parte 4. Agora: o que fazer de verdade no escritório.</aside>
+  <div class="body"><p class="big">Agentes são a equipe.<br><span class="acc">Quem coordena e assina é você.</span></p></div>
+  <aside class="notes">Falar: fecha a parte 4. Agora: o que fazer de verdade no escritório de vocês.</aside>
 </section>
 <!-- ================= PARTE 05 ================= -->
 <section class="slide divider" data-t="Parte 05 · No escritório">
   <div class="sd-top">PARTE 05 <i></i><span class="of">DE 07</span></div>
-  <div class="sd-grid"><div class="sd-num">05</div><div><div class="sd-kick">Próxima seção</div><h2 class="sd-title">No escritório</h2><div class="sd-rule"></div>
-    <ul class="sd-next"><li class="k">A SEGUIR</li><li><span>→</span>Sete tarefas chatas</li><li><span>→</span>Mais ideias</li><li><span>→</span>O que não delegar</li></ul></div></div>
+  <div class="sd-grid"><div class="sd-num">05</div><div><div class="sd-kick">③ Quem assina é você</div><h2 class="sd-title">No escritório</h2><div class="sd-rule"></div>
+    <ul class="sd-next"><li class="k">A SEGUIR</li><li><span>→</span>Sete tarefas chatas</li><li><span>→</span>Por onde começar</li><li><span>→</span>O que não delegar</li></ul></div></div>
   <div class="sd-foot"><span>IA sem hype</span><span>para arquitetas · 2026</span></div>
 </section>
 
 <section class="slide" data-t="Sete tarefas chatas">
-  <header class="head"><div class="eyebrow">No escritório · visão geral</div><h2 class="title">Sete tarefas chatas para tirar das suas costas.</h2></header>
-  <div class="cols2">
-    <div class="stack">
-      <div class="ncard"><span class="n">01</span><h3>Triagem de e-mails</h3></div>
-      <div class="ncard"><span class="n">02</span><h3>Organização do projeto</h3></div>
-      <div class="ncard"><span class="n">03</span><h3>Suas redes sociais</h3></div>
-      <div class="ncard"><span class="n">04</span><h3>Concorrentes</h3></div>
-    </div>
-    <div class="stack">
-      <div class="ncard"><span class="n">05</span><h3>Documentação</h3></div>
-      <div class="ncard"><span class="n">06</span><h3>Levantamento de materiais</h3></div>
-      <div class="ncard"><span class="n">07</span><h3>Scripts de CAD</h3></div>
-      <p class="note">Em cada uma: hoje · com IA · onde erra. Skill e arquivo de teste estão no kit.</p>
-    </div>
+  <header class="head"><div class="eyebrow">No escritório</div><h2 class="title">Sete tarefas chatas para tirar das costas.</h2></header>
+  <div class="body center">
+    <div class="flow"><span class="chip">E-mails</span><span class="chip">Organizar projeto</span><span class="chip">Suas redes</span><span class="chip">Concorrentes</span><span class="chip">Documentos</span><span class="chip">Listas de material</span><span class="chip">Programa de desenho</span></div>
   </div>
-  <aside class="notes">Peça para cada uma escolher a que mais dói hoje.</aside>
+  <aside class="notes">Falar: pergunte “qual dessas mais dói hoje?” e deixe elas contarem. Vocês são as especialistas do escritório; eu mostro a ferramenta. Cada caso a seguir tem uma skill pronta no kit.</aside>
 </section>
 
 <section class="slide" data-t="Caso: e-mails">
-  <header class="head"><div class="eyebrow">No escritório · 01 e-mails</div><h2 class="title">Triagem de e-mails: o urgente não se perde.</h2></header>
+  <header class="head"><div class="eyebrow">No escritório · e-mails</div><h2 class="title">O urgente não se perde.</h2></header>
   <div class="split">
-    <div class="mock"><div class="mh"><span>saida/triagem-2026-11-05.md</span><span class="badge">exemplo fictício</span></div>
-      <table><tr><th>De</th><th>Assunto</th><th>Tipo</th><th>Urgência</th><th>Ação</th></tr>
-        <tr><td>prefeitura</td><td>Pendência no alvará</td><td>órgão</td><td><span class="lbl alta">alta · 10 dias</span></td><td>enviar RRT + situação</td></tr>
-        <tr><td>cliente Marina</td><td>Cor da fachada</td><td>cliente</td><td><span class="lbl alta">alta · sexta</span></td><td>rascunho pronto</td></tr>
-        <tr><td>eletricista</td><td>Orçamento revisado</td><td>fornecedor</td><td><span class="lbl media">média · 7 dias</span></td><td>conferir valor</td></tr>
-        <tr><td>financeiro</td><td>NF em aberto</td><td>interno</td><td><span class="lbl media">média</span></td><td>lembrete</td></tr>
-        <tr><td>loja de pisos</td><td>Promoção</td><td>spam</td><td><span class="lbl">baixa</span></td><td>ignorar</td></tr></table></div>
+    <div class="mock"><div class="mh"><span>triagem de hoje</span><span class="badge">exemplo fictício</span></div>
+      <table><tr><th>De</th><th>Assunto</th><th>Urgência</th></tr>
+        <tr><td>cliente</td><td>Mudança de cor</td><td><span class="lbl alta">hoje</span></td></tr>
+        <tr><td>fornecedor</td><td>Orçamento novo</td><td><span class="lbl media">esta semana</span></td></tr>
+        <tr><td>financeiro</td><td>Nota em aberto</td><td><span class="lbl media">esta semana</span></td></tr>
+        <tr><td>loja</td><td>Promoção</td><td><span class="lbl">ignorar</span></td></tr></table></div>
     <div class="stack">
-      <div class="ncard"><span class="n">01</span><span class="tag">Hoje</span><h3>Caixa cheia; o prazo da prefeitura afunda.</h3></div>
-      <div class="ncard"><span class="n">02</span><span class="tag">Com IA</span><h3>Classifica, dá urgência, extrai prazo, rascunha respostas.</h3></div>
-      <div class="ncard warn"><span class="n">!</span><span class="tag">Onde erra</span><h3>Urgência mal lida. Rascunho, nunca envio.</h3></div>
-      <p class="note">skill triagem-email · teste: exemplos/emails.txt</p>
+      <div class="card num"><span class="tag">Com IA</span><h3>Separa, prioriza e rascunha a resposta.</h3></div>
+      <div class="card warn"><span class="tag">Onde erra</span><h3>Urgência mal lida. Só rascunho, nunca envia.</h3></div>
     </div>
   </div>
-  <aside class="notes">Comece colando e-mails num arquivo (fácil). Conectar a caixa (MCP) é nível 2. Demo ao vivo na parte 7.</aside>
+  <aside class="notes">Falar: comece colando os e-mails num arquivo (fácil). Ligar direto na caixa de e-mail é passo 2. Pergunte: “que tipo de e-mail mais atrapalha o dia de vocês?”. Skill: triagem-email; teste: exemplos/emails.txt.</aside>
 </section>
 
-<section class="slide" data-t="Caso: organização do projeto">
-  <header class="head"><div class="eyebrow">No escritório · 02 projeto</div><h2 class="title">A reunião acaba com dono e prazo.</h2></header>
+<section class="slide" data-t="Caso: organizar projeto">
+  <header class="head"><div class="eyebrow">No escritório · organizar projeto</div><h2 class="title">A reunião acaba com dono e prazo.</h2></header>
   <div class="split">
-    <div class="mock"><div class="mh"><span>saida/pendencias.csv</span><span class="badge">exemplo fictício</span></div>
-      <table class="sheet"><tr><th>#</th><th>Pendência</th><th>Responsável</th><th>Prazo</th><th>Etapa</th></tr>
-        <tr><td>1</td><td>Escolher piso da varanda</td><td>Marina (cliente)</td><td>07/11</td><td>executivo</td></tr>
-        <tr><td>2</td><td>Planta de situação p/ prefeitura</td><td>Bruno (eng.)</td><td>14/11</td><td>aprovação</td></tr>
-        <tr><td>3</td><td>Revisar memorial da cozinha</td><td>Rafaela (arq.)</td><td>06/11</td><td>executivo</td></tr>
-        <tr><td>4</td><td>Avisar marceneiro do adiamento</td><td><span class="lbl alta">✕ sem responsável</span></td><td>?</td><td>obra</td></tr></table></div>
+    <div class="mock"><div class="mh"><span>pendências</span><span class="badge">exemplo fictício</span></div>
+      <table class="sheet"><tr><th>Tarefa</th><th>Quem</th><th>Quando</th></tr>
+        <tr><td>Enviar proposta</td><td>Ana</td><td>quinta</td></tr>
+        <tr><td>Ligar para o cliente</td><td>Bia</td><td>amanhã</td></tr>
+        <tr><td>Avisar o fornecedor</td><td><span class="lbl alta">✕ sem dono</span></td><td>?</td></tr></table></div>
     <div class="stack">
-      <div class="ncard"><span class="n">01</span><span class="tag">Hoje</span><h3>Ninguém sabe quem faz o quê até quando.</h3></div>
-      <div class="ncard"><span class="n">02</span><span class="tag">Com IA</span><h3>Ata ou áudio vira pendências, cronograma e status para o cliente.</h3></div>
-      <div class="ncard warn"><span class="n">!</span><span class="tag">Onde erra</span><h3>Inventar dono ou prazo. Ela tem que perguntar.</h3></div>
-      <p class="note">skill organizacao-projeto · teste: exemplos/reuniao-ata.txt</p>
+      <div class="card num"><span class="tag">Com IA</span><h3>Ata ou áudio vira lista de tarefas.</h3></div>
+      <div class="card warn"><span class="tag">Onde erra</span><h3>Inventar dono ou prazo. Tem que perguntar.</h3></div>
     </div>
   </div>
-  <aside class="notes">A linha 4 é o ponto: a IA marcou que falta responsável em vez de inventar.</aside>
+  <aside class="notes">Falar: a última linha é o ponto — a IA marcou que falta dono em vez de inventar. Pergunte: “como vocês acompanham pendências hoje?”. Skill: organizacao-projeto; teste: exemplos/reuniao-ata.txt.</aside>
 </section>
 
 <section class="slide" data-t="Caso: suas redes">
-  <header class="head"><div class="eyebrow">No escritório · 03 redes</div><h2 class="title">Parar de postar no escuro.</h2></header>
+  <header class="head"><div class="eyebrow">No escritório · redes sociais</div><h2 class="title">Parar de postar no escuro.</h2></header>
   <div class="split">
-    <div class="mock"><div class="mh"><span>saida/relatorio-redes.md</span><span class="badge">exemplo fictício</span></div>
-      <div class="pad">
-        <p class="note" style="margin-bottom:14px">Alcance médio por formato (últimos 30 posts)</p>
-        <div class="bars">
-          <div class="row"><span class="w">obra antes/depois</span><div class="track"><div class="fill" style="width:88%"></div><span class="pct">4,1 mil</span></div></div>
-          <div class="row"><span class="w">bastidores</span><div class="track"><div class="fill" style="width:60%"></div><span class="pct">2,8 mil</span></div></div>
-          <div class="row"><span class="w">render 3D</span><div class="track"><div class="fill" style="width:41%"></div><span class="pct">1,9 mil</span></div></div>
-          <div class="row"><span class="w">dica técnica</span><div class="track"><div class="fill" style="width:30%"></div><span class="pct">1,4 mil</span></div></div>
-        </div>
-      </div></div>
+    <div class="mock"><div class="mh"><span>alcance médio por formato</span><span class="badge">exemplo fictício</span></div>
+      <div class="pad"><div class="bars">
+        <div class="row"><span class="w">vídeo</span><div class="track"><div class="fill" style="width:88%"></div><span class="pct">4,1 mil</span></div></div>
+        <div class="row"><span class="w">antes/depois</span><div class="track"><div class="fill" style="width:60%"></div><span class="pct">2,8 mil</span></div></div>
+        <div class="row"><span class="w">foto</span><div class="track"><div class="fill" style="width:41%"></div><span class="pct">1,9 mil</span></div></div>
+        <div class="row"><span class="w">texto</span><div class="track"><div class="fill" style="width:30%"></div><span class="pct">1,4 mil</span></div></div>
+      </div></div></div>
     <div class="stack">
-      <div class="ncard"><span class="n">01</span><span class="tag">Hoje</span><h3>Posta sem saber o que funciona.</h3></div>
-      <div class="ncard"><span class="n">02</span><span class="tag">Com IA</span><h3>Lê a planilha exportada, agrupa por tema e formato, sugere calendário e legendas.</h3></div>
-      <div class="ncard warn"><span class="n">!</span><span class="tag">Onde erra</span><h3>Poucos posts = conclusão fraca. As contas, quem faz é a planilha.</h3></div>
-      <p class="note">skill analise-redes-sociais · exportar 30 posts</p>
+      <div class="card num"><span class="tag">Com IA</span><h3>Lê os números e sugere o que postar.</h3></div>
+      <div class="card warn"><span class="tag">Onde erra</span><h3>Poucos posts, conclusão fraca.</h3></div>
     </div>
   </div>
-  <aside class="notes">Render de imagem é outra ferramenta; aqui a IA escreve a legenda e o texto de apresentação do projeto.</aside>
+  <aside class="notes">Falar: a plataforma deixa exportar as métricas em planilha; a IA agrupa por tema e formato e sugere calendário e legendas. As contas, quem faz é a planilha. Skill: analise-redes-sociais.</aside>
 </section>
 
 <section class="slide" data-t="Caso: concorrentes">
-  <header class="head"><div class="eyebrow">No escritório · 04 concorrentes</div><h2 class="title">O que eles fazem que vocês não fazem.</h2></header>
+  <header class="head"><div class="eyebrow">No escritório · concorrentes</div><h2 class="title">O que eles fazem que vocês não fazem?</h2></header>
   <div class="split">
-    <div class="mock"><div class="mh"><span>saida/benchmark.md</span><span class="badge">exemplo fictício</span></div>
-      <table><tr><th>Critério</th><th>Escritório A</th><th>Escritório B</th><th>Escritório C</th></tr>
-        <tr><td>Frequência</td><td>3×/semana</td><td>1×/semana</td><td>diário</td></tr>
-        <tr><td>Foco</td><td>alto padrão</td><td>reforma</td><td>comercial</td></tr>
-        <tr><td>Formato forte</td><td>vídeo de obra</td><td>antes/depois</td><td>render</td></tr>
-        <tr><td>Chamada</td><td>“agende visita”</td><td>orçamento</td><td>portfólio</td></tr></table></div>
+    <div class="mock"><div class="mh"><span>comparação</span><span class="badge">exemplo fictício</span></div>
+      <table><tr><th></th><th>Escritório A</th><th>Escritório B</th></tr>
+        <tr><td>Posta</td><td>3× por semana</td><td>todo dia</td></tr>
+        <tr><td>Forte em</td><td>vídeo</td><td>antes/depois</td></tr></table></div>
     <div class="stack">
-      <div class="ncard"><span class="n">01</span><span class="tag">Hoje</span><h3>Não dá tempo de acompanhar.</h3></div>
-      <div class="ncard"><span class="n">02</span><span class="tag">Com IA</span><h3>Um ajudante por concorrente, em paralelo; você junta.</h3></div>
-      <div class="ncard warn"><span class="n">!</span><span class="tag">Onde erra</span><h3>Só conteúdo público. Extrair padrão, nunca copiar.</h3></div>
-      <p class="note">skill analise-concorrentes · opcional: dá trabalho coletar</p>
+      <div class="card num"><span class="tag">Com IA</span><h3>Um ajudante por concorrente, ao mesmo tempo.</h3></div>
+      <div class="card warn"><span class="tag">Onde erra</span><h3>Só conteúdo público. Nunca copiar.</h3></div>
     </div>
   </div>
-  <aside class="notes">Opcional. É o melhor exemplo de paralelo, mas a coleta é trabalhosa. Respeitar termos de uso.</aside>
+  <aside class="notes">Opcional. Falar: bom exemplo de “ao mesmo tempo”, mas a coleta dá trabalho. Respeitar os termos de uso das plataformas. Skill: analise-concorrentes.</aside>
 </section>
 
-<section class="slide" data-t="Caso: documentação">
-  <header class="head"><div class="eyebrow">No escritório · 05 documentação</div><h2 class="title">Memorial sem noites em claro.</h2></header>
+<section class="slide" data-t="Caso: documentos">
+  <header class="head"><div class="eyebrow">No escritório · documentos</div><h2 class="title">Primeiro rascunho em minutos.</h2></header>
   <div class="split">
-    <div class="mock"><div class="mh"><span>saida/memorial.md</span><span class="badge">exemplo fictício</span></div>
+    <div class="mock"><div class="mh"><span>relatório da semana</span><span class="badge">exemplo fictício</span></div>
       <div class="pad a4">
-        <h4>3.2 Cozinha</h4>
-        <p><b>Piso:</b> porcelanato retificado 60×60, cor <span class="fill">[PREENCHER: referência]</span>, assentado com argamassa AC-III.</p>
-        <p><b>Paredes:</b> revestimento até 1,60 m; acima, pintura acrílica fosca.</p>
-        <p><b>Bancada:</b> granito <span class="fill">[PREENCHER: espessura]</span> com cuba de inox.</p>
-        <h4>3.3 Lavabo</h4>
-        <p><b>Área:</b> <span class="fill">[PREENCHER: área do lavabo]</span> — divergente entre planta e lista.</p>
+        <h4>Resumo</h4>
+        <p>A reunião de terça definiu as cores e o prazo de <span class="fill">[PREENCHER: data]</span>.</p>
+        <h4>Próximos passos</h4>
+        <p>Enviar a proposta revisada. Valor: <span class="fill">[PREENCHER]</span>.</p>
       </div></div>
     <div class="stack">
-      <div class="ncard"><span class="n">01</span><span class="tag">Hoje</span><h3>Memorial, especificações e checklists tomam noites.</h3></div>
-      <div class="ncard"><span class="n">02</span><span class="tag">Com IA</span><h3>Rascunha por ambiente e aponta divergência entre planta e texto.</h3></div>
-      <div class="ncard warn"><span class="n">!</span><span class="tag">Onde erra</span><h3>Norma sem número certo. Revisão e assinatura são suas.</h3></div>
-      <p class="note">skill documentacao-projeto · modelo: exemplos/modelo-memorial.md</p>
+      <div class="card num"><span class="tag">Com IA</span><h3>Rascunha a partir das anotações.</h3></div>
+      <div class="card warn"><span class="tag">Onde erra</span><h3>Inventar o que falta. Por isso o [PREENCHER].</h3></div>
     </div>
   </div>
-  <aside class="notes">[PREENCHER] é a IA dizendo “não sei” no lugar de inventar. É isso que a gente quer.</aside>
+  <aside class="notes">Falar: [PREENCHER] é a IA dizendo “não sei” no lugar de inventar — é exatamente o que queremos. Pergunte: “quais documentos vocês escrevem sempre do mesmo jeito?”. Elas sabem quais (memorial, especificações etc.). Skill: documentacao-projeto.</aside>
 </section>
 
-<section class="slide" data-t="Caso: materiais">
-  <header class="head"><div class="eyebrow">No escritório · 06 materiais</div><h2 class="title">Levantamento: a IA escreve a fórmula, a planilha conta.</h2></header>
+<section class="slide" data-t="Caso: listas de material">
+  <header class="head"><div class="eyebrow">No escritório · listas de material</div><h2 class="title">A IA escreve a fórmula. A planilha conta.</h2></header>
   <div class="split">
-    <div class="mock"><div class="mh"><span>saida/levantamento.xlsx</span><span class="badge">exemplo fictício</span></div>
-      <div class="fbar"><b>E2</b><span>=B2*(1+Premissas!B2)</span></div>
-      <table class="sheet"><tr><th></th><th>A Ambiente</th><th>B Área m²</th><th>C Piso</th><th>D Perda</th><th>E Qtde m²</th></tr>
-        <tr><td>2</td><td>Sala</td><td>28,50</td><td>porc. 90×90</td><td>10%</td><td class="sel">31,35</td></tr>
-        <tr><td>3</td><td>Cozinha</td><td>12,00</td><td>porc. 60×60</td><td>10%</td><td>13,20</td></tr>
-        <tr><td>4</td><td>Suíte</td><td>16,00</td><td>laminado</td><td>10%</td><td>17,60</td></tr>
-        <tr><td>5</td><td>Varanda</td><td>8,00</td><td>antiderrapante</td><td>10%</td><td>8,80</td></tr></table>
-      <div class="tabs"><span class="on">Levantamento</span><span>Premissas</span><span>Cotação</span></div></div>
+    <div class="mock"><div class="mh"><span>lista de compras</span><span class="badge">exemplo fictício</span></div>
+      <div class="fbar"><b>D2</b><span>=B2*C2</span></div>
+      <table class="sheet"><tr><th>A Item</th><th>B Qtde</th><th>C Preço</th><th>D Total</th></tr>
+        <tr><td>Tinta</td><td>4</td><td>120</td><td class="sel">480</td></tr>
+        <tr><td>Rolo</td><td>3</td><td>25</td><td>75</td></tr>
+        <tr><td>Fita</td><td>6</td><td>12</td><td>72</td></tr></table></div>
     <div class="stack">
-      <div class="ncard"><span class="n">01</span><span class="tag">Hoje</span><h3>Quantitativo à mão, ambiente por ambiente.</h3></div>
-      <div class="ncard"><span class="n">02</span><span class="tag">Com IA</span><h3>Lê a lista de ambientes e monta planilha com fórmulas, perdas e cotação.</h3></div>
-      <div class="ncard warn"><span class="n">!</span><span class="tag">Onde erra</span><h3>Fazer conta no texto. Confira duas linhas à mão.</h3></div>
-      <p class="note">skill levantamento-materiais · teste: exemplos/ambientes.csv</p>
+      <div class="card num"><span class="tag">Com IA</span><h3>Monta a planilha com as fórmulas.</h3></div>
+      <div class="card warn"><span class="tag">Onde erra</span><h3>Fazer a conta no texto. Confira duas linhas.</h3></div>
     </div>
   </div>
-  <aside class="notes">De onde vem a lista de ambientes? Pode vir do próprio DXF (próximo slide): DXF → tabela de áreas → levantamento, em sequência.</aside>
+  <aside class="notes">Falar: a IA lê a lista e monta a planilha com fórmulas; quem calcula é o Excel. Pergunte a elas como fazem o levantamento de material de uma obra hoje — a skill levantamento-materiais do kit já tem área, perda e cotação. Teste: exemplos/ambientes.csv.</aside>
 </section>
 
-<section class="slide" data-t="Caso: CAD">
-  <header class="head"><div class="eyebrow">No escritório · 07 CAD</div><h2 class="title">A IA não desenha o projeto. Automatiza o repetitivo.</h2></header>
-  <div class="split">
-    <div class="stack">
-      <div class="mock"><div class="mh"><span>layers · antes → depois</span><span class="badge">exemplo fictício</span></div>
-        <table><tr><th>Arquivo do complementar</th><th>Padrão do escritório</th></tr>
-          <tr><td>Layer1</td><td>A-TEXTO</td></tr><tr><td>paredes_antigas</td><td>A-PAREDE</td></tr><tr><td>cota_nova</td><td>A-COTAS</td></tr></table></div>
-      <div class="term"><div class="bar"><i></i><i></i><i></i>&nbsp;ajusta.lsp</div><pre><span class="c">; move tudo da layer "Layer1" para "A-TEXTO"</span>
-(defun c:AJUSTA (/ ss)
-  (if (setq ss (ssget "_X" '((8 . "Layer1"))))
-    (command "_.CHPROP" ss "" "_LA" "A-TEXTO" ""))
-  (princ))</pre></div>
-    </div>
-    <div class="stack">
-      <div class="ncard"><span class="n">01</span><span class="tag">Tarefas boas</span><h3>Padronizar layers dos complementares antes de compatibilizar; tabela de áreas; lista de pranchas e carimbos em lote.</h3></div>
-      <div class="ncard warn"><span class="n">!</span><span class="tag">Atenção</span><h3>AutoCAD LT antigo não roda LISP. DWG → “Salvar como DXF” para scripts em Python.</h3></div>
-      <div class="ph"><div><b>Captura real · substituir</b>Gerenciador de layers antes/depois do script<br>(arquivo de teste: exemplos/planta.dxf)</div></div>
-    </div>
+<section class="slide" data-t="Caso: programa de desenho">
+  <header class="head"><div class="eyebrow">No escritório · programa de desenho</div><h2 class="title">A IA não desenha. Ela tira o clique chato.</h2></header>
+  <div class="cols2">
+    <div class="card"><span class="tag">Antes</span><p class="mega sm">200</p><h3>cliques repetidos</h3></div>
+    <div class="card fill"><span class="tag">Depois</span><p class="mega sm">1</p><h3>comando</h3></div>
   </div>
-  <aside class="notes">Sempre em cópia do arquivo; revise o script antes de rodar. O script roda igual toda vez: determinístico.</aside>
+  <aside class="notes">Falar: programas como o AutoCAD aceitam pequenos scripts (macros). A IA escreve o script de uma tarefa repetitiva; o script roda igual toda vez. Pergunte: “qual tarefa no CAD vocês repetem até cansar?” — elas vão saber (renomear camadas, numerar pranchas…). Sempre em cópia do arquivo. Skill: apoio-cad (arquivo de teste no kit).</aside>
 </section>
 
 <section class="slide" data-t="Mais ideias">
-  <header class="head"><div class="eyebrow">No escritório · mais ideias</div><h2 class="title">E o que vocês podem usar amanhã.</h2></header>
-  <div class="cols3">
-    <div class="ncard"><span class="n">01</span><h3>Áudios do WhatsApp</h3><p>Transcrição de cliente e pedreiro vira resumo e pendências.</p></div>
-    <div class="ncard"><span class="n">02</span><h3>Equalizar orçamentos</h3><p>Três PDFs de fornecedor viram uma tabela: o que cada um inclui e exclui.</p></div>
-    <div class="ncard"><span class="n">03</span><h3>Relatório de visita</h3><p>Fotos com data e anotações viram o relatório semanal ao cliente.</p></div>
-    <div class="ncard"><span class="n">04</span><h3>Código de obras</h3><p>Pergunte ao PDF do plano diretor e exija a página citada.</p></div>
-    <div class="ncard"><span class="n">05</span><h3>Proposta de honorários</h3><p>A partir do modelo do escritório. A IA não emite RRT.</p></div>
-    <div class="ncard"><span class="n">06</span><h3>Briefing → programa</h3><p>Transcrição da 1ª reunião vira programa de necessidades.</p></div>
+  <header class="head"><div class="eyebrow">No escritório · mais ideias</div><h2 class="title">E três para usar amanhã.</h2></header>
+  <div class="trio">
+    <div><span class="k">1</span><p>Áudio longo vira resumo.</p></div>
+    <div><span class="k">2</span><p>Três orçamentos viram uma tabela.</p></div>
+    <div><span class="k">3</span><p>Pergunte a um PDF longo. Exija a página.</p></div>
   </div>
-  <aside class="notes">Render e imagem são outras ferramentas; texto em volta delas, a IA faz bem.</aside>
+  <aside class="notes">Falar: áudios de cliente e fornecedor viram resumo e tarefas; três orçamentos em PDF viram uma tabela comparando o que cada um inclui; documento longo (lei, contrato, manual) responde perguntas — sempre exigindo a página citada para conferir.</aside>
 </section>
 
 <section class="slide" data-t="Por onde começar">
-  <header class="head"><div class="eyebrow">No escritório · por onde começar</div><h2 class="title">Comece pelo que é chato, repetitivo e fácil de conferir.</h2></header>
-  <div class="split r">
-    <div class="fig">
-      <svg viewBox="0 0 1000 640" role="img" aria-labelledby="mx-t mx-d"><title id="mx-t">Matriz esforço por impacto</title><desc id="mx-d">E-mail colado e documentação têm baixo esforço e alto impacto; e-mail conectado e scripts de CAD têm alto impacto e alto esforço; concorrentes têm esforço alto e impacto médio.</desc>
-        <rect x="100" y="20" width="440" height="290" fill="var(--teal-soft)"/>
-        <g stroke="var(--rule-strong)" stroke-width="2"><line x1="100" y1="20" x2="100" y2="600"/><line x1="100" y1="600" x2="980" y2="600"/><line x1="540" y1="20" x2="540" y2="600" stroke-dasharray="6 6"/><line x1="100" y1="310" x2="980" y2="310" stroke-dasharray="6 6"/></g>
-        <text class="s t2 mono" x="120" y="54" style="font-size:20px">COMECE AQUI</text>
-        <text class="s m mid" x="540" y="636" style="font-size:22px">esforço →</text>
-        <text class="s m mid" x="40" y="320" style="font-size:22px" transform="rotate(-90 40 320)">impacto →</text>
-        <g class="s" style="font-size:22px">
-          <circle cx="200" cy="90" r="12" fill="var(--teal)"/><text x="222" y="98">E-mail colado</text>
-          <circle cx="260" cy="150" r="12" fill="var(--teal)"/><text x="282" y="158">Documentação</text>
-          <circle cx="390" cy="210" r="12" fill="var(--teal)"/><text x="412" y="218">Organização</text>
-          <circle cx="470" cy="270" r="12" fill="var(--teal)"/><text x="492" y="278">Materiais</text>
-          <circle cx="680" cy="110" r="12" fill="var(--ink-2)"/><text x="702" y="118">E-mail conectado</text>
-          <circle cx="760" cy="180" r="12" fill="var(--ink-2)"/><text x="782" y="188">Scripts de CAD</text>
-          <circle cx="500" cy="380" r="12" fill="var(--ink-2)"/><text x="522" y="388">Redes</text>
-          <circle cx="780" cy="420" r="12" fill="var(--ink-2)"/><text x="802" y="428">Concorrentes</text>
-        </g>
-      </svg>
-    </div>
-    <div class="stack">
-      <div class="ncard"><span class="n">01</span><h3>Primeiro</h3><p>E-mail colado num arquivo e documentação.</p></div>
-      <div class="ncard"><span class="n">02</span><h3>Depois</h3><p>Organização e levantamento.</p></div>
-      <div class="ncard"><span class="n">03</span><h3>Com tempo</h3><p>Caixa conectada (MCP) e scripts de CAD.</p></div>
-    </div>
+  <header class="head"><div class="eyebrow">No escritório · por onde começar</div><h2 class="title">Comece pelo chato e fácil de conferir.</h2></header>
+  <div class="fig" style="flex:1">
+    <svg viewBox="0 0 1400 600" role="img" aria-labelledby="mx-t mx-d" style="max-height:600px"><title id="mx-t">Matriz esforço por impacto</title><desc id="mx-d">E-mail colado e documentos têm baixo esforço e alto impacto; e-mail conectado e scripts de desenho têm alto impacto e alto esforço; concorrentes têm esforço alto e impacto médio.</desc>
+      <rect x="120" y="20" width="620" height="270" fill="var(--teal-soft)"/>
+      <g stroke="var(--rule-strong)" stroke-width="2"><line x1="120" y1="20" x2="120" y2="560"/><line x1="120" y1="560" x2="1380" y2="560"/><line x1="740" y1="20" x2="740" y2="560" stroke-dasharray="6 6"/><line x1="120" y1="290" x2="1380" y2="290" stroke-dasharray="6 6"/></g>
+      <text class="s t2 mono" x="144" y="60" style="font-size:22px">COMECE AQUI</text>
+      <text class="s m mid" x="750" y="596" style="font-size:24px">esforço →</text>
+      <text class="s m mid" x="50" y="300" style="font-size:24px" transform="rotate(-90 50 300)">impacto →</text>
+      <g class="s" style="font-size:26px">
+        <circle cx="240" cy="110" r="14" fill="var(--teal)"/><text x="266" y="119">E-mail colado</text>
+        <circle cx="320" cy="180" r="14" fill="var(--teal)"/><text x="346" y="189">Documentos</text>
+        <circle cx="520" cy="250" r="14" fill="var(--teal)"/><text x="546" y="259">Tarefas</text>
+        <circle cx="900" cy="100" r="14" fill="var(--ink-2)"/><text x="926" y="109">E-mail conectado</text>
+        <circle cx="1000" cy="180" r="14" fill="var(--ink-2)"/><text x="1026" y="189">Scripts de desenho</text>
+        <circle cx="620" cy="380" r="14" fill="var(--ink-2)"/><text x="646" y="389">Redes</text>
+        <circle cx="1020" cy="420" r="14" fill="var(--ink-2)"/><text x="1046" y="429">Concorrentes</text>
+      </g>
+    </svg>
   </div>
-  <aside class="notes">Posições são estimativas gerais; ajustem à realidade do escritório.</aside>
+  <aside class="notes">Falar: primeiro, e-mail colado num arquivo e documentos. Depois, tarefas e listas. Com tempo, caixa de e-mail conectada e scripts. As posições são estimativas: ajustem com elas à realidade do escritório.</aside>
 </section>
 
 <section class="slide statement" data-t="Vai substituir?">
-  <header class="head"><div class="eyebrow">No escritório · a pergunta que todo mundo faz</div></header>
+  <header class="head"><div class="eyebrow">A pergunta que todo mundo faz</div></header>
   <div class="body">
     <p class="big">Vai substituir arquiteta?</p>
-    <p class="lead xl">Não assina RRT. Não visita obra. Não responde ao CAU.<br><b class="acc">Substitui digitação.</b></p>
+    <p class="lead xl">Não assina. Não visita. Não responde por nada.<br><b class="acc">Substitui digitação.</b></p>
   </div>
-  <aside class="notes">Resposta seca, sem rodeio.</aside>
+  <aside class="notes">Falar: resposta seca, sem rodeio. Deixe elas comentarem.</aside>
 </section>
 
 <section class="slide" data-t="O que não delegar">
-  <header class="head"><div class="eyebrow">No escritório · limites</div><h2 class="title">Deu errado na obra? O CAU não vai multar o ChatGPT.</h2></header>
-  <div class="cols2">
-    <div class="ncard warn"><span class="n">01</span><h3>Responsabilidade técnica</h3><p>Assinatura, RRT, laudos, aprovações legais.</p></div>
-    <div class="ncard warn"><span class="n">02</span><h3>Cálculo estrutural e de instalações</h3><p>Com os profissionais habilitados.</p></div>
-    <div class="ncard warn"><span class="n">03</span><h3>Dados de clientes</h3><p>LGPD: nada de CPF, endereço ou telefone sem necessidade.</p></div>
-    <div class="ncard warn"><span class="n">04</span><h3>Envio sem revisão</h3><p>Nada sai do escritório sem olho humano.</p></div>
+  <header class="head"><div class="eyebrow">No escritório · limites</div><h2 class="title">Deu errado? Ninguém vai culpar o ChatGPT.</h2></header>
+  <div class="trio">
+    <div class="warn"><span class="k">✕</span><p>Assinar e responder.</p></div>
+    <div class="warn"><span class="k">✕</span><p>Dado pessoal de cliente.</p></div>
+    <div class="warn"><span class="k">✕</span><p>Enviar sem revisar.</p></div>
   </div>
-  <aside class="notes">A IA acelera. A responsabilidade não muda de dono.</aside>
+  <aside class="notes">Falar: a responsabilidade técnica continua de vocês. Dado pessoal (documento, endereço, telefone) só se for necessário — LGPD. Nada sai do escritório sem olho humano. Mensagem ③: quem assina é você.</aside>
 </section>
 
 <!-- ================= PARTE 06 ================= -->
-<section class="slide divider" data-t="Parte 06 · Licenciado × open source">
+<section class="slide divider" data-t="Parte 06 · Licenças">
   <div class="sd-top">PARTE 06 <i></i><span class="of">DE 07</span></div>
-  <div class="sd-grid"><div class="sd-num">06</div><div><div class="sd-kick">Próxima seção</div><h2 class="sd-title">Licenciado × open source</h2><div class="sd-rule"></div>
-    <ul class="sd-next"><li class="k">A SEGUIR</li><li><span>→</span>Cofre × planta aberta</li><li><span>→</span>No seu mundo</li><li><span>→</span>Como escolher</li></ul></div></div>
+  <div class="sd-grid"><div class="sd-num">06</div><div><div class="sd-kick">③ Quem assina é você</div><h2 class="sd-title">Licenciado × open source</h2><div class="sd-rule"></div>
+    <ul class="sd-next"><li class="k">A SEGUIR</li><li><span>→</span>Cofre × planta aberta</li><li><span>→</span>No dia a dia</li><li><span>→</span>Como escolher</li></ul></div></div>
   <div class="sd-foot"><span>IA sem hype</span><span>para arquitetas · 2026</span></div>
 </section>
 
-<section class="slide" data-t="Licenciado × open source">
-  <header class="head"><div class="eyebrow">Licenças · definições</div><h2 class="title">Cofre fechado × planta aberta.</h2></header>
+<section class="slide" data-t="Cofre × planta aberta">
+  <header class="head"><div class="eyebrow">Licenças</div><h2 class="title">Cofre fechado × planta aberta.</h2></header>
   <div class="split r">
     <div class="fig">
-      <svg viewBox="0 0 1000 480" role="img" aria-labelledby="lc-t lc-d"><title id="lc-t">Diagrama: cofre e planta aberta</title><desc id="lc-d">À esquerda um cofre fechado representa o software licenciado: você compra a chave e não vê dentro. À direita uma planta baixa aberta representa o open source: qualquer um lê e reforma, conforme a licença.</desc>
+      <svg viewBox="0 0 1000 480" role="img" aria-labelledby="lc-t lc-d"><title id="lc-t">Diagrama: cofre e planta aberta</title><desc id="lc-d">À esquerda um cofre fechado representa o software licenciado: você compra a chave e não vê dentro. À direita uma planta aberta representa o open source: qualquer um lê e modifica, conforme a licença.</desc>
         <rect x="40" y="40" width="380" height="320" rx="18" fill="var(--ink-2)"/><rect x="70" y="70" width="320" height="260" rx="10" fill="none" stroke="#4d555d" stroke-width="3"/>
         <circle cx="230" cy="200" r="64" fill="none" stroke="#c7ccd1" stroke-width="6"/><circle cx="230" cy="200" r="10" fill="#c7ccd1"/><line x1="230" y1="200" x2="270" y2="160" stroke="#c7ccd1" stroke-width="6"/>
-        <text class="s mid" x="230" y="410" style="font-size:28px">Licenciado</text><text class="s m mid" x="230" y="448" style="font-size:22px">compra a chave, não vê dentro</text>
+        <text class="s mid" x="230" y="420" style="font-size:30px">Licenciado</text>
         <g fill="none" stroke="var(--teal)" stroke-width="5"><rect x="580" y="40" width="380" height="320"/><line x1="580" y1="200" x2="760" y2="200"/><line x1="760" y1="40" x2="760" y2="150"/><line x1="760" y1="250" x2="760" y2="360"/><line x1="820" y1="200" x2="960" y2="200"/></g>
-        <path d="M760 150 A50 50 0 0 1 810 200" fill="none" stroke="var(--teal)" stroke-width="2" stroke-dasharray="5 5"/>
-        <text class="s t mid" x="670" y="130" style="font-size:20px">sala</text><text class="s t mid" x="860" y="130" style="font-size:20px">cozinha</text><text class="s t mid" x="670" y="290" style="font-size:20px">quarto</text><text class="s t mid" x="860" y="290" style="font-size:20px">banho</text>
-        <text class="s mid" x="770" y="410" style="font-size:28px">Open source</text><text class="s m mid" x="770" y="448" style="font-size:22px">todos leem e reformam, conforme a licença</text>
+        <text class="s mid" x="770" y="420" style="font-size:30px">Open source</text>
       </svg>
     </div>
     <div class="stack">
-      <div class="ncard"><span class="n">01</span><h3>Licenciado</h3><p>Você paga pelo direito de usar. Código fechado. O fabricante decide preço, versão e fim do suporte.</p></div>
-      <div class="ncard"><span class="n">02</span><h3>Open source</h3><p>Código aberto: ver, usar, modificar — dentro das regras da licença.</p></div>
-      <p class="lead"><mark>Grátis não é open source. Open source não é “sem regra”.</mark></p>
+      <div class="card"><span class="tag">Licenciado</span><h3>Você compra a chave. Não vê dentro.</h3></div>
+      <div class="card num"><span class="tag">Open source</span><h3>Todos veem e podem mudar, conforme a licença.</h3></div>
     </div>
   </div>
-  <aside class="notes">Algumas licenças abertas exigem que melhorias sejam compartilhadas com a mesma licença.</aside>
+  <aside class="notes">Falar: “grátis” não é o mesmo que open source, e open source não é “sem regra” — algumas licenças exigem compartilhar as melhorias. No licenciado, o fabricante decide preço, versão e fim do suporte.</aside>
 </section>
 
 <section class="slide" data-t="Comparando">
   <header class="head"><div class="eyebrow">Licenças · comparação</div><h2 class="title">Não existe “o melhor”. Existe “serve pra isso”.</h2></header>
   <table class="tbl">
-    <tr><th>Critério</th><th>Licenciado</th><th class="h">Open source</th></tr>
-    <tr><td>Custo</td><td>Assinatura ou licença</td><td class="h">Sem licença; custa tempo e suporte</td></tr>
-    <tr><td>Suporte</td><td>Do fabricante</td><td class="h">Comunidade ou empresa contratada</td></tr>
-    <tr><td>Controle</td><td>Limitado</td><td class="h">Alto</td></tr>
-    <tr><td>Privacidade</td><td>Depende do contrato</td><td class="h">Pode rodar no seu computador</td></tr>
-    <tr><td>Dependência</td><td>Do fabricante</td><td class="h">Menor</td></tr>
-    <tr><td>Facilidade</td><td>Geralmente maior</td><td class="h">Varia muito</td></tr>
+    <tr><th></th><th>Licenciado</th><th class="h">Open source</th></tr>
+    <tr><td>Custo</td><td>assinatura</td><td class="h">tempo e suporte</td></tr>
+    <tr><td>Controle</td><td>do fabricante</td><td class="h">seu</td></tr>
+    <tr><td>Facilidade</td><td>maior</td><td class="h">varia</td></tr>
   </table>
-  <aside class="notes">A pergunta certa é: para esta tarefa, com este dado, qual serve?</aside>
+  <aside class="notes">Falar: a pergunta certa é “para esta tarefa, com este dado, qual serve?”. Outras diferenças: suporte (fabricante × comunidade), privacidade (open source pode rodar no seu computador), dependência do fornecedor.</aside>
 </section>
 
-<section class="slide" data-t="No seu mundo">
-  <header class="head"><div class="eyebrow">Licenças · no seu mundo</div><h2 class="title">No projeto e na IA, os dois mundos existem.</h2></header>
-  <div class="cols2">
-    <div class="card"><span class="tag">Projeto</span><p><b>Licenciado:</b> AutoCAD, Revit, SketchUp.</p><p><b>Aberto:</b> FreeCAD, LibreCAD, Blender + Bonsai (BIM), QGIS.</p></div>
-    <div class="card"><span class="tag">IA</span><p><b>Fechados, na nuvem:</b> GPT, Claude, Gemini, Grok.</p><p><b>Pesos abertos, no seu PC:</b> gpt-oss, Qwen, Mistral, Llama — via Ollama ou LM Studio.</p></div>
-  </div>
-  <p class="lead">“Pesos abertos” = dá para baixar e rodar. Nem sempre é open source: o Llama, por exemplo, tem licença própria com restrições.</p>
-  <aside class="notes">Opcional. Modelos locais são mais fracos que os de ponta, mas o dado não sai de casa.</aside>
+<section class="slide" data-t="No dia a dia">
+  <header class="head"><div class="eyebrow">Licenças · no dia a dia</div><h2 class="title">Os dois mundos já estão no seu computador.</h2></header>
+  <table class="tbl">
+    <tr><th>Para</th><th>Licenciado</th><th class="h">Aberto</th></tr>
+    <tr><td>Texto</td><td>Word</td><td class="h">LibreOffice</td></tr>
+    <tr><td>Imagem</td><td>Photoshop</td><td class="h">GIMP</td></tr>
+    <tr><td>IA</td><td>ChatGPT</td><td class="h">modelo no seu PC</td></tr>
+  </table>
+  <aside class="notes">Opcional. Falar: existe o mesmo para desenho técnico (ex.: FreeCAD) — elas conhecem melhor. Na IA, modelos de “pesos abertos” (gpt-oss, Qwen, Mistral, Llama) rodam no PC via Ollama ou LM Studio: mais fracos que os de ponta, mas o dado não sai de casa. “Pesos abertos” nem sempre é open source: o Llama tem licença própria.</aside>
 </section>
 
-<section class="slide" data-t="Como escolher">
-  <header class="head"><div class="eyebrow">Licenças · como escolher</div><h2 class="title">Dado de cliente? Ou roda local, ou leia o contrato.</h2></header>
-  <div class="split">
-    <div class="stack">
-      <div class="ncard"><span class="n">01</span><h3>Dado sensível</h3><p>Local, ou plano com contrato de privacidade claro.</p></div>
-      <div class="ncard"><span class="n">02</span><h3>Tarefa difícil</h3><p>Costuma pedir modelo de ponta (fechado).</p></div>
-      <div class="ncard"><span class="n">03</span><h3>Muito volume</h3><p>Pode compensar rodar local.</p></div>
-      <div class="ncard"><span class="n">04</span><h3>Quebrou, quem responde?</h3><p>Suporte e prazo contam.</p></div>
-    </div>
-    <div class="card fill"><span class="tag">Exemplo híbrido</span><h3>O Codex CLI é open source (Apache-2.0) e usa modelos fechados da OpenAI.</h3><p>Com <code>codex --oss</code> ele também roda modelos locais (Ollama, LM Studio).</p></div>
+<section class="slide statement" data-t="Como escolher">
+  <header class="head"><div class="eyebrow">Licenças · como escolher</div></header>
+  <div class="body">
+    <p class="big">Dado de cliente?<br><span class="acc">Ou roda no seu PC, ou leia o contrato.</span></p>
   </div>
-  <aside class="notes">O app e a nuvem do Codex não são necessariamente abertos; o programa de terminal é.</aside>
+  <aside class="notes">Falar: tarefa difícil costuma pedir modelo de ponta (fechado); muito volume pode compensar rodar local; e pensem em quem responde se quebrar. Exemplo híbrido: o Codex CLI é open source (Apache-2.0) e usa modelos fechados da OpenAI — e com “codex --oss” também roda modelos locais.</aside>
 </section>
 <!-- ================= PARTE 07 ================= -->
 <section class="slide divider" data-t="Parte 07 · Codex">
   <div class="sd-top">PARTE 07 <i></i><span class="of">DE 07</span></div>
-  <div class="sd-grid"><div class="sd-num">07</div><div><div class="sd-kick">Próxima seção</div><h2 class="sd-title">Codex na prática</h2><div class="sd-rule"></div>
-    <ul class="sd-next"><li class="k">A SEGUIR</li><li><span>→</span>Anatomia da pasta</li><li><span>→</span>Configurar em 5 passos</li><li><span>→</span>Demo e regras da casa</li></ul></div></div>
+  <div class="sd-grid"><div class="sd-num">07</div><div><div class="sd-kick">② + ③ na prática</div><h2 class="sd-title">Codex na prática</h2><div class="sd-rule"></div>
+    <ul class="sd-next"><li class="k">A SEGUIR</li><li><span>→</span>A pasta do projeto</li><li><span>→</span>Configurar em 5 passos</li><li><span>→</span>Regras da casa</li></ul></div></div>
   <div class="sd-foot"><span>IA sem hype</span><span>para arquitetas · 2026</span></div>
 </section>
 
-<section class="slide" data-t="Codex">
-  <header class="head"><div class="eyebrow">Codex · o que é</div><h2 class="title">O Codex é o harness que vamos configurar.</h2></header>
-  <div class="split">
-    <div class="stack">
-      <p class="lead">Agente da OpenAI que trabalha com <b>arquivos</b> — não só código. Roda como app, como extensão do VS Code ou no terminal.</p>
-      <div class="card num"><span class="tag">Dever de casa (antes da aula)</span><ul class="list"><li>Instalar o app do Codex ou a extensão do VS Code</li><li>Fazer login com a conta do ChatGPT (confira se o plano inclui o Codex)</li><li>Travou? Manda print.</li></ul></div>
-    </div>
-    <div class="term"><div class="bar"><i></i><i></i><i></i>&nbsp;terminal (opcional)</div><pre><span class="c"># pasta do projeto</span>
-cd C:\Projetos\casa-lago
-codex
-
-<span class="c"># instalação e login: codex-kit/README.md</span></pre></div>
+<section class="slide statement" data-t="Codex">
+  <header class="head"><div class="eyebrow">Codex</div></header>
+  <div class="body">
+    <p class="big">Codex: o harness<br><span class="acc">que vamos configurar.</span></p>
+    <p class="lead">Trabalha com arquivos, não só com código.</p>
   </div>
-  <aside class="notes">Não precisa de terminal nem Node.js para começar: app ou extensão resolvem. Os passos mudam; a página oficial é a fonte.</aside>
+  <aside class="notes">Falar: é o agente da OpenAI; roda como app, extensão do VS Code ou no terminal. Dever de casa antes da aula: instalar o app ou a extensão e fazer login com a conta do ChatGPT (conferir se o plano inclui o Codex). Travou? Manda print. Não precisa de terminal para começar. Passo a passo: codex-kit/README.md.</aside>
 </section>
 
-<section class="slide" data-t="Anatomia da pasta">
-  <header class="head"><div class="eyebrow">Codex · anatomia</div><h2 class="title">A pasta do projeto é uma planta baixa.</h2></header>
+<section class="slide" data-t="A pasta do projeto">
+  <header class="head"><div class="eyebrow">Codex · a pasta</div><h2 class="title">Uma pasta organizada como um escritório.</h2></header>
   <div class="split r">
     <div class="fig">
-      <svg viewBox="0 0 1000 600" role="img" aria-labelledby="pl-t pl-d"><title id="pl-t">Planta baixa da pasta do projeto</title><desc id="pl-d">A pasta entrada é a recepção, saida é a expedição, projetos é o arquivo trancado, AGENTS.md é o quadro de regras na parede e skills é a estante de cadernos.</desc>
+      <svg viewBox="0 0 1000 600" role="img" aria-labelledby="pl-t pl-d"><title id="pl-t">A pasta do projeto como um escritório</title><desc id="pl-d">A pasta entrada é a gaveta de entrada, saida é a gaveta de saída, projetos é o arquivo trancado, AGENTS.md é o manual na parede e skills é a gaveta de receitas.</desc>
         <g fill="none" stroke="var(--ink)" stroke-width="6"><rect x="20" y="20" width="960" height="540"/><line x1="380" y1="20" x2="380" y2="230"/><line x1="380" y1="320" x2="380" y2="560"/><line x1="20" y1="300" x2="300" y2="300"/><line x1="680" y1="20" x2="680" y2="300"/><line x1="460" y1="300" x2="980" y2="300"/></g>
-        <rect x="26" y="26" width="348" height="268" fill="var(--paper)"/><text class="s mid" x="200" y="140">entrada/</text><text class="s m mid" x="200" y="176" style="font-size:22px">recepção: o que você entrega</text>
-        <rect x="26" y="306" width="348" height="248" fill="var(--paper)"/><text class="s mid" x="200" y="420">saida/</text><text class="s m mid" x="200" y="456" style="font-size:22px">expedição: o que a IA gera</text>
-        <rect x="386" y="26" width="288" height="268" fill="var(--paper)"/><text class="s mid" x="530" y="140">.agents/skills/</text><text class="s m mid" x="530" y="176" style="font-size:22px">estante de cadernos</text>
-        <rect x="686" y="26" width="288" height="268" fill="var(--clay-soft)" stroke="var(--clay)" stroke-width="3"/><text class="s ci mid" x="830" y="140">projetos/</text><text class="s ci mid" x="830" y="176" style="font-size:22px">arquivo trancado</text>
-        <g transform="translate(810 200)"><rect x="0" y="16" width="40" height="30" rx="5" fill="var(--clay-ink)"/><path d="M8 16V9a12 12 0 0 1 24 0v7" fill="none" stroke="var(--clay-ink)" stroke-width="4"/></g>
+        <rect x="26" y="26" width="348" height="268" fill="var(--paper)"/><text class="s mid" x="200" y="150" style="font-size:30px">entrada/</text><text class="s m mid" x="200" y="190" style="font-size:24px">o que você entrega</text>
+        <rect x="26" y="306" width="348" height="248" fill="var(--paper)"/><text class="s mid" x="200" y="420" style="font-size:30px">saida/</text><text class="s m mid" x="200" y="460" style="font-size:24px">o que a IA gera</text>
+        <rect x="386" y="26" width="288" height="268" fill="var(--paper)"/><text class="s mid" x="530" y="150" style="font-size:30px">skills/</text><text class="s m mid" x="530" y="190" style="font-size:24px">receitas</text>
+        <rect x="686" y="26" width="288" height="268" fill="var(--clay-soft)" stroke="var(--clay)" stroke-width="3"/><text class="s ci mid" x="830" y="150" style="font-size:30px">projetos/</text><text class="s ci mid" x="830" y="190" style="font-size:24px">trancado</text>
+        <g transform="translate(810 210)"><rect x="0" y="16" width="40" height="30" rx="5" fill="var(--clay-ink)"/><path d="M8 16V9a12 12 0 0 1 24 0v7" fill="none" stroke="var(--clay-ink)" stroke-width="4"/></g>
         <rect x="386" y="306" width="588" height="248" fill="var(--paper)"/>
-        <rect x="560" y="330" width="260" height="60" rx="6" fill="var(--teal)"/><text class="s w mid" x="690" y="369">AGENTS.md</text><text class="s m mid" x="690" y="430" style="font-size:22px">quadro de regras na parede</text>
-        <text class="s m mid" x="690" y="500" style="font-size:20px">área de trabalho da IA (o cercadinho)</text>
+        <rect x="560" y="350" width="260" height="64" rx="6" fill="var(--teal)"/><text class="s w mid" x="690" y="392" style="font-size:30px">AGENTS.md</text><text class="s m mid" x="690" y="460" style="font-size:24px">o manual na parede</text>
       </svg>
     </div>
-    <div class="term tree"><div class="bar"><i></i><i></i><i></i>&nbsp;casa-lago/</div><pre>casa-lago/
-├── AGENTS.md     <span class="c">← regras</span>
-├── .agents/
-│   └── skills/   <span class="c">← cadernos</span>
-├── entrada/      <span class="c">← você entrega</span>
-├── saida/        <span class="c">← a IA gera</span>
-└── projetos/     <span class="c">← intocável</span>
-
-C:\Users\SeuNome\.codex\
-└── config.toml   <span class="c">← cinto e tomadas</span></pre></div>
+    <div class="body center"><p class="big md">Entra, sai,<br>e o que é sagrado<br><span class="acc">fica trancado.</span></p></div>
   </div>
-  <aside class="notes">Tudo isso está pronto em codex-kit/. É copiar e editar.</aside>
+  <aside class="notes">Falar: entrada/ é o que vocês entregam; saida/ é o que a IA gera; projetos/ é intocável; AGENTS.md é o manual; as skills ficam numa pasta própria (.agents/skills). Configuração geral: C:\Users\SeuNome\.codex\config.toml. Tudo pronto no codex-kit/.</aside>
 </section>
 
 <section class="slide" data-t="Configurando">
   <header class="head"><div class="eyebrow">Codex · configurar</div><h2 class="title">Configurar em cinco passos.</h2></header>
-  <div class="split">
-    <ol class="list">
-      <li>Instalar o app ou a extensão e logar.</li>
-      <li>Copiar <code>AGENTS.md</code> para a pasta do projeto e editar.</li>
-      <li>Copiar <code>config.toml</code> para <code>C:\Users\SeuNome\.codex\</code>.</li>
-      <li>Copiar as skills para <code>C:\Users\SeuNome\.agents\skills\</code>.</li>
-      <li>Nível 2, outro dia: um conector (MCP) somente leitura e um hook.</li>
-    </ol>
-    <div class="stack">
-      <div class="term"><div class="bar"><i></i><i></i><i></i>&nbsp;config.toml</div><pre>approval_policy = <span class="g">"on-request"</span>
-sandbox_mode    = <span class="g">"workspace-write"</span></pre></div>
-      <div class="ncard warn"><span class="n">!</span><h3>Windows</h3><p>No Explorador: Exibir → Mostrar → <b>Itens ocultos</b> e <b>Extensões</b>. Senão vira <code>config.toml.txt</code>.</p></div>
-      <p class="note">Chamar uma skill: <code>$triagem-email</code> · listar: <code>/skills</code></p>
-    </div>
+  <div class="body center">
+    <div class="flow"><span class="chip">1 instalar</span><span class="arrow">→</span><span class="chip">2 manual</span><span class="arrow">→</span><span class="chip">3 cinto</span><span class="arrow">→</span><span class="chip">4 receitas</span><span class="arrow">→</span><span class="chip a">5 testar</span></div>
   </div>
-  <aside class="notes">Nos textos técnicos, “~” quer dizer a sua pasta de usuário (C:\Users\SeuNome). Hooks novos só funcionam depois de aprovados com /hooks.</aside>
-</section>
-
-<section class="slide" data-t="Demo">
-  <header class="head"><div class="eyebrow">Codex · demo</div><h2 class="title">Demo: plano, “posso?”, arquivo, conferência.</h2></header>
-  <div class="split">
-    <div class="term"><div class="bar"><i></i><i></i><i></i>&nbsp;codex · recriação ilustrativa</div><pre><span class="p">você&gt;</span> $triagem-email em entrada/emails.txt.
-       Mostre o plano antes. Só rascunhos.
-<span class="g">codex&gt;</span> Plano:
-       1. ler 5 e-mails
-       2. classificar e dar urgência
-       3. rascunhar 3 respostas
-<span class="p">você&gt;</span> pode ir
-<span class="g">codex&gt;</span> Criar saida/triagem-2026-11-05.md?
-       [s] sim  [n] não
-<span class="p">você&gt;</span> s</pre></div>
-    <div class="stack">
-      <div class="ph"><div><b>Captura real · substituir</b>Prompt de aprovação do Codex<br>com dados fictícios</div></div>
-      <p class="note">Depois: <code>$levantamento-materiais</code> com ambientes.csv e <code>$apoio-cad</code> com planta.dxf.</p>
-    </div>
-  </div>
-  <aside class="notes">Mostre o plano, o pedido de aprovação, o arquivo gerado, e confira dois números à mão. Plano B: tenha a gravação ou os prints da demo prontos — demo ao vivo falha.</aside>
+  <aside class="notes">Falar: 1) instalar o app ou a extensão e logar; 2) copiar o AGENTS.md para a pasta do projeto e editar; 3) copiar o config.toml para C:\Users\SeuNome\.codex\ (approval_policy = "on-request", sandbox_mode = "workspace-write"); 4) copiar as skills para C:\Users\SeuNome\.agents\skills\; 5) testar com os exemplos. No Windows, ativar no Explorador “Itens ocultos” e “Extensões”, senão vira config.toml.txt. Chamar skill: $triagem-email; listar: /skills. Conectores (MCP) e hooks ficam para outro dia.</aside>
 </section>
 
 <section class="slide" data-t="Regras da casa">
-  <header class="head"><div class="eyebrow">Codex · orquestração</div><h2 class="title">Regras da casa.</h2></header>
-  <div class="cols2">
-    <ul class="list"><li>Uma tarefa clara por conversa.</li><li>Peça o <b>plano</b> antes de executar.</li><li>Etapas com critério de “pronto”.</li><li>Cópia de segurança antes de mexer.</li></ul>
-    <ul class="list"><li><b>Abra e confira</b> o arquivo, sempre.</li><li>Paralelo só no que é independente.</li><li>Prancheta enxuta: skills, não colar tudo.</li><li>Repetiu? Vira skill. Aprendeu? Vai pro AGENTS.md.</li></ul>
+  <header class="head"><div class="eyebrow">Codex · regras da casa</div><h2 class="title">Regras da casa.</h2></header>
+  <div class="trio">
+    <div><span class="k">1</span><p>Uma tarefa por conversa.</p></div>
+    <div><span class="k">2</span><p>Plano antes de agir.</p></div>
+    <div><span class="k">3</span><p>Abra e confira. Sempre.</p></div>
   </div>
-  <p class="note">Receitas de sequencial, paralelo e aprovação: codex-kit/orquestracao.md</p>
-  <aside class="notes">Prática: duas sessões em paralelo (concorrentes + e-mails) e uma cadeia sequencial (briefing → memorial → materiais), aprovando entre as etapas.</aside>
+  <aside class="notes">Falar: mais regras no kit: cópia de segurança antes de mexer; ao mesmo tempo só o que é independente; prancheta enxuta; o que se repete vira skill; o que aprendeu vai pro AGENTS.md. Receitas em codex-kit/orquestracao.md.</aside>
 </section>
 
-<section class="slide" data-t="Antipadrões">
-  <header class="head"><div class="eyebrow">Codex · antipadrões</div><h2 class="title">Os erros do “pede e torce”.</h2></header>
+<section class="slide" data-t="O vilão volta">
+  <header class="head"><div class="eyebrow">Codex · o vilão volta</div><h2 class="title">Os erros do “pede e torce”.</h2></header>
   <table class="tbl">
     <tr><th>Não faça</th><th class="h">Faça</th></tr>
-    <tr><td>Pedido gigante e vago</td><td class="h">Papel, contexto, formato, “pronto”</td></tr>
-    <tr><td>Aceitar sem ler</td><td class="h">Abrir o arquivo e conferir contas</td></tr>
-    <tr><td>Conversa infinita</td><td class="h">Nova conversa por assunto + resumo</td></tr>
-    <tr><td>Acesso total no dia 1</td><td class="h">Somente leitura, aprovação, cercadinho</td></tr>
-    <tr><td>Repetir o mesmo pedido toda semana</td><td class="h">Virar skill</td></tr>
+    <tr><td>Pedido vago</td><td class="h">Contexto, formato, “pronto”</td></tr>
+    <tr><td>Aceitar sem ler</td><td class="h">Abrir e conferir</td></tr>
+    <tr><td>Acesso total no dia 1</td><td class="h">Cercadinho e “posso?”</td></tr>
   </table>
-  <aside class="notes">Fecha o bloco prático.</aside>
+  <aside class="notes">Falar: também — conversa infinita (abra uma nova por assunto) e repetir o mesmo pedido toda semana (vire skill).</aside>
 </section>
 
 <section class="slide" data-t="Semana 1">
-  <header class="head"><div class="eyebrow">Fechamento · próximos passos</div><h2 class="title">Sua semana 1.</h2></header>
-  <div class="split">
-    <ol class="list">
-      <li>Codex instalado e logado.</li>
-      <li>Kit copiado; <code>AGENTS.md</code> editado com as regras de vocês.</li>
-      <li>Triagem com <code>exemplos/emails.txt</code>.</li>
-      <li>Levantamento com <code>exemplos/ambientes.csv</code>.</li>
-      <li>Anotar <b>3 tarefas que vocês repetem</b>.</li>
-    </ol>
-    <div class="card fill"><span class="tag">Semana 2</span><h3>A gente transforma uma dessas tarefas na primeira skill de vocês.</h3></div>
+  <header class="head"><div class="eyebrow">Próximos passos</div><h2 class="title">Sua semana 1.</h2></header>
+  <div class="trio">
+    <div><span class="k">1</span><p>Instalar e logar.</p></div>
+    <div><span class="k">2</span><p>Rodar os exemplos do kit.</p></div>
+    <div><span class="k">3</span><p>Anotar 3 tarefas que vocês repetem.</p></div>
   </div>
-  <aside class="notes">Pequeno e concreto. Combinar uma data para trocar experiências.</aside>
+  <aside class="notes">Falar: na semana 2, a gente transforma uma dessas tarefas na primeira skill de vocês. Combinar uma data.</aside>
+</section>
+
+<section class="slide dark statement" data-t="Mais uma coisa">
+  <div class="body"><p class="quote">Mais uma coisa…</p></div>
+  <aside class="notes">Falar: pausa. “Vamos ver isso funcionando.”</aside>
+</section>
+
+<section class="slide" data-t="Demo">
+  <header class="head"><div class="eyebrow">Demo</div><h2 class="title">Plano, “posso?”, arquivo pronto.</h2></header>
+  <div class="split">
+    <div class="term"><div class="bar"><i></i><i></i><i></i>&nbsp;codex · recriação ilustrativa</div><pre><span class="p">você&gt;</span> $triagem-email em entrada/emails.txt.
+       Mostre o plano antes. Só rascunhos.
+<span class="g">codex&gt;</span> Plano: 1. ler  2. priorizar
+       3. rascunhar respostas
+<span class="p">você&gt;</span> pode ir
+<span class="g">codex&gt;</span> Criar saida/triagem.md?  [s/n]
+<span class="p">você&gt;</span> s</pre></div>
+    <div class="ph"><div><b>Captura real · substituir</b>Pedido de aprovação do Codex<br>com dados fictícios</div></div>
+  </div>
+  <aside class="notes">Falar: mostre o plano, o pedido de aprovação, o arquivo gerado e confira uma resposta. Depois, se der tempo: $levantamento-materiais com exemplos/ambientes.csv. Plano B: tenha prints ou gravação prontos — demo ao vivo falha.</aside>
 </section>
 
 <section class="slide dark statement" data-t="Fim">
   <div class="body">
-    <p class="quote md">Gerador de texto glorificado? Sim.<br><span class="acc">Bem amarrado, tira muito trabalho chato. Quem assina continua sendo você.</span></p>
+    <div class="trio dark-trio">
+      <div><span class="k">①</span><p>É um gerador de texto.</p></div>
+      <div><span class="k">②</span><p>O poder está no que vai em volta.</p></div>
+      <div><span class="k">③</span><p>Quem assina é você.</p></div>
+    </div>
     <p class="by">Perguntas?</p>
   </div>
-  <aside class="notes">Volta à frase de abertura: ele tem razão no mecanismo. A diferença está no que vocês colocam em volta.</aside>
+  <aside class="notes">Falar: volte à frase de abertura — “gerador de texto glorificado? Sim. Bem amarrado, tira muito trabalho chato.” Repita as três mensagens e abra para perguntas.</aside>
 </section>
 
 </main></div>
@@ -1327,10 +1137,10 @@ function pad(n){return (n<10?"0":"")+n}
 
 /* ---------- diagrama do harness (mesmo desenho, uma camada acesa) ---------- */
 var HX=[
-  {k:"rules",x:330,y:84,w:340,h:116,t:"Rules",s:"manual de padrões"},
-  {k:"skills",x:50,y:262,w:270,h:116,t:"Skills",s:"cadernos"},
+  {k:"rules",x:330,y:84,w:340,h:116,t:"Rules",s:"manual"},
+  {k:"skills",x:50,y:262,w:270,h:116,t:"Skills",s:"receitas"},
   {k:"hooks",x:680,y:262,w:270,h:116,t:"Hooks",s:"trava automática"},
-  {k:"mcp",x:330,y:440,w:340,h:116,t:"MCP",s:"tomada padrão"}
+  {k:"mcp",x:330,y:440,w:340,h:116,t:"MCP",s:"tomada universal"}
 ];
 function harness(on){
   var any=on!=="none"&&on!=="all",o='<svg viewBox="0 0 1000 640" role="img" aria-label="Diagrama do harness: modelo no centro cercado por rules, skills, hooks e MCP, dentro do cercadinho (sandbox)'+(any?"; em destaque: "+on:"")+'">';
@@ -1381,7 +1191,7 @@ function show(n,fromHash){
   if(!fromHash){try{history.replaceState(null,"","#"+(n+1))}catch(e){}}
   var a=slides[n].querySelector("aside.notes");
   $("notes").innerHTML="<b>Notas · "+pad(n+1)+" · "+(slides[n].getAttribute("data-t")||"")+"</b>";
-  $("notes").appendChild(document.createTextNode(a?a.textContent.trim():"(sem notas)"));
+  $("notes").appendChild(document.createTextNode(a?a.textContent.trim().replace(/\s*\|\|\s*/g,"\n\n"):"(sem notas)"));
   [].forEach.call(ov.children,function(b,k){b.classList.toggle("cur",k===n)});
 }
 function fromHash(){var h=parseInt(location.hash.slice(1),10);show(isNaN(h)?0:h-1,true)}
@@ -1446,7 +1256,7 @@ function tkRender(){
 $("tk-in").addEventListener("input",tkRender);tkRender();
 
 /* ---------- prancheta (janela de contexto) ---------- */
-var ITEMS=[["regras","#cfe6e8",1],["conversa","#dde3ea",2],["sua pergunta","#f3e6c4",1],["planta.pdf","#f6dccf",3],["memorial","#e4ecd6",2],["e-mails","#e6e1f2",2],["resposta","#dde3ea",2]];
+var ITEMS=[["regras","#cfe6e8",1],["conversa","#dde3ea",2],["sua pergunta","#f3e6c4",1],["PDF longo","#f6dccf",3],["planilha","#e4ecd6",2],["e-mails","#e6e1f2",2],["resposta","#dde3ea",2]];
 var CAP=10,desk=[],fallen=[],n=0;
 function used(){return desk.reduce(function(a,x){return a+x[2]},0)}
 function deskRender(){
@@ -1462,12 +1272,11 @@ function reset(){desk=[];fallen=[];n=0;add();add();add()}
 $("desk-add").onclick=add;$("desk-reset").onclick=reset;reset();
 
 /* ---------- inferência ---------- */
-var DIST={exigir:[["demolição",.31],["nova",.24],["licença",.2],["reforço",.13],["paciência",.12]],
-"demolição":[["parcial",.45],["da",.3],["cuidadosa",.25]],nova:[["instalação",.35],["tubulação",.3],["bancada",.2],["licença",.15]],
-licença:[["da",.5],["na",.3],["do",.2]],reforço:[["estrutural",.6],["na",.25],["de",.15]],paciência:[[".",.5],["e",.3],["com",.2]],
-parcial:[["da",.5],["de",.3],["e",.2]],instalação:[["elétrica",.5],["hidráulica",.4],["de",.1]],tubulação:[["nova",.4],["de",.35],["hidráulica",.25]],
-bancada:[["de",.6],["nova",.25],["e",.15]]};
-var BASE="A reforma da cozinha vai exigir",txt=BASE,busy=false,DEF=[[".",.4],["e",.3],["de",.2],["com",.1]];
+var DIST={vou:[["jantar",.34],["dormir",.25],["ver",.22],["sair",.12],["trabalhar",.07]],
+jantar:[["fora",.5],["com",.3],["em",.2]],dormir:[["cedo",.6],["tarde",.25],["no",.15]],ver:[["uma",.45],["série",.35],["o",.2]],
+sair:[["com",.5],["para",.3],["cedo",.2]],trabalhar:[["até",.5],["em",.3],["mais",.2]],fora:[[".",.5],["com",.3],["e",.2]],
+uma:[["série",.6],["comédia",.25],["partida",.15]],"série":[[".",.5],["nova",.3],["com",.2]],cedo:[[".",.6],["e",.25],["hoje",.15]]};
+var BASE="Hoje à noite eu vou",txt=BASE,busy=false,DEF=[[".",.4],["e",.3],["de",.2],["com",.1]];
 function dist(){return DIST[txt.split(" ").pop()]||DEF}
 function infRender(pick){
   $("inf-text").textContent=txt;var b=$("inf-bars");b.innerHTML="";b.classList.toggle("lose",pick!=null);
