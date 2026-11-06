@@ -24,6 +24,8 @@ Modelos prontos para configurar o **harness** (rules, skills, MCP, hooks) no Cod
 6. **MCP** (conectores): descomente só o que for usar em `config.toml`. Comece somente-leitura.
 7. **Hooks**: copie `hooks/hooks.json` para `~/.codex/hooks.json` e `hooks/bloquear_apagar.py` para `~/.codex/hooks/`. Abra o Codex, rode `/hooks` e **aprove** o hook — sem aprovação ele não roda; se editar, aprove de novo. Precisa de Python instalado (no Windows, o comando `py`). Se o script falhar, o Codex libera a ação: hook é trava extra, não substitui cópia de segurança.
 8. Scripts de CAD/planilha em Python: `pip install ezdxf openpyxl`.
+   - `exemplos/gerar_levantamento.py` gera uma planilha real com fórmulas a partir de `ambientes.csv`.
+   - `exemplos/freecad_apto.py` desenha no FreeCAD (open source) a planta de um apartamento com portas, janelas e móveis, e calcula as áreas.
 
 ## Recortes reais para a apresentação
 O deck tem 3 espaços marcados "Captura real — substituir". Para capturar:

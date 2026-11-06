@@ -12,7 +12,7 @@ description: Apoia o trabalho em AutoCAD/BricsCAD/progeCAD escrevendo scripts de
 
 ## Passos
 1. Trabalhe só em **cópia** do arquivo (`saida/`). Nunca em `.dwg`/`.dxf` original.
-2. Para DXF use Python com `ezdxf` (instale com `pip install ezdxf` se faltar).
+2. Para DXF use Python com `ezdxf` (instale com `pip install ezdxf` se faltar). No FreeCAD, gere macros Python (modelo: `exemplos/freecad_apto.py`).
 3. Entregue o script + instrução "como rodar" + o que ele altera.
 4. Rode em arquivo de teste e mostre antes/depois.
 
