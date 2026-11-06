@@ -22,15 +22,15 @@ Abra `index.html` no navegador — funciona offline, sem instalar nada.
 
 O palco é 1920×1080 e se ajusta ao projetor. No celular (ou em retrato) os slides se reorganizam em coluna.
 
-São 80 slides curtos (7 partes), com 7 demos, com a demo do Codex no fim, como "mais uma coisa…". Para caber em ~60 min, pule os marcados como **opcional** nas notas (mapa da IA, fabricantes, concorrentes, "no dia a dia").
+São 59 slides curtos (7 partes), com 7 demos, com a demo do Codex no fim, como "mais uma coisa…". Cabe em ~60 min com as demos e perguntas.
 
 Os exemplos são do dia a dia (teclado do celular, jantar, livro, planilha). O detalhe de arquitetura fica com elas: as notas sugerem perguntas para devolver à plateia, e as skills do `codex-kit/` trazem o passo a passo técnico.
 
 ## Demos
-Sete demos ao longo do deck: harness (trava em ação), skill, e-mail, planilha real no LibreOffice, planta e 3D no FreeCAD, e o Codex no fim. As demos animadas tocam sozinhas ao entrar no slide (botão "Ver de novo"); os vídeos tocam em loop. Versões avulsas em `demos/`.
+Sete demos ao longo do deck: skill, harness (trava em ação), e-mail, planilha real no LibreOffice, Codex (ata → tarefas) e, como "mais uma coisa…" no final, a planta técnica e o 3D no FreeCAD. As demos animadas tocam sozinhas ao entrar no slide (botão "Ver de novo"); os vídeos tocam em loop. Versões avulsas em `demos/`.
 
-## Recortes reais para capturar
-O slide da demo tem um espaço tracejado "Captura real · substituir" para o pedido de aprovação do Codex. Veja as regras de captura em `codex-kit/README.md`. Todas as outras telas do deck são **recriações ilustrativas** marcadas "exemplo fictício".
+## Simulações e capturas reais
+Planilha e FreeCAD são capturas reais. As telas de Codex, e-mail, skill e harness são **simulações** fiéis, marcadas como tal; se quiser, troque por capturas suas (regras em `codex-kit/README.md`).
 
 ## Kit
 `codex-kit/` — AGENTS.md, config.toml, skills, hooks e exemplos fictícios. Veja o README dentro da pasta.
