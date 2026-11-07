@@ -22,7 +22,7 @@ Abra `index.html` no navegador — funciona offline, sem instalar nada.
 
 O palco é 1920×1080 e se ajusta ao projetor. No celular (ou em retrato) os slides se reorganizam em coluna.
 
-São 70 slides curtos (8 partes), com 9 demos e o FreeCAD como "mais uma coisa…" no final. As Partes 1–7 cabem em ~60 min com as demos e perguntas; a **Parte 8 (hands-on de skills e plugins)** soma ~25 min e pode virar uma oficina à parte.
+São 76 slides curtos (8 partes), com 10 demos (inclui rotinas agendadas e o pipeline briefing → render) e o FreeCAD como "mais uma coisa…" no final. As Partes 1–7 cabem em ~60 min com as demos e perguntas; a **Parte 8 (hands-on de skills e plugins)** soma ~25 min e pode virar uma oficina à parte.
 
 Os exemplos são do dia a dia (teclado do celular, jantar, livro, planilha). O detalhe de arquitetura fica com elas: as notas sugerem perguntas para devolver à plateia, e as skills do `codex-kit/` trazem o passo a passo técnico.
 

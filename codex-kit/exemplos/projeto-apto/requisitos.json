@@ -1,0 +1,24 @@
+{
+  "_comentario": "Requisitos EXTRAÍDOS do briefing.md pela IA (revisados pela arquiteta). É o que o script de validação confere. Tipos de móvel = nomes do catálogo.",
+  "circulacao_minima_m": 0.80,
+  "areas_minimas_m2": {"suite": 12.0, "home_office": 9.0, "sala_cozinha": 40.0},
+  "itens_obrigatorios": [
+    {"ambiente": "sala_cozinha", "tipo": "sofa3", "min": 1, "origem": "sofá de 3 lugares"},
+    {"ambiente": "sala_cozinha", "tipo": "tv", "min": 1, "origem": "TV 55\""},
+    {"ambiente": "sala_cozinha", "tipo": "cadeira_jantar", "min": 6, "origem": "mesa para 6 pessoas"},
+    {"ambiente": "sala_cozinha", "tipo": "mesa_jantar", "min": 1, "origem": "mesa de jantar"},
+    {"ambiente": "sala_cozinha", "tipo": "ilha", "min": 1, "origem": "ilha"},
+    {"ambiente": "sala_cozinha", "tipo": "banqueta", "min": 3, "origem": "3 banquetas"},
+    {"ambiente": "sala_cozinha", "tipo": "geladeira", "min": 1, "origem": "geladeira duplex"},
+    {"ambiente": "sala_cozinha", "tipo": "bancada", "min": 1, "origem": "bancada com cooktop e pia"},
+    {"ambiente": "suite", "tipo": "cama_queen", "min": 1, "origem": "cama queen"},
+    {"ambiente": "suite", "tipo": "guarda_roupa", "min": 1, "origem": "guarda-roupa", "frente_min_m": 2.4},
+    {"ambiente": "suite", "tipo": "criado", "min": 2, "origem": "criados-mudos"},
+    {"ambiente": "home_office", "tipo": "escrivaninha", "min": 1, "origem": "mesa de 1,4 m ou mais", "frente_min_m": 1.4},
+    {"ambiente": "home_office", "tipo": "estante", "min": 1, "origem": "estante"},
+    {"ambiente": "home_office", "tipo": "sofa_cama", "min": 1, "origem": "sofá-cama"},
+    {"ambiente": "varanda", "tipo": "poltrona_varanda", "min": 2, "origem": "2 poltronas"},
+    {"ambiente": "varanda", "tipo": "mesa_apoio", "min": 1, "origem": "mesa de apoio"},
+    {"ambiente": "varanda", "tipo": "planta", "min": 2, "origem": "plantas"}
+  ]
+}

@@ -1,0 +1,4 @@
+# PNGs pesados dos renders (o repositório guarda os .jpg); modelos Blender
+saida/render/*.png
+saida/validacao/*.png
+saida/**/*.blend
