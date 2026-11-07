@@ -1,0 +1,15 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "appflowy": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["appflowy-mcp"],
+      "env": {
+        "APPFLOWY_BASE_URL": "https://SEU-APPFLOWY.exemplo",
+        "APPFLOWY_EMAIL": "conta-de-servico@escritorio.exemplo",
+        "APPFLOWY_PASSWORD": "NAO_COLOQUE_A_SENHA_AQUI"
+      }
+    }
+  }
+}

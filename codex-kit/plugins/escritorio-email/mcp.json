@@ -1,0 +1,25 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "gmail": {
+      "type": "streamable-http",
+      "url": "https://gmailmcp.googleapis.com/mcp/v1",
+      "extensions": {
+        "com.openai": {
+          "auth": {
+            "type": "oauth",
+            "client": {
+              "mode": "provided",
+              "clientId": "COLE_AQUI_O_CLIENT_ID_DA_SUA_CONTA_GOOGLE",
+              "tokenEndpointAuthMethod": "client_secret_post"
+            },
+            "baseScopes": [
+              "https://www.googleapis.com/auth/gmail.readonly",
+              "https://www.googleapis.com/auth/gmail.compose"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

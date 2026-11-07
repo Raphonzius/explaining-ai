@@ -1,0 +1,6 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "escritorio-email",
+  "version": "1.0.0",
+  "description": "Triagem de e-mails do escritório: lê o Gmail (somente leitura) e deixa rascunhos. Nunca envia."
+}
