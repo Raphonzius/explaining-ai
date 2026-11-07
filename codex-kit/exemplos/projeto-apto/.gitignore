@@ -2,3 +2,4 @@
 saida/render/*.png
 saida/validacao/*.png
 saida/**/*.blend
+saida/animacao/
