@@ -1,0 +1,6 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "escritorio-atas",
+  "version": "1.0.0",
+  "description": "Escriba de atas: transforma anotações da reunião em ata no padrão do escritório, cria a página no AppFlowy e lança as pendências no quadro. Pergunta antes de criar."
+}

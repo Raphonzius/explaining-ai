@@ -27,6 +27,10 @@ Modelos prontos para configurar o **harness** (rules, skills, MCP, hooks) no Cod
    - `exemplos/gerar_levantamento.py` gera uma planilha real com fórmulas a partir de `ambientes.csv`.
    - `exemplos/freecad_apto.py` desenha no FreeCAD (open source) a planta de um apartamento com portas, janelas e móveis, e calcula as áreas.
 
+## Nível 3 — hands-on de skills e plugins
+9. **Crie sua primeira skill** com `$skill-creator` ou a mão: veja [`guia-skills.md`](guia-skills.md) (anatomia, descrição, onde guardar, testar, checklist) e o modelo em branco [`modelo-skill/`](modelo-skill/SKILL.md).
+10. **Plugins** (skill + conector + rule): veja [`plugins/`](plugins/README.md), com dois exemplos — `escritorio-email` (Gmail, só rascunho) e `escritorio-atas` (AppFlowy, escriba de atas com aprovação). Use contas de teste.
+
 ## Recortes reais para a apresentação
 O deck tem 3 espaços marcados "Captura real — substituir". Para capturar:
 - use **só dados fictícios** (os de `exemplos/`);
@@ -34,7 +38,7 @@ O deck tem 3 espaços marcados "Captura real — substituir". Para capturar:
 - recorte só a parte que importa e salve em 2× (PNG/WebP).
 
 ## Glossário rápido
-- **Rule** (`AGENTS.md`): manual de padrões que vale sempre. **Skill**: procedimento sob demanda. **MCP**: tomada para outros sistemas. **Hook**: trava automática. **Sandbox**: o cercadinho onde a IA pode escrever. **Aprovação**: quando ela precisa pedir.
+- **Rule** (`AGENTS.md`): manual de padrões que vale sempre. **Skill**: procedimento sob demanda. **MCP**: tomada para outros sistemas. **Hook**: trava automática. **Plugin**: caixa que junta skills e conectores para instalar de uma vez (a rule fica no projeto). **Sandbox**: o cercadinho onde a IA pode escrever. **Aprovação**: quando ela precisa pedir.
 
 Receitas de sequencial/paralelo/aprovação/economia de tokens: [`orquestracao.md`](orquestracao.md).
 

@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1330 1300" width="1330" height="1300" font-family="Inter, Helvetica, Arial, sans-serif">
+<rect width="1330" height="1300" fill="#f7f6f2"/>
+<polygon points="130.0,930.0 1130.0,930.0 1130.0,475.0 130.0,475.0" fill="#eadcc3"/>
+<polygon points="130.0,465.0 485.0,465.0 485.0,130.0 130.0,130.0" fill="#eadcc3"/>
+<polygon points="495.0,465.0 665.0,465.0 665.0,130.0 495.0,130.0" fill="#dfe6e8"/>
+<polygon points="675.0,465.0 825.0,465.0 825.0,130.0 675.0,130.0" fill="#dfe6e8"/>
+<polygon points="835.0,465.0 1130.0,465.0 1130.0,130.0 835.0,130.0" fill="#eadcc3"/>
+<polygon points="130.0,1130.0 730.0,1130.0 730.0,930.0 130.0,930.0" fill="#d8c09b"/>
+<rect x="110.0" y="930.0" width="110.0" height="20.0" fill="#262c33"/>
+<rect x="640.0" y="930.0" width="210.0" height="20.0" fill="#262c33"/>
+<rect x="1050.0" y="930.0" width="100.0" height="20.0" fill="#262c33"/>
+<rect x="220.0" y="930.0" width="420.0" height="20.0" fill="#f7f6f2"/>
+<line x1="220.0" y1="937.0" x2="440.0" y2="937.0" stroke="#1f252b" stroke-width="2.5"/>
+<line x1="420.0" y1="943.0" x2="640.0" y2="943.0" stroke="#1f252b" stroke-width="2.5"/>
+<rect x="850.0" y="930.0" width="200.0" height="20.0" fill="#f7f6f2"/>
+<line x1="850.0" y1="945.0" x2="1050.0" y2="945.0" stroke="#1f252b" stroke-width="1.4"/>
+<line x1="850.0" y1="940.0" x2="1050.0" y2="940.0" stroke="#1f252b" stroke-width="1.4"/>
+<line x1="850.0" y1="935.0" x2="1050.0" y2="935.0" stroke="#1f252b" stroke-width="1.4"/>
+<text x="430.0" y="900.0" font-size="13" fill="#5f6873" text-anchor="middle" dominant-baseline="middle" font-family="JetBrains Mono, monospace">S01</text>
+<text x="950.0" y="986.0" font-size="13" fill="#5f6873" text-anchor="middle" dominant-baseline="middle" font-family="JetBrains Mono, monospace">J01</text>
+<rect x="1130.0" y="580.0" width="20.0" height="350.0" fill="#262c33"/>
+<rect x="1130.0" y="370.0" width="20.0" height="120.0" fill="#262c33"/>
+<rect x="1130.0" y="130.0" width="20.0" height="60.0" fill="#262c33"/>
+<rect x="1130.0" y="490.0" width="20.0" height="90.0" fill="#f7f6f2"/>
+<rect x="1130.0" y="190.0" width="20.0" height="180.0" fill="#f7f6f2"/>
+<line x1="1135.0" y1="370.0" x2="1135.0" y2="190.0" stroke="#1f252b" stroke-width="1.4"/>
+<line x1="1140.0" y1="370.0" x2="1140.0" y2="190.0" stroke="#1f252b" stroke-width="1.4"/>
+<line x1="1145.0" y1="370.0" x2="1145.0" y2="190.0" stroke="#1f252b" stroke-width="1.4"/>
+<text x="1178.0" y="535.0" font-size="13" fill="#5f6873" text-anchor="middle" dominant-baseline="middle" font-family="JetBrains Mono, monospace">P01</text>
+<text x="1178.0" y="280.0" font-size="13" fill="#5f6873" text-anchor="middle" dominant-baseline="middle" font-family="JetBrains Mono, monospace">J02</text>
+<rect x="110.0" y="110.0" width="120.0" height="20.0" fill="#262c33"/>
+<rect x="430.0" y="110.0" width="110.0" height="20.0" fill="#262c33"/>
+<rect x="620.0" y="110.0" width="80.0" height="20.0" fill="#262c33"/>
+<rect x="800.0" y="110.0" width="350.0" height="20.0" fill="#262c33"/>
+<rect x="230.0" y="110.0" width="200.0" height="20.0" fill="#f7f6f2"/>
+<line x1="230.0" y1="125.0" x2="430.0" y2="125.0" stroke="#1f252b" stroke-width="1.4"/>
+<line x1="230.0" y1="120.0" x2="430.0" y2="120.0" stroke="#1f252b" stroke-width="1.4"/>
+<line x1="230.0" y1="115.0" x2="430.0" y2="115.0" stroke="#1f252b" stroke-width="1.4"/>
+<rect x="540.0" y="110.0" width="80.0" height="20.0" fill="#262c33"/>
+<line x1="540.0" y1="120.0" x2="620.0" y2="120.0" stroke="#f7f6f2" stroke-width="2" stroke-dasharray="6 4"/>
+<rect x="700.0" y="110.0" width="100.0" height="20.0" fill="#262c33"/>
+<line x1="700.0" y1="120.0" x2="800.0" y2="120.0" stroke="#f7f6f2" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="330.0" y="82.0" font-size="13" fill="#5f6873" text-anchor="middle" dominant-baseline="middle" font-family="JetBrains Mono, monospace">J03</text>
+<text x="580.0" y="82.0" font-size="13" fill="#5f6873" text-anchor="middle" dominant-baseline="middle" font-family="JetBrains Mono, monospace">J04</text>
+<text x="750.0" y="82.0" font-size="13" fill="#5f6873" text-anchor="middle" dominant-baseline="middle" font-family="JetBrains Mono, monospace">J05</text>
+<rect x="110.0" y="130.0" width="20.0" height="800.0" fill="#262c33"/>
+<rect x="130.0" y="465.0" width="250.0" height="10.0" fill="#262c33"/>
+<rect x="460.0" y="465.0" width="265.0" height="10.0" fill="#262c33"/>
+<rect x="795.0" y="465.0" width="65.0" height="10.0" fill="#262c33"/>
+<rect x="940.0" y="465.0" width="190.0" height="10.0" fill="#262c33"/>
+<rect x="380.0" y="465.0" width="80.0" height="10.0" fill="#f7f6f2"/>
+<rect x="725.0" y="465.0" width="70.0" height="10.0" fill="#f7f6f2"/>
+<rect x="860.0" y="465.0" width="80.0" height="10.0" fill="#f7f6f2"/>
+<rect x="485.0" y="430.0" width="10.0" height="40.0" fill="#262c33"/>
+<rect x="485.0" y="130.0" width="10.0" height="230.0" fill="#262c33"/>
+<rect x="485.0" y="360.0" width="10.0" height="70.0" fill="#f7f6f2"/>
+<rect x="665.0" y="130.0" width="10.0" height="340.0" fill="#262c33"/>
+<rect x="825.0" y="130.0" width="10.0" height="340.0" fill="#262c33"/>
+<line x1="1140.0" y1="490.0" x2="1050.0" y2="490.0" stroke="#1f252b" stroke-width="3"/>
+<path d="M 1140.0 580.0 A 90.0 90.0 0 0 1 1050.0 490.0" fill="none" stroke="#7b848d" stroke-width="1.4" stroke-dasharray="4 3"/>
+<line x1="460.0" y1="470.0" x2="460.0" y2="390.0" stroke="#1f252b" stroke-width="3"/>
+<path d="M 380.0 470.0 A 80.0 80.0 0 0 1 460.0 390.0" fill="none" stroke="#7b848d" stroke-width="1.4" stroke-dasharray="4 3"/>
+<line x1="725.0" y1="470.0" x2="725.0" y2="400.0" stroke="#1f252b" stroke-width="3"/>
+<path d="M 795.0 470.0 A 70.0 70.0 0 0 0 725.0 400.0" fill="none" stroke="#7b848d" stroke-width="1.4" stroke-dasharray="4 3"/>
+<line x1="940.0" y1="470.0" x2="940.0" y2="390.0" stroke="#1f252b" stroke-width="3"/>
+<path d="M 860.0 470.0 A 80.0 80.0 0 0 1 940.0 390.0" fill="none" stroke="#7b848d" stroke-width="1.4" stroke-dasharray="4 3"/>
+<line x1="490.0" y1="360.0" x2="560.0" y2="360.0" stroke="#1f252b" stroke-width="3"/>
+<path d="M 490.0 430.0 A 70.0 70.0 0 0 0 560.0 360.0" fill="none" stroke="#7b848d" stroke-width="1.4" stroke-dasharray="4 3"/>
+<polyline points="130.0,930.0 130.0,1130.0 730.0,1130.0 730.0,930.0" fill="none" stroke="#6aa0b8" stroke-width="5"/>
+<text x="630.0" y="835.0" font-size="15" font-weight="600" fill="#1f252b" text-anchor="middle" letter-spacing=".5">SALA / COZINHA</text>
+<text x="630.0" y="854.0" font-size="14" fill="#5f6873" text-anchor="middle" font-family="JetBrains Mono, monospace">45,50 m²</text>
+<text x="310.0" y="420.0" font-size="15" font-weight="600" fill="#1f252b" text-anchor="middle" letter-spacing=".5">SUÍTE</text>
+<text x="310.0" y="439.0" font-size="14" fill="#5f6873" text-anchor="middle" font-family="JetBrains Mono, monospace">11,89 m²</text>
+<text x="580.0" y="300.0" font-size="15" font-weight="600" fill="#1f252b" text-anchor="middle" letter-spacing=".5">BANHO</text>
+<text x="580.0" y="318.0" font-size="15" font-weight="600" fill="#1f252b" text-anchor="middle" letter-spacing=".5">SUÍTE</text>
+<text x="580.0" y="337.0" font-size="14" fill="#5f6873" text-anchor="middle" font-family="JetBrains Mono, monospace">5,69 m²</text>
+<text x="730.0" y="275.0" font-size="15" font-weight="600" fill="#1f252b" text-anchor="middle" letter-spacing=".5">BANHO</text>
+<text x="730.0" y="293.0" font-size="15" font-weight="600" fill="#1f252b" text-anchor="middle" letter-spacing=".5">SOCIAL</text>
+<text x="730.0" y="312.0" font-size="14" fill="#5f6873" text-anchor="middle" font-family="JetBrains Mono, monospace">5,02 m²</text>
+<text x="1025.0" y="410.0" font-size="15" font-weight="600" fill="#1f252b" text-anchor="middle" letter-spacing=".5">HOME OFFICE</text>
+<text x="1025.0" y="429.0" font-size="14" fill="#5f6873" text-anchor="middle" font-family="JetBrains Mono, monospace">9,88 m²</text>
+<text x="565.0" y="980.0" font-size="15" font-weight="600" fill="#1f252b" text-anchor="middle" letter-spacing=".5">VARANDA</text>
+<text x="565.0" y="999.0" font-size="14" fill="#5f6873" text-anchor="middle" font-family="JetBrains Mono, monospace">12,00 m²</text>
+<line x1="130.0" y1="1150.0" x2="1130.0" y2="1150.0" stroke="#1f252b" stroke-width="1.2"/>
+<line x1="130.0" y1="1144.0" x2="130.0" y2="1156.0" stroke="#1f252b" stroke-width="1.2"/>
+<line x1="1130.0" y1="1144.0" x2="1130.0" y2="1156.0" stroke="#1f252b" stroke-width="1.2"/>
+<text x="630.0" y="1170.0" font-size="14" text-anchor="middle" fill="#1f252b" font-family="JetBrains Mono, monospace">10,00 m</text>
+<line x1="1225.0" y1="930.0" x2="1225.0" y2="130.0" stroke="#1f252b" stroke-width="1.2"/>
+<line x1="1219.0" y1="930.0" x2="1231.0" y2="930.0" stroke="#1f252b" stroke-width="1.2"/>
+<line x1="1219.0" y1="130.0" x2="1231.0" y2="130.0" stroke="#1f252b" stroke-width="1.2"/>
+<text x="1241.0" y="530.0" font-size="14" text-anchor="middle" fill="#1f252b" transform="rotate(-90 1241.0 530.0)" font-family="JetBrains Mono, monospace">8,00 m</text>
+<g transform="translate(1150.0,1100.0)"><circle r="22" fill="none" stroke="#1f252b" stroke-width="1.5"/><path d="M0 -17 L7 8 L0 3 L-7 8 Z" fill="#1f252b"/><text y="-28" font-size="14" font-weight="700" text-anchor="middle" fill="#1f252b">N</text></g>
+<text x="70" y="1266" font-size="20" font-weight="700" fill="#1f252b" letter-spacing="1">APTO TORRES · 80 M² · PLANTA BASE</text>
+<text x="70" y="1288" font-size="14" fill="#5f6873" font-family="JetBrains Mono, monospace">rascunho para validação · esc. 1:100 · dados fictícios · quem assina é a arquiteta</text>
+</svg>
