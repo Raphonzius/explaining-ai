@@ -10,7 +10,7 @@ Visual no estilo da apresentação do TCC (papel claro, teal, divisores escuros,
 3. Quem assina é você.
 
 ## Abrir e apresentar
-Abra `index.html` no navegador — funciona offline, sem instalar nada.
+Abra `index.html` no navegador, sem instalar nada. Os vídeos reais (planilha e FreeCAD) são carregados de `demos/`, então mantenha a pasta ao lado do arquivo (já funciona no GitHub Pages).
 
 | Tecla | Ação |
 |---|---|

@@ -1,6 +1,6 @@
 # Demos (vídeos e imagens)
 
-Material para mostrar ou mandar fora do deck. Os mesmos vídeos já estão embutidos no `index.html`.
+Material para mostrar ou mandar fora do deck. O `index.html` carrega os vídeos reais (planilha e FreeCAD) direto desta pasta.
 
 | Arquivo | O que mostra | Tipo |
 |---|---|---|
