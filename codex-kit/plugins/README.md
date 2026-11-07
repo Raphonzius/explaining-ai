@@ -37,10 +37,11 @@ Na prática: skills e MCP já funcionam em muitas ferramentas (Codex, Claude Cod
 - Escopos: `gmail.readonly` + `gmail.compose`. O segredo do cliente OAuth **não** vai no arquivo: é informado na hora de conectar.
 - **Risco real: injeção de comando por e-mail.** Um e-mail malicioso pode trazer "instruções" para a IA. Por isso a rule diz que e-mail é dado, não ordem, e a skill só cria rascunho com aprovação.
 
-### 2. `escritorio-tarefas` — Skill + Rule + AppFlowy
-- Skill `ata-para-appflowy`: lê a ata, mostra a lista, **pergunta**, cria os cartões no quadro "Pendências".
-- Conector: o AppFlowy não tem (até onde conferimos) servidor MCP oficial; existem servidores da **comunidade** (ex.: `appflowy-mcp` no PyPI, executado com `uvx`). Código de terceiros: leia antes, use conta de serviço com acesso só ao quadro de pendências e prefira versões com escrita limitada. As variáveis do `mcp.json` são um **modelo**: confira os nomes na documentação do servidor que escolher.
-- Teste com `exemplos/reuniao-ata.txt` (a ata fictícia da Casa Lago).
+### 2. `escritorio-atas` — Skill + Rule + AppFlowy (escriba de atas)
+- Skill `escriba-ata-appflowy`: lê as anotações ou a transcrição da reunião, **redige a ata** no padrão do escritório (presentes, decisões, pendências com dono e prazo, pontos em aberto), cria a página no AppFlowy e, com um segundo "pode ir", lança as pendências no quadro "Pendências".
+- Dois pedidos de aprovação separados: um para a **página**, outro para os **cartões**.
+- Conector: o AppFlowy não tem (até onde conferimos) servidor MCP oficial; existem servidores da **comunidade** (ex.: `appflowy-mcp` no PyPI, executado com `uvx`). Código de terceiros: leia antes, use conta de serviço com acesso só ao espaço "Atas" e ao quadro de pendências e prefira versões com escrita limitada. As variáveis do `mcp.json` são um **modelo**: confira os nomes na documentação do servidor que escolher.
+- Teste com `exemplos/reuniao-ata.txt` (anotações fictícias da reunião da Casa Lago, 04/11/2026).
 
 ## Como instalar (resumo)
 

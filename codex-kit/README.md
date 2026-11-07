@@ -29,7 +29,7 @@ Modelos prontos para configurar o **harness** (rules, skills, MCP, hooks) no Cod
 
 ## Nível 3 — hands-on de skills e plugins
 9. **Crie sua primeira skill** com `$skill-creator` ou a mão: veja [`guia-skills.md`](guia-skills.md) (anatomia, descrição, onde guardar, testar, checklist) e o modelo em branco [`modelo-skill/`](modelo-skill/SKILL.md).
-10. **Plugins** (skill + conector + rule): veja [`plugins/`](plugins/README.md), com dois exemplos — `escritorio-email` (Gmail, só rascunho) e `escritorio-tarefas` (AppFlowy, cartões com aprovação). Use contas de teste.
+10. **Plugins** (skill + conector + rule): veja [`plugins/`](plugins/README.md), com dois exemplos — `escritorio-email` (Gmail, só rascunho) e `escritorio-atas` (AppFlowy, escriba de atas com aprovação). Use contas de teste.
 
 ## Recortes reais para a apresentação
 O deck tem 3 espaços marcados "Captura real — substituir". Para capturar:

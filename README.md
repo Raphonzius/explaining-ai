@@ -27,7 +27,7 @@ São 70 slides curtos (8 partes), com 9 demos e o FreeCAD como "mais uma coisa�
 Os exemplos são do dia a dia (teclado do celular, jantar, livro, planilha). O detalhe de arquitetura fica com elas: as notas sugerem perguntas para devolver à plateia, e as skills do `codex-kit/` trazem o passo a passo técnico.
 
 ## Demos
-Nove demos ao longo do deck: skill, harness (trava em ação), e-mail, planilha real no LibreOffice, Codex (ata → tarefas), **plugin de e-mail (Skill + Rule + Gmail)**, **plugin de tarefas (Skill + Rule + AppFlowy)** e, como "mais uma coisa…" no final, a planta técnica e o 3D no FreeCAD. As demos animadas tocam sozinhas ao entrar no slide (botão "Ver de novo"); os vídeos tocam em loop. Versões avulsas em `demos/`.
+Nove demos ao longo do deck: skill, harness (trava em ação), e-mail, planilha real no LibreOffice, Codex (ata → tarefas), **plugin de e-mail (Skill + Rule + Gmail)**, **plugin escriba de atas (Skill + Rule + AppFlowy)** e, como "mais uma coisa…" no final, a planta técnica e o 3D no FreeCAD. As demos animadas tocam sozinhas ao entrar no slide (botão "Ver de novo"); os vídeos tocam em loop. Versões avulsas em `demos/`.
 
 ## Simulações e capturas reais
 Planilha e FreeCAD são capturas reais. As telas de Codex, e-mail, skill, harness e dos dois plugins (Gmail, AppFlowy) são **simulações** fiéis, marcadas como tal; se quiser, troque por capturas suas (regras em `codex-kit/README.md`).
@@ -36,7 +36,7 @@ Planilha e FreeCAD são capturas reais. As telas de Codex, e-mail, skill, harnes
 Anatomia de uma skill, descrição, `$skill-creator`, onde guardar e chamar, instalar com cuidado, plugin (skill + conector + rule), duas demos, "qual usar quando", erros e dicas, e plugins como padrão de mercado.
 
 ## Kit
-`codex-kit/` — AGENTS.md, config.toml, skills, hooks, exemplos fictícios, `guia-skills.md`, `modelo-skill/` e `plugins/` (e-mail com Gmail e tarefas com AppFlowy). Veja o README dentro da pasta.
+`codex-kit/` — AGENTS.md, config.toml, skills, hooks, exemplos fictícios, `guia-skills.md`, `modelo-skill/` e `plugins/` (e-mail com Gmail e escriba de atas com AppFlowy). Veja o README dentro da pasta.
 
 ## Créditos
 Fontes Inter e JetBrains Mono sob SIL Open Font License 1.1. Citação de abertura: paráfrase de Fabio Akita, "RANT: o Akita abriu as pernas pra IA??", akitaonrails.com, fev/2026.

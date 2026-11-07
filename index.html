@@ -331,6 +331,14 @@ body.reflow .cols2.fc img{max-height:none;width:100%}
 body.reflow .board{grid-template-columns:1fr;padding:10px;gap:10px} body.reflow .cardx{font-size:15px} body.reflow .cardx small{font-size:12px} body.reflow .board h5{font-size:11px}
 .stack > .flow{gap:12px}
 .stack > .flow .chip{font-size:24px;padding:12px 22px}
+
+.pg .pad{padding:20px 28px;display:grid;gap:6px}
+.pg h3{font:600 34px/1.2 var(--font-sans);margin:0 0 4px}
+.pg p,.pg li{font-size:23px;line-height:1.4;color:var(--ink-2);max-width:none}
+.pg ul{margin:0;padding-left:26px}
+.pg h5{margin:10px 0 0;font:500 16px var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--teal)}
+.mock.pg table{font-size:21px;margin-top:2px} .mock.pg th{font-size:15px;padding:6px 12px} .mock.pg td{padding:7px 12px}
+body.reflow .pg h3{font-size:19px} body.reflow .pg p,body.reflow .pg li{font-size:15px}
 </style>
 </head>
 <body>
@@ -1123,32 +1131,40 @@ Só instruções, sem scripts.</pre></div>
 </section>
 
 <section class="slide" data-t="Demo: plugin AppFlowy" data-play>
-  <header class="head"><div class="eyebrow">Demo · plugin de tarefas</div><h2 class="title">Skill + Rule + AppFlowy: ata vira cartão.</h2></header>
+  <header class="head"><div class="eyebrow">Demo · plugin escriba de atas</div><h2 class="title">Skill + Rule + AppFlowy: a ata se escreve.</h2></header>
   <div class="split">
     <div class="stack">
       <div class="flow"><span class="chip st" data-d="500">Rule</span><span class="chip st" data-d="450">Skill</span><span class="chip st" data-d="450">AppFlowy (MCP)</span></div>
-      <div class="term"><div class="bar"><i></i><i></i><i></i>&nbsp;codex · simulação</div><pre><span class="st type" data-d="500"><span class="p">você&gt;</span> $ata-para-appflowy ata.txt</span>
-<span class="st c" data-d="800">… li AGENTS.md: "perguntar antes"</span>
-<span class="st c" data-d="800">… appflowy: quadro Pendências (2)</span>
-<span class="st" data-d="900"><span class="g">codex&gt;</span> Achei 4 tarefas; 1 sem dono [?]</span>
-<span class="st r" data-d="900">? Criar 4 cartões no AppFlowy? [s/n]</span>
+      <div class="term"><div class="bar"><i></i><i></i><i></i>&nbsp;codex · simulação</div><pre><span class="st type" data-d="500"><span class="p">você&gt;</span> $escriba-ata reuniao.txt</span>
+<span class="st c" data-d="800">… li AGENTS.md: "ata é rascunho"</span>
+<span class="st c" data-d="800">… appflowy: espaço Atas (12 páginas)</span>
+<span class="st" data-d="900"><span class="g">codex&gt;</span> Ata redigida: 2 decisões,
+       4 pendências, 1 sem dono [?]</span>
+<span class="st r" data-d="900">? Criar a página no AppFlowy? [s/n]</span>
 <span class="st type" data-d="900"><span class="p">você&gt;</span> s</span>
-<span class="st g" data-d="800">✓ 4 criados · o quadro agora tem 6</span>
-<span class="st" data-d="900"><span class="g">codex&gt;</span> Falta dono: avisar o marceneiro.</span></pre></div>
+<span class="st g" data-d="800">✓ página "Ata 04/11 · Casa Lago"</span>
+<span class="st r" data-d="900">? Lançar 4 cartões em Pendências? [s/n]</span>
+<span class="st type" data-d="900"><span class="p">você&gt;</span> s</span>
+<span class="st g" data-d="800">✓ 4 cartões · você revisa e assina</span></pre></div>
     </div>
-    <div class="mock"><div class="mh"><span>AppFlowy · Pendências</span><span class="badge">exemplo fictício</span></div>
-      <div class="board">
-        <div class="col"><h5>A fazer</h5>
-          <div class="cardx st" data-d="500">Escolher piso da varanda<small>Marina · sexta</small></div>
-          <div class="cardx st" data-d="400">Planta de situação<small>Bruno · 14/11</small></div>
-          <div class="cardx st" data-d="400">Revisar memorial<small>Rafaela · quinta</small></div>
-          <div class="cardx st" data-d="400">Avisar o marceneiro<small><span class="lbl alta">[?] sem dono</span></small></div></div>
-        <div class="col"><h5>Em andamento</h5><div class="cardx">Enviar ART/RRT<small>Bruno</small></div></div>
-        <div class="col"><h5>Feito</h5><div class="cardx">Medir terreno<small>Rafaela</small></div></div>
+    <div class="mock pg"><div class="mh"><span>AppFlowy · Atas</span><span class="badge">exemplo fictício</span></div>
+      <div class="pad">
+        <h3 class="st" data-d="500">Ata 04/11/2026 · Casa Lago</h3>
+        <p class="st" data-d="400"><b>Presentes:</b> Marina (cliente), Rafaela (arq.), Bruno (eng.)</p>
+        <h5 class="st" data-d="400">Decisões</h5>
+        <ul class="st" data-d="500"><li>Trocar o piso da varanda por um menos escorregadio (escolha até sexta).</li></ul>
+        <h5 class="st" data-d="300">Pendências</h5>
+        <table class="st" data-d="600"><tr><th>Tarefa</th><th>Quem</th><th>Quando</th></tr>
+          <tr><td>Escolher o piso</td><td>Marina</td><td>06/11</td></tr>
+          <tr><td>Planta de situação</td><td>Bruno</td><td>14/11</td></tr>
+          <tr><td>Revisar memorial</td><td>Rafaela</td><td>05/11</td></tr>
+          <tr><td>Avisar o marceneiro</td><td><span class="lbl alta">[?]</span></td><td>?</td></tr></table>
+        <h5 class="st" data-d="400">Em aberto</h5>
+        <p class="st" data-d="400">Adiar a marcenaria? Ninguém definiu quem avisa.</p>
       </div></div>
   </div>
   <button class="btn replay" style="top:96px;bottom:auto">↺ Ver de novo</button>
-  <aside class="notes">Falar: mesma ideia, outro sistema. A RULE manda perguntar antes de criar; a SKILL é a receita “ata → tarefas”; o conector do APPFLOWY (MCP) deixa a IA ler o quadro e criar cartões. Os dois cartões que já existiam não são tocados. A tarefa sem dono entra marcada [?] em vez de a IA inventar um nome. || Se perguntarem: simulação fiel; o plugin de exemplo está em codex-kit/plugins/escritorio-tarefas e a ata de teste em codex-kit/exemplos/reuniao-ata.txt. Atenção: o AppFlowy não tem (até onde conferimos) conector oficial; existem servidores MCP da comunidade. Código de terceiros: leia antes, use uma conta de serviço com acesso só ao quadro de pendências. Os nomes das variáveis no mcp.json são um modelo — confira na documentação do servidor escolhido.</aside>
+  <aside class="notes">Falar: a IA vira a escriba da reunião. Vocês entregam as anotações (ou a transcrição) e ela redige a ata no padrão do escritório: presentes, decisões, pendências com dono e prazo, e o que ficou em aberto. A RULE diz “ata é rascunho e pergunte antes de criar”; a SKILL é o formato da ata; o conector do APPFLOWY (MCP) cria a página no espaço de atas e, num segundo “pode ir”, lança as pendências no quadro. Repare: o que ninguém decidiu (quem avisa o marceneiro) fica marcado [?] em vez de a IA inventar um nome. Quem assina a ata é a arquiteta. || Se perguntarem: simulação fiel; o plugin de exemplo está em codex-kit/plugins/escritorio-atas e as anotações de teste em codex-kit/exemplos/reuniao-ata.txt. Datas: a reunião foi 04/11/2026 (quarta); “quinta” virou 05/11 e “sexta” 06/11 porque a data da reunião está no texto. Atenção: o AppFlowy não tem (até onde conferimos) conector oficial; existem servidores MCP da comunidade. Código de terceiros: leia antes e use uma conta de serviço restrita ao espaço de atas e ao quadro. Os nomes das variáveis no mcp.json são um modelo.</aside>
 </section>
 
 <section class="slide" data-t="Qual usar quando">
